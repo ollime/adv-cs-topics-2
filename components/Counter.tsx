@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React from "react";
+import { View, Text, Pressable } from "react-native";
 
 export default function Counter() {
   const [count, setCount] = React.useState(0);
@@ -14,7 +14,7 @@ export default function Counter() {
       <View className="m-2">
         <Pressable
           onPress={() => increment()}
-          className="bg-midnight size-20 flex-shrink-0 items-center justify-center rounded-lg">
+          className="size-20 flex-shrink-0 items-center justify-center rounded-lg bg-primary">
           <Text className="select-none text-2xl">{count}</Text>
         </Pressable>
       </View>

@@ -1,8 +1,7 @@
-import Counter from 'components/Counter';
-import { Text } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
+import Counter from "components/Counter";
 
-import './global.css';
+import "./global.css";
 
 export default function App() {
   return (
