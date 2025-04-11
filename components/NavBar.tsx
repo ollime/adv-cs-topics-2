@@ -19,7 +19,7 @@ function NavBarButton({ route, label }: { route: string; label?: string }) {
     <>
       <Link
         href={route}
-        className="flex h-20 w-auto min-w-[100px] flex-1 items-center justify-center">
+        className="flex h-[60px] w-auto min-w-[100px] flex-1 items-center justify-center">
         <Text className="text-lg font-medium text-white">
           {label ? label : route}
         </Text>

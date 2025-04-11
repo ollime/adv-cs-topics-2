@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Counter from "./../components/Counter";
+import Counter from "./../../components/Counter";
 
 export default function index() {
   return (
