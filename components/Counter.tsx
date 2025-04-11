@@ -6,16 +6,16 @@ export default function Counter() {
 
   function increment() {
     setCount((num) => num + 1);
-    console.log(count);
   }
 
   return (
     <>
       <View className="m-2">
+        <Text className="select-none">This is a test</Text>
         <Pressable
           onPress={() => increment()}
-          className="size-20 flex-shrink-0 items-center justify-center rounded-lg bg-primary">
-          <Text className="select-none text-2xl">{count}</Text>
+          className="primary-gradient size-20 flex-shrink-0 items-center justify-center rounded-lg shadow-lg shadow-indigo-500/50">
+          <Text className="select-none text-2xl text-white">{count}</Text>
         </Pressable>
       </View>
     </>

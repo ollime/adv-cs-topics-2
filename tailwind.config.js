@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import nativewindPreset from "nativewind/preset"
+import nativewindPreset from "nativewind/preset";
 
 export default {
   content: ["./App.{js,ts,tsx}", "./components/**/*.{js,ts,tsx}"],
@@ -12,8 +12,8 @@ export default {
         midnight: "#00171F",
         sky: "#00A7E1",
         offwhite: "#EBF7FF",
-        primary: "#0a97c4",
-        secondary: "#003459",
+        primary: "#3210c9",
+        secondary: "#7bd1ed",
       },
     },
   },
