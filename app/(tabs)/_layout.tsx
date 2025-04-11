@@ -1,3 +1,5 @@
+/** @overview Main page tab layout with custom navbar */
+
 import React from "react";
 import { Tabs } from "expo-router";
 import NavBar from "./../../components/NavBar";

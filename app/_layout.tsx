@@ -1,3 +1,5 @@
+/** @overview Root layout for the app */
+
 import React from "react";
 import { Stack } from "expo-router";
 

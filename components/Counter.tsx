@@ -1,3 +1,7 @@
+/**
+ * @overview Button component with gradient style
+ */
+
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 
