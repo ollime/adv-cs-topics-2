@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer components {
-  .primary-gradient {
+  .primary-gradient-tr {
     @apply bg-gradient-to-tr from-primary to-secondary;
+  }
+  .primary-gradient-r {
+    @apply bg-gradient-to-r from-primary to-secondary;
   }
 }
