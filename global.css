@@ -4,9 +4,9 @@
 
 @layer components {
   .primary-gradient-tr {
-    @apply bg-gradient-to-tr from-primary to-secondary;
+    @apply bg-primary bg-gradient-to-tr from-primary to-secondary;
   }
   .primary-gradient-r {
-    @apply bg-gradient-to-r from-primary to-secondary;
+    @apply bg-primary bg-gradient-to-r from-primary to-secondary;
   }
 }

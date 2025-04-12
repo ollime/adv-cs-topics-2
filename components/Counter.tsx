@@ -4,6 +4,7 @@
 
 import React from "react";
 import { View, Text, Pressable } from "react-native";
+import Gradient from "./Gradient";
 
 export default function Counter() {
   const [count, setCount] = React.useState<number>(0);
@@ -14,12 +15,16 @@ export default function Counter() {
 
   return (
     <>
-      <View className="m-2">
-        <Text className="select-none">This is a test</Text>
-        <Pressable
-          onPress={() => increment()}
-          className="primary-gradient-tr size-20 flex-shrink-0 items-center justify-center rounded-lg shadow-lg shadow-indigo-500/50">
-          <Text className="select-none text-2xl text-white">{count}</Text>
+      <Text className="select-none">This is a test</Text>
+      <View className="m-2 size-20 flex-shrink-0 overflow-hidden rounded-lg">
+        <Pressable onPress={() => increment()}>
+          <Gradient>
+            <View className="size-20 items-center justify-center rounded-lg shadow-lg shadow-indigo-500/50">
+              <Text className="text-2xl text-white first-line:select-none">
+                {count}
+              </Text>
+            </View>
+          </Gradient>
         </Pressable>
       </View>
     </>

@@ -3,7 +3,11 @@
 import nativewindPreset from "nativewind/preset";
 
 export default {
-  content: ["./App.{js,ts,tsx}", "./components/**/*.{js,ts,tsx}"],
+  content: [
+    "./components/**/*.{js,ts,tsx}",
+    "./components/*.{js,ts,tsx}",
+    "./app/**/*.{js,ts,tsx}",
+  ],
 
   presets: [nativewindPreset],
   theme: {

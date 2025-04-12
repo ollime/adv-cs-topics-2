@@ -1,6 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
-export default function settings() {
-  return <View>Settings</View>;
+export default function secondPage() {
+  return (
+    <View>
+      <Text>Settings</Text>
+    </View>
+  );
 }
