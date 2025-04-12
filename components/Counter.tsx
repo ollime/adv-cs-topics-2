@@ -16,7 +16,7 @@ export default function Counter() {
   return (
     <>
       <Text className="select-none">This is a test</Text>
-      <View className="m-2 size-20 flex-shrink-0 overflow-hidden rounded-lg">
+      <View className="m-2 size-min flex-shrink-0 overflow-hidden rounded-lg">
         <Pressable onPress={() => increment()}>
           <Gradient>
             <View className="size-20 items-center justify-center rounded-lg shadow-lg shadow-indigo-500/50">

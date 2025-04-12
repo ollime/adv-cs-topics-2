@@ -32,14 +32,16 @@ export default function NavBar() {
 function NavBarButton({ route, label }: { route: string; label?: string }) {
   return (
     <>
-      <View className="flex h-[60px] w-auto min-w-[100px] flex-1 items-center justify-center">
+      <View className="flex-1">
         <Link
           href={route}
           // adjust the height of the navbar and min width of each button here
         >
-          <Text className="text-lg font-medium text-white">
-            {label ? label : route}
-          </Text>
+          <View className="flex h-[60px] w-auto min-w-[100px] items-center justify-center">
+            <Text className="text-lg font-medium text-white">
+              {label ? label : route}
+            </Text>
+          </View>
         </Link>
       </View>
     </>
