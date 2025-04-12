@@ -9,13 +9,15 @@ import Gradient from "./Gradient";
 
 /**
  * Navigation bar
+ *
+ * When updating the routes in this navbar, also update the apps/(tabs)/_layout.tsx
  */
 export default function NavBar() {
   return (
     <>
       <Gradient>
         <View className="flex flex-row flex-wrap">
-          <NavBarButton route={"/"} label={"test"}></NavBarButton>
+          <NavBarButton route={"/"} label={"home"}></NavBarButton>
           <NavBarButton route={"secondPage"}></NavBarButton>
           <NavBarButton route={"settings"}></NavBarButton>
         </View>
@@ -33,10 +35,7 @@ function NavBarButton({ route, label }: { route: string; label?: string }) {
   return (
     <>
       <View className="flex-1">
-        <Link
-          href={route}
-          // adjust the height of the navbar and min width of each button here
-        >
+        <Link href={route}>
           <View className="flex h-[60px] w-auto min-w-[100px] items-center justify-center">
             <Text className="text-lg font-medium text-white">
               {label ? label : route}

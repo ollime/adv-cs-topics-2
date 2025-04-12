@@ -16,16 +16,23 @@ export default function Counter() {
   return (
     <>
       <Text className="select-none">This is a test</Text>
-      <View className="m-2 size-min flex-shrink-0 overflow-hidden rounded-lg">
-        <Pressable onPress={() => increment()}>
-          <Gradient>
-            <View className="size-20 items-center justify-center rounded-lg shadow-lg shadow-indigo-500/50">
-              <Text className="text-2xl text-white first-line:select-none">
-                {count}
-              </Text>
-            </View>
-          </Gradient>
-        </Pressable>
+      {/* uppermost view for rounded box shadow.
+      size-min keeps the button to size defined below */}
+      <View className="m-2 size-min rounded-lg shadow-md shadow-indigo-500/50">
+        {/* second view for rounded corner.
+        overflow-hidden necessary to keep rounded corner */}
+        <View className="size-min overflow-hidden rounded-lg">
+          <Pressable onPress={() => increment()}>
+            <Gradient>
+              {/* change the size of the button here */}
+              <View className="size-20 items-center justify-center">
+                <Text className="text-2xl text-white first-line:select-none">
+                  {count}
+                </Text>
+              </View>
+            </Gradient>
+          </Pressable>
+        </View>
       </View>
     </>
   );
