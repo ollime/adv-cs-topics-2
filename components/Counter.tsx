@@ -18,10 +18,10 @@ export default function Counter() {
       <Text className="select-none">This is a test</Text>
       {/* uppermost view for rounded box shadow.
       size-min keeps the button to size defined below */}
-      <View className="m-2 size-min rounded-lg shadow-md shadow-indigo-500/50">
+      <View className="m-2 size-20 rounded-lg shadow-md shadow-indigo-500/50">
         {/* second view for rounded corner.
         overflow-hidden necessary to keep rounded corner */}
-        <View className="size-min overflow-hidden rounded-lg">
+        <View className="size-20 overflow-hidden rounded-lg">
           <Pressable onPress={() => increment()}>
             <Gradient>
               {/* change the size of the button here */}

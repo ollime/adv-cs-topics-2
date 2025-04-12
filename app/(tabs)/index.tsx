@@ -1,13 +1,16 @@
 import React from "react";
-import { View } from "react-native";
 import Counter from "./../../components/Counter";
+import PillButton from "./../../components/PillButton";
 
 export default function index() {
+  const callback = () => {
+    console.log("messaged!");
+  };
+
   return (
     <>
-      <View className="flex-1">
-        <Counter></Counter>
-      </View>
+      <Counter></Counter>
+      <PillButton label="Message" callback={callback}></PillButton>
     </>
   );
 }
