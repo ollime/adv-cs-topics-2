@@ -35,13 +35,13 @@ function NavBarButton({ route, label }: { route: string; label?: string }) {
   return (
     <>
       <View className="flex-1">
-        <View className="flex h-[60px] w-auto min-w-[100px] items-center justify-center">
-          <Link href={route}>
+        <Link href={route}>
+          <View className="flex h-[60px] w-auto min-w-[100px] items-center justify-center">
             <Text className="text-lg font-medium text-white">
               {label ? label : route}
             </Text>
-          </Link>
-        </View>
+          </View>
+        </Link>
       </View>
     </>
   );
