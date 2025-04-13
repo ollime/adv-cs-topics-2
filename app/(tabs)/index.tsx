@@ -1,6 +1,6 @@
 import React from "react";
 import Counter from "./../../components/Counter";
-import PillButton from "./../../components/PillButton";
+import { FilledPill, OutlinedPill } from "./../../components/PillButton";
 
 export default function index() {
   const callback = () => {
@@ -10,7 +10,8 @@ export default function index() {
   return (
     <>
       <Counter></Counter>
-      <PillButton label="Message" callback={callback}></PillButton>
+      <FilledPill label="Message" callback={callback}></FilledPill>
+      <OutlinedPill label="Message" callback={callback}></OutlinedPill>
     </>
   );
 }
