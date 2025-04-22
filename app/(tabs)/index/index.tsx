@@ -1,10 +1,13 @@
 import React from "react";
-import Counter from "./../../components/Counter";
-import { FilledPill, OutlinedPill } from "./../../components/PillButton";
+import { useRouter } from "expo-router";
+import Counter from "../../../components/Counter";
+import { FilledPill, OutlinedPill } from "../../../components/PillButton";
 
 export default function index() {
+  const router = useRouter();
+
   const callback = () => {
-    console.log("messaged!");
+    router.navigate("/modal");
   };
 
   return (
