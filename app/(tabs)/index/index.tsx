@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import Counter from "../../../components/Counter";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
+import Palette from "../../../components/Palette";
 
 export default function index() {
   const router = useRouter();
@@ -10,17 +11,18 @@ export default function index() {
     router.navigate("/modal");
   };
 
+  // TODO: make colors easier to select using variables
   const testData = [
-    { key: "quarter", color: "indigo-300" },
-    { key: "good-bye", color: "indigo-300" },
+    { key: "quarter", color: "purple-400" },
+    { key: "good-bye", color: "purple-400" },
     { key: "zephyr", color: "primary" },
     { key: "stream" },
     { key: "unit" },
-    { key: "receptive", color: "orange-300" },
-    { key: "summer", color: "red-300" },
-    { key: "tear", color: "green-300" },
-    { key: "course" },
-    { key: "steel" },
+    { key: "receptive", color: "orange-400" },
+    { key: "summer", color: "red-400" },
+    { key: "tear", color: "green-400" },
+    { key: "course", color: "orange-400" },
+    { key: "steel", color: "blue-400" },
     { key: "red" },
     { key: "hungry" },
     { key: "impartial" },
@@ -47,6 +49,7 @@ export default function index() {
       <FilledPill label="Message" callback={callback}></FilledPill>
       <OutlinedPill label="Message" callback={callback}></OutlinedPill>
       <EventList data={testData}></EventList>
+      <Palette></Palette>
     </>
   );
 }
