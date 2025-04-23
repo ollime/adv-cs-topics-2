@@ -2,15 +2,7 @@ import React from "react";
 import { View, FlatList, Text } from "react-native";
 import { FilledPill } from "./PillButton";
 import { useRouter } from "expo-router";
-
-interface ListItem {
-  key: string;
-  color?: string;
-  type?: "since" | "until" | "elapsed" | string;
-  /** TODO: determine time formatting later */
-  time?: number;
-  description?: string;
-}
+import { ListItem } from "./../types";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {
   const router = useRouter();

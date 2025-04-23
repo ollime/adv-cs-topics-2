@@ -7,10 +7,22 @@ import Palette from "../../../components/Palette";
 import TextField from "../../../components/TextField";
 import DateField from "../../../components/DateField";
 import RadioSelect from "../../../components/RadioSelect";
+import { useState } from "react";
 
 export default function addEventScreen() {
-  function addNewEvent() {
-    console.log("added!");
+  const [modalTitle, useModalTitle] = useState<string>("");
+  const [description, useDescription] = useState<string>("");
+
+  function getCurrentData() {
+    return { key: modalTitle, description: description };
+  }
+
+  function saveTitle(value: string) {
+    return useModalTitle(value);
+  }
+
+  function saveDescription(value: string) {
+    return useDescription(value);
   }
 
   const isPresented = router.canGoBack();
@@ -22,8 +34,10 @@ export default function addEventScreen() {
 
       {/* Main content */}
       <View className="flex items-center justify-center">
-        <TextField label="Modal title"></TextField>
-        <TextField label="Description"></TextField>
+        <TextField label="Modal title" onChangeText={saveTitle}></TextField>
+        <TextField
+          label="Description"
+          onChangeText={saveDescription}></TextField>
 
         <View className="m-2 flex flex-row items-center">
           <Text className="m-2 dark:text-white">Icon color</Text>
@@ -45,14 +59,19 @@ export default function addEventScreen() {
               /* If the modal was added on a stack, return to
                 previous page. Otherwise, return to index */
             }
-            addNewEvent();
-            router.navigate(isPresented ? "../" : "/");
+            router.navigate({
+              pathname: isPresented ? "../" : "/",
+              params: getCurrentData(),
+            });
           }}></FilledPill>
         {/* Close modal without saving */}
         <OutlinedPill
           label="Cancel"
           callback={() => {
-            router.navigate(isPresented ? "../" : "/");
+            router.navigate({
+              pathname: isPresented ? "../" : "/",
+              params: {},
+            });
           }}></OutlinedPill>
       </View>
     </>

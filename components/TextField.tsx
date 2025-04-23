@@ -1,9 +1,15 @@
 import React from "react";
 import { TextInput, View, Text } from "react-native";
 
-export default function TextField({ label }: { label: string }) {
-  function onChangeText() {
-    console.log("!!!!");
+export default function TextField({
+  label,
+  onChangeText,
+}: {
+  label: string;
+  onChangeText: Function;
+}) {
+  function handleChangeText(value: string) {
+    onChangeText(value);
   }
 
   return (
@@ -12,7 +18,7 @@ export default function TextField({ label }: { label: string }) {
         <Text className="m-2 dark:text-white">{label}</Text>
         <TextInput
           className="border-1 w-60 rounded-lg border bg-white p-2 dark:border-white"
-          onChangeText={onChangeText}></TextInput>
+          onChangeText={handleChangeText}></TextInput>
       </View>
     </>
   );

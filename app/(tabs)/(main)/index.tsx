@@ -1,9 +1,10 @@
 import React from "react";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 import Counter from "../../../components/Counter";
 import { OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
+// import { ListItem } from "./../../../types";
 
 export default function index() {
   const router = useRouter();
@@ -61,6 +62,14 @@ export default function index() {
     { key: "torpid" },
     { key: "heavy" },
   ];
+
+  // TODO: useEffect to load newData
+  // loadData function
+  const key = useLocalSearchParams();
+  console.log(key);
+  if (key) {
+    testData.push(key);
+  }
 
   return (
     <>
