@@ -2,9 +2,10 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Link, router } from "expo-router";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
-import { FilledPill } from "./../../../components/PillButton";
+import { FilledPill } from "../../../components/PillButton";
 
 // TODO: If using this later, add in parameter for JSX content
+// TODO: Move to components folder
 export default function Modal() {
   const isPresented = router.canGoBack();
   const childContent = (
