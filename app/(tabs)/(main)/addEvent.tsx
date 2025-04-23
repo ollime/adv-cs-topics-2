@@ -16,46 +16,44 @@ export default function addEventScreen() {
   const isPresented = router.canGoBack();
   const childContent = (
     <>
-      <View className="flex w-full flex-1">
-        <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
-          Add new event
-        </Text>
+      <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
+        Add new event
+      </Text>
 
-        {/* Main content */}
-        <View className="flex items-center justify-center">
-          <TextField label="Modal title"></TextField>
-          <TextField label="Description"></TextField>
+      {/* Main content */}
+      <View className="flex items-center justify-center">
+        <TextField label="Modal title"></TextField>
+        <TextField label="Description"></TextField>
 
-          <View className="m-2 flex flex-row items-center">
-            <Text className="m-2 dark:text-white">Icon color</Text>
-            <Palette></Palette>
-          </View>
-
-          <RadioSelect label="Type"></RadioSelect>
-
-          <DateField label="Started"></DateField>
-          <DateField label="Ended"></DateField>
+        <View className="m-2 flex flex-row items-center">
+          <Text className="m-2 dark:text-white">Icon color</Text>
+          <Palette></Palette>
         </View>
 
-        <View className="mb-5 mr-5 flex flex-row content-end justify-end">
-          {/* Save / close modal */}
-          <FilledPill
-            label="Confirm"
-            callback={() => {
-              {
-                /* If the modal was added on a stack, return to
+        <RadioSelect label="Type"></RadioSelect>
+
+        <DateField label="Started"></DateField>
+        <DateField label="Ended"></DateField>
+      </View>
+
+      <View className="mb-5 mr-5 flex flex-row content-end justify-end">
+        {/* Save / close modal */}
+        <FilledPill
+          label="Confirm"
+          callback={() => {
+            {
+              /* If the modal was added on a stack, return to
                 previous page. Otherwise, return to index */
-              }
-              addNewEvent();
-              router.navigate(isPresented ? "../" : "/");
-            }}></FilledPill>
-          {/* Close modal without saving */}
-          <OutlinedPill
-            label="Cancel"
-            callback={() => {
-              router.navigate(isPresented ? "../" : "/");
-            }}></OutlinedPill>
-        </View>
+            }
+            addNewEvent();
+            router.navigate(isPresented ? "../" : "/");
+          }}></FilledPill>
+        {/* Close modal without saving */}
+        <OutlinedPill
+          label="Cancel"
+          callback={() => {
+            router.navigate(isPresented ? "../" : "/");
+          }}></OutlinedPill>
       </View>
     </>
   );

@@ -6,7 +6,7 @@ import { useRouter } from "expo-router";
 interface ListItem {
   key: string;
   color?: string;
-  type?: "since" | "until" | "elapsed";
+  type?: "since" | "until" | "elapsed" | string;
   /** TODO: determine time formatting later */
   time?: number;
   description?: string;
@@ -58,7 +58,7 @@ function EventListItem({ data }: { data: ListItem }) {
 
   return (
     <>
-      <View className="dark:bg-lightDark mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm">
+      <View className="mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm dark:bg-lightDark">
         <View
           className={`mr-2 flex size-10 rounded-full bg-${data.color}`}></View>
         <View className="flex flex-1">

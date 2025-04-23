@@ -7,32 +7,34 @@ import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
 // TODO: Move to components folder
 export default function Modal({ childContent }: { childContent: JSX.Element }) {
   return (
-    <Animated.View
-      entering={FadeIn}
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#00000040",
-      }}>
-      {/* Dismiss modal when pressing outside */}
-      <Link href={"/"} asChild>
-        <Pressable style={StyleSheet.absoluteFill} />
-      </Link>
+    <View className="flex w-full flex-1">
       <Animated.View
-        entering={SlideInDown}
+        entering={FadeIn}
         style={{
-          width: "80%",
-          height: "80%",
-          alignItems: "center",
+          flex: 1,
           justifyContent: "center",
-          backgroundColor: "white",
-          borderRadius: "0.75rem",
+          alignItems: "center",
+          backgroundColor: "#00000040",
         }}>
-        <View className="dark:bg-lightDark flex w-full flex-1 rounded-xl bg-background">
-          {childContent}
-        </View>
+        {/* Dismiss modal when pressing outside */}
+        <Link href={"/"} asChild>
+          <Pressable style={StyleSheet.absoluteFill} />
+        </Link>
+        <Animated.View
+          entering={SlideInDown}
+          style={{
+            width: "80%",
+            height: "80%",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white",
+            borderRadius: "0.75rem",
+          }}>
+          <View className="flex w-full flex-1 rounded-xl bg-background dark:bg-lightDark">
+            {childContent}
+          </View>
+        </Animated.View>
       </Animated.View>
-    </Animated.View>
+    </View>
   );
 }

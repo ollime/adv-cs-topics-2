@@ -64,7 +64,7 @@ export default function index() {
 
   return (
     <>
-      <View className="dark:bg-backgroundDark flex flex-1 bg-background">
+      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
         <Counter></Counter>
         <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
         <EventList data={testData}></EventList>

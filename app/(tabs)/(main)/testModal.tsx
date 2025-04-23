@@ -8,8 +8,8 @@ export default function testModal() {
   const isPresented = router.canGoBack();
   const childContent = (
     <>
-      <View className="flex items-center justify-center bg-white">
-        <Text className="m-5">Modal title</Text>
+      <View className="flex flex-1 items-center justify-center">
+        <Text className="m-5 dark:text-white">Modal title</Text>
         <FilledPill
           label="Okay"
           callback={() => {

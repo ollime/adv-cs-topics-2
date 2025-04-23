@@ -8,7 +8,7 @@ export default function secondPage() {
   setColorScheme("dark");
 
   return (
-    <View className="dark:bg-backgroundDark flex flex-1 bg-background">
+    <View className="flex flex-1 bg-background dark:bg-backgroundDark">
       <RadioSelect label="Dark mode"></RadioSelect>
     </View>
   );
