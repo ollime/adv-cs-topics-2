@@ -12,7 +12,16 @@ export default function ModalLayout() {
           }}
         />
         <Stack.Screen
-          name="modal"
+          name="addEvent"
+          options={{
+            presentation: "transparentModal",
+            animation: "fade",
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="testModal"
           options={{
             presentation: "transparentModal",
             animation: "fade",

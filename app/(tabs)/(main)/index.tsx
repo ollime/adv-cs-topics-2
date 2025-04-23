@@ -3,12 +3,11 @@ import { useRouter } from "expo-router";
 import Counter from "../../../components/Counter";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
-import Palette from "../../../components/Palette";
 
 export default function index() {
   const router = useRouter();
-  const callback = () => {
-    router.navigate("/modal");
+  const testCallback = () => {
+    router.navigate("/testModal");
   };
 
   // TODO: make colors easier to select using variables
@@ -65,10 +64,9 @@ export default function index() {
   return (
     <>
       <Counter></Counter>
-      <FilledPill label="Message" callback={callback}></FilledPill>
-      <OutlinedPill label="Message" callback={callback}></OutlinedPill>
+      <FilledPill label="Message" callback={testCallback}></FilledPill>
+      <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
       <EventList data={testData}></EventList>
-      <Palette></Palette>
     </>
   );
 }

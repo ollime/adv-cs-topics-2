@@ -17,7 +17,7 @@ export default function TabLayout() {
         }}>
         {/* This defines headers at the top of the page */}
         <Tabs.Screen
-          name="index"
+          name="(main)"
           options={{
             title: "Home",
           }}></Tabs.Screen>
