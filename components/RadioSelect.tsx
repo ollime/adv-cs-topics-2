@@ -9,7 +9,7 @@ export default function RadioSelect({
   label: string;
   options: Array<string>;
 }) {
-  const [option, useOption] = useState("since");
+  const [option, useOption] = useState(options[0]);
   const handleChangeOption = (value: string) => {
     useOption(value);
   };
@@ -52,14 +52,14 @@ function RadioButton({
           <View
             className={`rounded-full ring-2 ${
               label == selected
-                ? "ring-sky ring-offset-4"
+                ? "ring-blue-500 ring-offset-4"
                 : "ring-gray-400 ring-offset-2"
             }
           `}>
             <View
               className={`size-8 rounded-full bg-white ${
                 label == selected
-                  ? "bg-sky ring-4 ring-white"
+                  ? "bg-blue-500 ring-4 ring-white"
                   : "ring-2 ring-gray-400"
               }
             `}></View>
