@@ -1,5 +1,7 @@
 import React from "react";
 import { View, FlatList, Text } from "react-native";
+import { FilledPill } from "./PillButton";
+import { useRouter } from "expo-router";
 
 interface ListItem {
   key: string;
@@ -11,10 +13,20 @@ interface ListItem {
 }
 
 export default function EventList({ data }: { data: Array<ListItem> }) {
+  const router = useRouter();
+  function openAddEventModal() {
+    router.navigate("/testModal");
+  }
+
   return (
     <>
-      <View className="m-2 h-[280px] w-[300px] rounded-lg p-2">
-        <Text className="p-2 text-lg font-bold">Event List</Text>
+      <View className="m-2 h-[300px] w-[300px] rounded-lg p-2">
+        <View className="flex flex-row items-center justify-between">
+          <Text className="p-2 text-lg font-bold">Event List</Text>
+          <FilledPill
+            label="Add event"
+            callback={openAddEventModal}></FilledPill>
+        </View>
         <FlatList
           data={data}
           renderItem={({ item }: { item: ListItem }) => (
