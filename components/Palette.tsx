@@ -3,7 +3,7 @@
 import React from "react";
 import { View } from "react-native";
 
-// TODO: Use later for
+// TODO: Use later for editing event
 export default function Palette() {
   return (
     <>

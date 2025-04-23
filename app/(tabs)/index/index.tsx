@@ -13,13 +13,32 @@ export default function index() {
 
   // TODO: make colors easier to select using variables
   const testData = [
-    { key: "quarter", color: "purple-400" },
-    { key: "good-bye", color: "purple-400" },
-    { key: "zephyr", color: "primary" },
-    { key: "stream" },
-    { key: "unit" },
-    { key: "receptive", color: "orange-400" },
-    { key: "summer", color: "red-400" },
+    {
+      key: "quarter",
+      color: "purple-400",
+      type: "since",
+      time: 20,
+      description: "A description of this event.",
+    },
+    { key: "good-bye", color: "purple-400", type: "until", time: 5 },
+    { key: "zephyr", color: "primary", type: "since", time: 500 },
+    { key: "stream", type: "elapsed", time: 200 },
+    { key: "unit", type: "until" },
+    {
+      key: "receptive",
+      color: "orange-400",
+      description:
+        "This is what a long description looks like. It may break off into multiple lines.",
+    },
+    {
+      key: "summer",
+      color: "red-400",
+      type: "since",
+      time: 10,
+      description: `For multi-line descriptions,
+      use \` markers or \\n
+      newline characters.`,
+    },
     { key: "tear", color: "green-400" },
     { key: "course", color: "orange-400" },
     { key: "steel", color: "blue-400" },
