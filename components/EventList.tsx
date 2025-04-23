@@ -15,7 +15,7 @@ interface ListItem {
 export default function EventList({ data }: { data: Array<ListItem> }) {
   const router = useRouter();
   function openAddEventModal() {
-    router.navigate("/testModal");
+    router.navigate("/addEvent");
   }
 
   return (
