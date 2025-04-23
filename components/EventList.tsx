@@ -22,7 +22,9 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
     <>
       <View className="m-2 h-[400px] w-[300px] rounded-lg p-2">
         <View className="flex flex-row items-center justify-between">
-          <Text className="p-2 text-lg font-bold">Event List</Text>
+          <Text className="p-2 text-lg font-bold dark:text-white">
+            Event List
+          </Text>
           <FilledPill
             label="Add event"
             callback={openAddEventModal}></FilledPill>
@@ -56,13 +58,15 @@ function EventListItem({ data }: { data: ListItem }) {
 
   return (
     <>
-      <View className="mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm">
+      <View className="dark:bg-lightDark mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm">
         <View
           className={`mr-2 flex size-10 rounded-full bg-${data.color}`}></View>
         <View className="flex flex-1">
-          <Text className="font-bold">{data.key}</Text>
-          <Text>{renderText(data.type, data.time)}</Text>
-          <Text className="mt-2 break-words">
+          <Text className="font-bold dark:text-white">{data.key}</Text>
+          <Text className="dark:text-white">
+            {renderText(data.type, data.time)}
+          </Text>
+          <Text className="mt-2 break-words dark:text-white">
             {data.description ? data.description : ""}
           </Text>
         </View>

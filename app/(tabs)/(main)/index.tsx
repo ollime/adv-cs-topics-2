@@ -1,7 +1,8 @@
 import React from "react";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
 import Counter from "../../../components/Counter";
-import { FilledPill, OutlinedPill } from "../../../components/PillButton";
+import { OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
 
 export default function index() {
@@ -63,9 +64,11 @@ export default function index() {
 
   return (
     <>
-      <Counter></Counter>
-      <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
-      <EventList data={testData}></EventList>
+      <View className="dark:bg-backgroundDark flex flex-1 bg-background">
+        <Counter></Counter>
+        <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
+        <EventList data={testData}></EventList>
+      </View>
     </>
   );
 }

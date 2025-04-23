@@ -8,7 +8,6 @@ export default {
     "./components/*.{js,ts,tsx}",
     "./app/**/*.{js,ts,tsx}",
   ],
-
   presets: [nativewindPreset],
   theme: {
     extend: {
@@ -19,8 +18,11 @@ export default {
         primary: "#3210C9",
         secondary: "#7BD1ED",
         background: "#F2F2F2",
+        backgroundDark: "#101828",
+        lightDark: "#364153",
       },
     },
   },
   plugins: [],
+  darkMode: "class",
 };

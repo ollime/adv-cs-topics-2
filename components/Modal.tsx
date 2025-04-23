@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
 
@@ -27,8 +27,11 @@ export default function Modal({ childContent }: { childContent: JSX.Element }) {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "white",
+          borderRadius: "0.75rem",
         }}>
-        {childContent}
+        <View className="dark:bg-lightDark flex w-full flex-1 rounded-xl bg-background">
+          {childContent}
+        </View>
       </Animated.View>
     </Animated.View>
   );
