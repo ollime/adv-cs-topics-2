@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useColorScheme } from "nativewind";
+import RadioSelect from "../../components/RadioSelect";
 
 export default function secondPage() {
   const { setColorScheme } = useColorScheme();
@@ -8,7 +9,7 @@ export default function secondPage() {
 
   return (
     <View className="dark:bg-backgroundDark flex flex-1 bg-background">
-      <Text>Settings</Text>
+      <RadioSelect label="Dark mode"></RadioSelect>
     </View>
   );
 }

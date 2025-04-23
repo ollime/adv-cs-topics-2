@@ -8,7 +8,7 @@ export default function TextField({ label }: { label: string }) {
 
   return (
     <>
-      <View className="m-2 flex flex-row items-center justify-center">
+      <View className="m-2 flex flex-row items-center">
         <Text className="m-2 dark:text-white">{label}</Text>
         <TextInput
           className="border-1 w-60 rounded-lg border bg-white p-2 dark:border-white"

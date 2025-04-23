@@ -17,15 +17,16 @@ export default function addEventScreen() {
   const childContent = (
     <>
       <View className="flex w-full flex-1">
+        <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
+          Add new event
+        </Text>
+
         {/* Main content */}
-        <View className="flex justify-center">
-          <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
-            Add new event
-          </Text>
+        <View className="flex items-center justify-center">
           <TextField label="Modal title"></TextField>
           <TextField label="Description"></TextField>
 
-          <View className="m-2 flex flex-row items-center justify-center">
+          <View className="m-2 flex flex-row items-center">
             <Text className="m-2 dark:text-white">Icon color</Text>
             <Palette></Palette>
           </View>
