@@ -14,6 +14,7 @@ export default function addEventScreen() {
   const childContent = (
     <>
       <View className="flex w-full flex-1">
+        {/* Main content */}
         <View className="flex flex-1 items-center justify-center">
           <Text className="m-5">Modal title</Text>
           <Palette></Palette>
@@ -35,10 +36,6 @@ export default function addEventScreen() {
           <OutlinedPill
             label="Cancel"
             callback={() => {
-              {
-                /* If the modal was added on a stack, return to
-                previous page. Otherwise, return to index */
-              }
               router.navigate(isPresented ? "../" : "/");
             }}></OutlinedPill>
         </View>

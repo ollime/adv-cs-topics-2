@@ -20,7 +20,7 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
 
   return (
     <>
-      <View className="m-2 h-[300px] w-[300px] rounded-lg p-2">
+      <View className="m-2 h-[400px] w-[300px] rounded-lg p-2">
         <View className="flex flex-row items-center justify-between">
           <Text className="p-2 text-lg font-bold">Event List</Text>
           <FilledPill

@@ -64,7 +64,6 @@ export default function index() {
   return (
     <>
       <Counter></Counter>
-      <FilledPill label="Message" callback={testCallback}></FilledPill>
       <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
       <EventList data={testData}></EventList>
     </>
