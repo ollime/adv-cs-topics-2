@@ -4,6 +4,9 @@ import { View, Text } from "react-native";
 import { router } from "expo-router";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
 import Palette from "../../../components/Palette";
+import TextField from "../../../components/TextField";
+import DateField from "../../../components/DateField";
+import RadioSelect from "../../../components/RadioSelect";
 
 export default function addEventScreen() {
   function addNewEvent() {
@@ -15,12 +18,25 @@ export default function addEventScreen() {
     <>
       <View className="flex w-full flex-1">
         {/* Main content */}
-        <View className="flex flex-1 items-center justify-center">
-          <Text className="m-5">Modal title</Text>
-          <Palette></Palette>
+        <View className="flex justify-center">
+          <Text className="mx-5 mt-5 flex items-start text-lg font-bold">
+            Add new event
+          </Text>
+          <TextField label="Modal title"></TextField>
+          <TextField label="Description"></TextField>
+
+          <View className="m-2 flex flex-row items-center justify-center">
+            <Text className="m-2">Icon color</Text>
+            <Palette></Palette>
+          </View>
+
+          <RadioSelect label="Type"></RadioSelect>
+
+          <DateField label="Started"></DateField>
+          <DateField label="Ended"></DateField>
         </View>
 
-        <View className="m-5 flex flex-row content-end justify-end">
+        <View className="mb-5 mr-5 flex flex-row content-end justify-end">
           {/* Save / close modal */}
           <FilledPill
             label="Confirm"
