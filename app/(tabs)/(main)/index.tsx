@@ -4,7 +4,7 @@ import { View } from "react-native";
 import Counter from "../../../components/Counter";
 import { OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
-// import { ListItem } from "./../../../types";
+import { ListItem } from "./../../../types";
 
 export default function index() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function index() {
   };
 
   // TODO: make colors easier to select using variables
-  const testData = [
+  const testData: Array<ListItem> = [
     {
       key: "quarter",
       color: "purple-400",
@@ -63,10 +63,15 @@ export default function index() {
     { key: "heavy" },
   ];
 
+  const params = useLocalSearchParams() as unknown;
+  // type checking the key
+  const key =
+    params && typeof params === "object" && "key" in params
+      ? (params as ListItem)
+      : null;
+
   // TODO: useEffect to load newData
   // loadData function
-  const key = useLocalSearchParams();
-  console.log(key);
   if (key) {
     testData.push(key);
   }

@@ -9,7 +9,9 @@ export default function secondPage() {
 
   return (
     <View className="flex flex-1 bg-background dark:bg-backgroundDark">
-      <RadioSelect label="Dark mode"></RadioSelect>
+      <RadioSelect
+        label="Dark mode"
+        options={["dark", "light", "automatic"]}></RadioSelect>
     </View>
   );
 }

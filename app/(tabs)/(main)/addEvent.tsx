@@ -14,7 +14,14 @@ export default function addEventScreen() {
   const [description, useDescription] = useState<string>("");
 
   function getCurrentData() {
-    return { key: modalTitle, description: description };
+    if (modalTitle) {
+      return {
+        key: modalTitle,
+        description: description,
+        type: "since",
+        time: 0,
+      };
+    }
   }
 
   function saveTitle(value: string) {
@@ -25,7 +32,7 @@ export default function addEventScreen() {
     return useDescription(value);
   }
 
-  const isPresented = router.canGoBack();
+  // const isPresented = router.canGoBack();
   const childContent = (
     <>
       <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
@@ -44,7 +51,9 @@ export default function addEventScreen() {
           <Palette></Palette>
         </View>
 
-        <RadioSelect label="Type"></RadioSelect>
+        <RadioSelect
+          label="Days"
+          options={["since", "until", "elapsed"]}></RadioSelect>
 
         <DateField label="Started"></DateField>
         <DateField label="Ended"></DateField>
@@ -59,17 +68,22 @@ export default function addEventScreen() {
               /* If the modal was added on a stack, return to
                 previous page. Otherwise, return to index */
             }
-            router.navigate({
-              pathname: isPresented ? "../" : "/",
-              params: getCurrentData(),
-            });
+            if (modalTitle) {
+              router.navigate({
+                pathname: "/",
+                params: getCurrentData(),
+              });
+            } else {
+              // TODO: Create better alert popup
+              alert("Add a title!");
+            }
           }}></FilledPill>
         {/* Close modal without saving */}
         <OutlinedPill
           label="Cancel"
           callback={() => {
             router.navigate({
-              pathname: isPresented ? "../" : "/",
+              pathname: "/",
               params: {},
             });
           }}></OutlinedPill>
