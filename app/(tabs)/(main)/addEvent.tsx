@@ -3,7 +3,7 @@ import Modal from "../../../components/Modal";
 import { View, Text } from "react-native";
 import { router } from "expo-router";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
-import Palette from "../../../components/Palette";
+import { Palette, SelectablePalette } from "../../../components/Palette";
 import TextField from "../../../components/TextField";
 import DateField from "../../../components/DateField";
 import RadioSelect from "../../../components/RadioSelect";
@@ -13,12 +13,14 @@ export default function addEventScreen() {
   const [modalTitle, useModalTitle] = useState<string>("");
   const [description, useDescription] = useState<string>("");
   const [type, useType] = useState<"since" | "until" | "elapsed" | string>("");
+  const [iconColor, useIconColor] = useState<string>("");
 
   function getCurrentData() {
     if (modalTitle) {
       return {
         key: modalTitle,
         description: description,
+        color: iconColor,
         type: type,
         time: 0,
       };
@@ -37,6 +39,10 @@ export default function addEventScreen() {
     return useType(value);
   }
 
+  function saveColor(value: string) {
+    return useIconColor(value);
+  }
+
   // const isPresented = router.canGoBack();
   const childContent = (
     <>
@@ -53,7 +59,7 @@ export default function addEventScreen() {
 
         <View className="m-2 flex flex-row items-center">
           <Text className="m-2 dark:text-white">Icon color</Text>
-          <Palette></Palette>
+          <SelectablePalette onChangeOption={saveColor}></SelectablePalette>
         </View>
 
         <RadioSelect
