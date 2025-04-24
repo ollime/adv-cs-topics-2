@@ -5,6 +5,7 @@ import Counter from "../../../components/Counter";
 import { OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
 import { ListItem } from "./../../../types";
+import { useState, useEffect } from "react";
 
 export default function index() {
   const router = useRouter();
@@ -12,8 +13,7 @@ export default function index() {
     router.navigate("/testModal");
   };
 
-  // TODO: make colors easier to select using variables
-  const testData: Array<ListItem> = [
+  const [testData, setTestData] = useState<Array<ListItem>>([
     {
       key: "quarter",
       color: "purple-400",
@@ -37,8 +37,8 @@ export default function index() {
       type: "since",
       time: 10,
       description: `For multi-line descriptions,
-      use \` markers or \\n
-      newline characters.`,
+        use \` markers or \\n
+        newline characters.`,
     },
     { key: "tear", color: "green-400" },
     { key: "course", color: "orange-400" },
@@ -61,7 +61,8 @@ export default function index() {
     { key: "birthday" },
     { key: "torpid" },
     { key: "heavy" },
-  ];
+  ]);
+  // TODO: make colors easier to select using variables
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -72,9 +73,11 @@ export default function index() {
 
   // TODO: useEffect to load newData
   // loadData function
-  if (key) {
-    testData.push(key);
-  }
+  useEffect(() => {
+    if (key) {
+      setTestData([...testData, key]);
+    }
+  }, []);
 
   return (
     <>

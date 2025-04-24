@@ -3,7 +3,7 @@ import Modal from "../../../components/Modal";
 import { View, Text } from "react-native";
 import { router } from "expo-router";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
-import { Palette, SelectablePalette } from "../../../components/Palette";
+import { SelectablePalette } from "../../../components/Palette";
 import TextField from "../../../components/TextField";
 import DateField from "../../../components/DateField";
 import RadioSelect from "../../../components/RadioSelect";

@@ -31,7 +31,7 @@ export function SelectablePalette({
 }: {
   onChangeOption: Function;
 }) {
-  const [option, useOption] = useState("red-400");
+  const [option, useOption] = useState("white");
   const handleChangeOption = (value: string) => {
     // updates this function's copy of the selected option
     useOption(value);
