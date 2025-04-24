@@ -31,7 +31,6 @@ export default function addEventScreen() {
   // TODO: useEffect to load newData
   // loadData function
   useEffect(() => {
-    console.log(initialData);
     if (initialData && initialData.type) {
       setModalTitle(initialData.key);
       setDescription(initialData.description);
@@ -115,7 +114,7 @@ export default function addEventScreen() {
             if (modalTitle) {
               router.navigate({
                 pathname: "/",
-                params: getCurrentData(),
+                params: { rawData: JSON.stringify(getCurrentData()) },
               });
             } else {
               // TODO: Create better alert popup

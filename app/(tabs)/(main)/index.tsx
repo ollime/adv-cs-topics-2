@@ -13,6 +13,10 @@ export default function index() {
     router.navigate("/testModal");
   };
 
+  const openConfirmOverride = (data) => {
+    router.navigate({ pathname: "/confirmOverride", params: data });
+  };
+
   const [testData, setTestData] = useState<Array<ListItem>>([
     {
       key: "quarter",
@@ -64,18 +68,35 @@ export default function index() {
   ]);
   // TODO: make colors easier to select using variables
 
-  const params = useLocalSearchParams() as unknown;
-  // type checking the key
-  const data =
-    params && typeof params === "object" && "key" in params
-      ? (params as ListItem)
-      : null;
+  const { rawData, override } = useLocalSearchParams<{
+    rawData: string;
+    override?: string;
+  }>();
+
+  // converting data back into JSON
+  const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
   // TODO: useEffect to load newData
+  // TODO: delete existing event if changing name
   // loadData function
   useEffect(() => {
     if (data) {
-      setTestData([...testData, data]);
+      // checks if key already exists
+      const keyAlreadyExists = testData.find((i) => i.key == data.key);
+      if (keyAlreadyExists) {
+        // override the existing event
+        if (override) {
+          // remove old version of event
+          const filteredEvents = testData.filter(
+            (item) => item.key != data.key
+          );
+          setTestData([...filteredEvents, data]);
+        } else {
+          openConfirmOverride(data);
+        }
+      } else {
+        setTestData([...testData, data]);
+      }
     }
   }, []);
 

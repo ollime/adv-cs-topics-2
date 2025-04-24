@@ -19,7 +19,14 @@ export default function ModalLayout() {
             headerShown: false,
           }}
         />
-
+        <Stack.Screen
+          name="confirmOverride"
+          options={{
+            presentation: "transparentModal",
+            animation: "fade",
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="testModal"
           options={{
