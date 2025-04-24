@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View, StyleSheet } from "react-native";
+import { Pressable, View, ScrollView, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
 
@@ -30,9 +30,12 @@ export default function Modal({ childContent }: { childContent: JSX.Element }) {
             backgroundColor: "white",
             borderRadius: "0.75rem",
           }}>
-          <View className="flex w-full flex-1 rounded-xl bg-background dark:bg-lightDark">
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            className="flex w-full flex-1 flex-wrap rounded-xl bg-background dark:bg-lightDark">
             {childContent}
-          </View>
+          </ScrollView>
         </Animated.View>
       </Animated.View>
     </View>
