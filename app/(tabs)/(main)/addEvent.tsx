@@ -12,8 +12,8 @@ import { useState } from "react";
 export default function addEventScreen() {
   const [modalTitle, useModalTitle] = useState<string>("");
   const [description, useDescription] = useState<string>("");
-  const [type, useType] = useState<"since" | "until" | "elapsed" | string>("");
-  const [iconColor, useIconColor] = useState<string>("");
+  const [type, useType] = useState<"since" | "until" | "elapsed">("since");
+  const [iconColor, useIconColor] = useState<string>("white");
 
   function getCurrentData() {
     if (modalTitle) {
@@ -35,7 +35,7 @@ export default function addEventScreen() {
     return useDescription(value);
   }
 
-  function saveType(value: string) {
+  function saveType(value: "since" | "until" | "elapsed") {
     return useType(value);
   }
 
