@@ -66,7 +66,7 @@ export default function index() {
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
-  const key =
+  const data =
     params && typeof params === "object" && "key" in params
       ? (params as ListItem)
       : null;
@@ -74,8 +74,8 @@ export default function index() {
   // TODO: useEffect to load newData
   // loadData function
   useEffect(() => {
-    if (key) {
-      setTestData([...testData, key]);
+    if (data) {
+      setTestData([...testData, data]);
     }
   }, []);
 

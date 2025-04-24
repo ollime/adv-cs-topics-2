@@ -1,23 +1,30 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function RadioSelect({
   label,
   options,
   onChangeOption,
+  selected,
 }: {
   label: string;
   options: Array<string>;
   onChangeOption: Function;
+  selected?: string;
 }) {
-  const [option, useOption] = useState(options[0]);
+  const [option, useOption] = useState<string>(selected || options[0]);
   const handleChangeOption = (value: string) => {
-    // updates this function's copy of the selected option
-    useOption(value);
-    // updates parent container
-    onChangeOption(value);
+    useOption(value); // updates local state
+    onChangeOption(value); // updates parent container
   };
+
+  // Sync the internal state with the `selected` prop if it changes
+  useEffect(() => {
+    if (selected !== undefined && selected !== option) {
+      useOption(selected);
+    }
+  }, [selected]);
 
   const radioBtns = options.map((item, key) => (
     <RadioButton

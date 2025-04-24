@@ -1,19 +1,44 @@
 import React from "react";
-import Modal from "../../../components/Modal";
+
 import { View, Text } from "react-native";
 import { router } from "expo-router";
-import { FilledPill, OutlinedPill } from "../../../components/PillButton";
-import { SelectablePalette } from "../../../components/Palette";
+import { useState, useEffect } from "react";
+import { useLocalSearchParams } from "expo-router";
+
+import Modal from "../../../components/Modal";
 import TextField from "../../../components/TextField";
 import DateField from "../../../components/DateField";
 import RadioSelect from "../../../components/RadioSelect";
-import { useState } from "react";
+import { FilledPill, OutlinedPill } from "../../../components/PillButton";
+import { SelectablePalette } from "../../../components/Palette";
+import { ListItem } from "./../../../types";
 
 export default function addEventScreen() {
-  const [modalTitle, useModalTitle] = useState<string>("");
-  const [description, useDescription] = useState<string>("");
-  const [type, useType] = useState<"since" | "until" | "elapsed">("since");
-  const [iconColor, useIconColor] = useState<string>("white");
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [description, setDescription] = useState<string | undefined>("");
+  const [type, setType] = useState<"since" | "until" | "elapsed" | string>(
+    "since"
+  );
+  const [iconColor, setIconColor] = useState<string | undefined>("white");
+
+  const params = useLocalSearchParams() as unknown;
+  // type checking the key
+  const initialData =
+    params && typeof params === "object" && "key" in params
+      ? (params as ListItem)
+      : null;
+
+  // TODO: useEffect to load newData
+  // loadData function
+  useEffect(() => {
+    console.log(initialData);
+    if (initialData && initialData.type) {
+      setModalTitle(initialData.key);
+      setDescription(initialData.description);
+      setType(initialData.type);
+      setIconColor(initialData.color);
+    }
+  }, []);
 
   function getCurrentData() {
     if (modalTitle) {
@@ -28,19 +53,19 @@ export default function addEventScreen() {
   }
 
   function saveTitle(value: string) {
-    return useModalTitle(value);
+    return setModalTitle(value);
   }
 
   function saveDescription(value: string) {
-    return useDescription(value);
+    return setDescription(value);
   }
 
   function saveType(value: "since" | "until" | "elapsed") {
-    return useType(value);
+    return setType(value);
   }
 
   function saveColor(value: string) {
-    return useIconColor(value);
+    return setIconColor(value);
   }
 
   // const isPresented = router.canGoBack();
@@ -52,20 +77,27 @@ export default function addEventScreen() {
 
       {/* Main content */}
       <View className="flex items-center justify-center">
-        <TextField label="Modal title" onChangeText={saveTitle}></TextField>
+        <TextField
+          label="Modal title"
+          onChangeText={saveTitle}
+          initialText={modalTitle}></TextField>
         <TextField
           label="Description"
-          onChangeText={saveDescription}></TextField>
+          onChangeText={saveDescription}
+          initialText={description}></TextField>
 
         <View className="m-2 flex flex-row items-center">
           <Text className="m-2 dark:text-white">Icon color</Text>
-          <SelectablePalette onChangeOption={saveColor}></SelectablePalette>
+          <SelectablePalette
+            onChangeOption={saveColor}
+            selected={iconColor}></SelectablePalette>
         </View>
 
         <RadioSelect
           label="Days"
           options={["since", "until", "elapsed"]}
-          onChangeOption={saveType}></RadioSelect>
+          onChangeOption={saveType}
+          selected={type}></RadioSelect>
 
         <DateField label="Started"></DateField>
         <DateField label="Ended"></DateField>

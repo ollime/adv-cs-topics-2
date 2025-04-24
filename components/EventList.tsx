@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList, Text, Pressable } from "react-native";
 import { FilledPill } from "./PillButton";
 import { useRouter } from "expo-router";
 import { ListItem } from "./../types";
@@ -34,6 +34,14 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
 }
 
 function EventListItem({ data }: { data: ListItem }) {
+  const router = useRouter();
+  function handleOpenModal() {
+    router.navigate({
+      pathname: "/addEvent",
+      params: JSON.parse(JSON.stringify(data)),
+    });
+  }
+
   function renderText(type?: string, time?: number) {
     if (type && time) {
       if (type == "since") {
@@ -50,19 +58,21 @@ function EventListItem({ data }: { data: ListItem }) {
 
   return (
     <>
-      <View className="mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm dark:bg-lightDark">
-        <View
-          className={`mr-2 flex size-10 rounded-full bg-${data.color}`}></View>
-        <View className="flex flex-1">
-          <Text className="font-bold dark:text-white">{data.key}</Text>
-          <Text className="dark:text-white">
-            {renderText(data.type, data.time)}
-          </Text>
-          <Text className="mt-2 break-words dark:text-white">
-            {data.description ? data.description : ""}
-          </Text>
+      <Pressable onPress={handleOpenModal}>
+        <View className="mt-2 flex flex-row rounded-md bg-white p-4 shadow-sm dark:bg-lightDark">
+          <View
+            className={`mr-2 flex size-10 rounded-full bg-${data.color}`}></View>
+          <View className="flex flex-1">
+            <Text className="font-bold dark:text-white">{data.key}</Text>
+            <Text className="dark:text-white">
+              {renderText(data.type, data.time)}
+            </Text>
+            <Text className="mt-2 break-words dark:text-white">
+              {data.description ? data.description : ""}
+            </Text>
+          </View>
         </View>
-      </View>
+      </Pressable>
     </>
   );
 }
