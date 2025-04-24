@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Modal from "../../../components/Modal";
 import TextField from "../../../components/TextField";
@@ -92,17 +93,34 @@ export default function addEventScreen() {
     }
   }
 
+  function renderText(type?: string, time?: number) {
+    if (type && (time || time === 0)) {
+      if (type == "since") {
+        return time + " days ago";
+      } else if (type == "until") {
+        return "in " + time + " days";
+      } else if (type == "elapsed") {
+        return "elapsed for " + time + " days";
+      }
+    } else {
+      return "Error: Data not loaded.";
+    }
+  }
+
   // const isPresented = router.canGoBack();
   const childContent = (
     <>
-      <View className="mb-7 mt-5 flex flex-1 flex-row justify-between">
+      <View className="mb-7 mt-7 flex flex-1 flex-row items-center justify-between">
         <Text className="mx-5 flex items-start text-lg font-bold dark:text-white">
           {initialData ? "Modify existing event" : "Add new event"}
         </Text>
         {initialData ? (
-          <Text className="mx-5 text-lg font-bold dark:text-white">
-            {initialData.time} days
-          </Text>
+          <View className="mx-5 flex flex-row items-center">
+            <Ionicons name="timer-outline" size={24} color="black" />
+            <Text className="text-md ml-1 font-bold dark:text-white">
+              {renderText(initialData.type, initialData.time)}
+            </Text>
+          </View>
         ) : (
           ""
         )}
