@@ -13,8 +13,11 @@ export default function index() {
     router.navigate("/testModal");
   };
 
-  const openConfirmOverride = (data) => {
-    router.navigate({ pathname: "/confirmOverride", params: data });
+  const openConfirmOverride = (data, overrideKey?: string) => {
+    router.navigate({
+      pathname: "/confirmOverride",
+      params: { data: JSON.stringify(data), overrideKey: overrideKey },
+    });
   };
 
   const [testData, setTestData] = useState<Array<ListItem>>([
@@ -68,9 +71,10 @@ export default function index() {
   ]);
   // TODO: make colors easier to select using variables
 
-  const { rawData, override } = useLocalSearchParams<{
+  const { rawData, override, overrideKey } = useLocalSearchParams<{
     rawData: string;
-    override?: string;
+    override?: "true" | string | undefined; // boolean used only to check if override modal should show up or not
+    overrideKey?: string;
   }>();
 
   // converting data back into JSON
@@ -81,22 +85,31 @@ export default function index() {
   // loadData function
   useEffect(() => {
     if (data) {
-      // checks if key already exists
-      const keyAlreadyExists = testData.find((i) => i.key == data.key);
+      const keyAlreadyExists = testData.find(
+        (i) => i.key == (overrideKey ? overrideKey : data.key)
+      );
       if (keyAlreadyExists) {
-        // override the existing event
         if (override) {
-          // remove old version of event
+          // event already exists && override confirmed --> override event
           const filteredEvents = testData.filter(
-            (item) => item.key != data.key
+            (item) => item.key != (overrideKey ? overrideKey : data.key)
           );
           setTestData([...filteredEvents, data]);
         } else {
-          openConfirmOverride(data);
+          // event already exists && override not confirmed --> ask for confirmation
+          if (overrideKey) {
+            // event names don't match up --> pass in optional parameter
+            openConfirmOverride(data, overrideKey);
+          } else {
+            openConfirmOverride(data);
+          }
         }
       } else {
+        // event doesn't already exist --> add event
         setTestData([...testData, data]);
       }
+    } else {
+      console.log("no data provided?");
     }
   }, []);
 

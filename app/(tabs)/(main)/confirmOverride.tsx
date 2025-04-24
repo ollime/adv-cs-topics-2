@@ -5,20 +5,23 @@ import Modal from "../../../components/Modal";
 import { View, Text } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
-// import { ListItem } from "./../../../types";
+import { ListItem } from "./../../../types";
 
 export default function confirmOverrideModal() {
-  const originalData = useLocalSearchParams() as unknown;
-  // type checking the key
-  const currentData =
-    originalData && typeof originalData === "object" && "key" in originalData
-      ? (originalData as ListItem)
-      : null;
+  const { data, overrideKey } = useLocalSearchParams<{
+    data: string;
+    overrideKey?: string;
+  }>();
+  const currentData = data ? (JSON.parse(data) as ListItem) : undefined;
 
   const childContent = (
     <>
       <View className="flex flex-1 items-center justify-center">
-        <Text className="m-5 dark:text-white">The event already exists.</Text>
+        <Text className="m-5 dark:text-white">
+          {currentData && overrideKey == currentData.key
+            ? "The event already exists."
+            : "This action will rename the event."}
+        </Text>
         <Text className="m-5 dark:text-white">
           Are you sure you want to override this event?
         </Text>
@@ -34,6 +37,7 @@ export default function confirmOverrideModal() {
               params: {
                 rawData: JSON.stringify(currentData),
                 override: "true",
+                overrideKey: overrideKey,
               },
             });
           }}></FilledPill>

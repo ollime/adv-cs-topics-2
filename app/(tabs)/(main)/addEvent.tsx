@@ -51,6 +51,14 @@ export default function addEventScreen() {
     }
   }
 
+  function getInitialKey() {
+    if (initialData) {
+      return initialData.key;
+    } else {
+      return null;
+    }
+  }
+
   function saveTitle(value: string) {
     return setModalTitle(value);
   }
@@ -65,6 +73,23 @@ export default function addEventScreen() {
 
   function saveColor(value: string) {
     return setIconColor(value);
+  }
+
+  function handleAddEvent() {
+    /* If the modal was added on a stack, return to
+          previous page. Otherwise, return to index */
+    if (modalTitle) {
+      router.navigate({
+        pathname: "/",
+        params: {
+          rawData: JSON.stringify(getCurrentData()),
+          overrideKey: getInitialKey(),
+        },
+      });
+    } else {
+      // TODO: Create better alert popup
+      alert("Add a title!");
+    }
   }
 
   // const isPresented = router.canGoBack();
@@ -104,23 +129,7 @@ export default function addEventScreen() {
 
       <View className="mb-5 mr-5 flex flex-row content-end justify-end">
         {/* Save / close modal */}
-        <FilledPill
-          label="Confirm"
-          callback={() => {
-            {
-              /* If the modal was added on a stack, return to
-                previous page. Otherwise, return to index */
-            }
-            if (modalTitle) {
-              router.navigate({
-                pathname: "/",
-                params: { rawData: JSON.stringify(getCurrentData()) },
-              });
-            } else {
-              // TODO: Create better alert popup
-              alert("Add a title!");
-            }
-          }}></FilledPill>
+        <FilledPill label="Confirm" callback={handleAddEvent}></FilledPill>
         {/* Close modal without saving */}
         <OutlinedPill
           label="Cancel"
