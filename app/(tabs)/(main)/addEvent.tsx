@@ -12,13 +12,14 @@ import { useState } from "react";
 export default function addEventScreen() {
   const [modalTitle, useModalTitle] = useState<string>("");
   const [description, useDescription] = useState<string>("");
+  const [type, useType] = useState<"since" | "until" | "elapsed" | string>("");
 
   function getCurrentData() {
     if (modalTitle) {
       return {
         key: modalTitle,
         description: description,
-        type: "since",
+        type: type,
         time: 0,
       };
     }
@@ -30,6 +31,10 @@ export default function addEventScreen() {
 
   function saveDescription(value: string) {
     return useDescription(value);
+  }
+
+  function saveType(value: string) {
+    return useType(value);
   }
 
   // const isPresented = router.canGoBack();
@@ -53,7 +58,8 @@ export default function addEventScreen() {
 
         <RadioSelect
           label="Days"
-          options={["since", "until", "elapsed"]}></RadioSelect>
+          options={["since", "until", "elapsed"]}
+          onChangeOption={saveType}></RadioSelect>
 
         <DateField label="Started"></DateField>
         <DateField label="Ended"></DateField>

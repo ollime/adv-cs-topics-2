@@ -5,13 +5,18 @@ import { useState } from "react";
 export default function RadioSelect({
   label,
   options,
+  onChangeOption,
 }: {
   label: string;
   options: Array<string>;
+  onChangeOption: Function;
 }) {
   const [option, useOption] = useState(options[0]);
   const handleChangeOption = (value: string) => {
+    // updates this function's copy of the selected option
     useOption(value);
+    // updates parent container
+    onChangeOption(value);
   };
 
   const radioBtns = options.map((item, key) => (
@@ -50,19 +55,19 @@ function RadioButton({
       <Pressable onPress={handleSelect}>
         <View className="flex flex-row items-center justify-center">
           <View
-            className={`rounded-full ring-2 ${
-              label == selected
-                ? "ring-blue-500 ring-offset-4"
-                : "ring-gray-400 ring-offset-2"
-            }
-          `}>
+            className={
+              "rounded-full ring-2 " +
+              (label == selected
+                ? "ring-primary ring-offset-4"
+                : "ring-gray-400 ring-offset-2")
+            }>
             <View
-              className={`size-8 rounded-full bg-white ${
-                label == selected
-                  ? "bg-blue-500 ring-4 ring-white"
-                  : "ring-2 ring-gray-400"
-              }
-            `}></View>
+              className={
+                "size-8 rounded-full " +
+                (label == selected
+                  ? "bg-primary ring-4 ring-white"
+                  : "bg-white ring-2 ring-gray-400")
+              }></View>
           </View>
           <Text className="mx-2 dark:text-white">{label}</Text>
         </View>
