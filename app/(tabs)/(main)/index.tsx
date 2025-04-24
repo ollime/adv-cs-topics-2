@@ -28,7 +28,7 @@ export default function index() {
       time: 20,
       description: "A description of this event.",
     },
-    { key: "good-bye", color: "purple-400", type: "until", time: 5 },
+    { key: "good-bye", color: "purple-400", type: "until", time: 0 },
     { key: "zephyr", color: "primary", type: "since", time: 500 },
     { key: "stream", type: "elapsed", time: 200 },
     { key: "unit", type: "until" },

@@ -95,9 +95,18 @@ export default function addEventScreen() {
   // const isPresented = router.canGoBack();
   const childContent = (
     <>
-      <Text className="mx-5 mt-5 flex items-start text-lg font-bold dark:text-white">
-        Add new event
-      </Text>
+      <View className="mb-7 mt-5 flex flex-1 flex-row justify-between">
+        <Text className="mx-5 flex items-start text-lg font-bold dark:text-white">
+          {initialData ? "Modify existing event" : "Add new event"}
+        </Text>
+        {initialData ? (
+          <Text className="mx-5 text-lg font-bold dark:text-white">
+            {initialData.time} days
+          </Text>
+        ) : (
+          ""
+        )}
+      </View>
 
       {/* Main content */}
       <View className="flex items-center justify-center">

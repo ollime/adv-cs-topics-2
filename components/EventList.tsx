@@ -43,7 +43,7 @@ function EventListItem({ data }: { data: ListItem }) {
   }
 
   function renderText(type?: string, time?: number) {
-    if (type && time) {
+    if (type && (time || time === 0)) {
       if (type == "since") {
         return time + " days ago";
       } else if (type == "until") {
