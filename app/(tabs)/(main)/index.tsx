@@ -1,8 +1,9 @@
 import React from "react";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import Counter from "../../../components/Counter";
 import { OutlinedPill } from "../../../components/PillButton";
+import DatePicker from "../../../components/DatePicker";
 import EventList from "../../../components/EventList";
 import { ListItem } from "./../../../types";
 import { useState, useEffect } from "react";
@@ -115,11 +116,12 @@ export default function index() {
 
   return (
     <>
-      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
+      <ScrollView className="flex flex-1 bg-background dark:bg-backgroundDark">
+        {/* <DatePicker></DatePicker> */}
         <Counter></Counter>
         <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
         <EventList data={testData}></EventList>
-      </View>
+      </ScrollView>
     </>
   );
 }

@@ -150,11 +150,13 @@ export default function addEventScreen() {
           onChangeOption={saveType}
           selected={type}></RadioSelect>
 
-        <DateField label="Started"></DateField>
-        <DateField label="Ended"></DateField>
+        <View className="my-5 flex w-80 flex-1 items-center border-t">
+          <DateField label="Started"></DateField>
+          <DateField label="Ended"></DateField>
+        </View>
       </View>
 
-      <View className="mb-5 mr-5 flex flex-row content-end justify-end">
+      <View className="mb-5 mr-5 mt-2 flex flex-row content-end justify-end">
         {/* Save / close modal */}
         <FilledPill label="Confirm" callback={handleAddEvent}></FilledPill>
         {/* Close modal without saving */}
