@@ -21,6 +21,8 @@ export default function addEventScreen() {
     "since"
   );
   const [iconColor, setIconColor] = useState<string | undefined>("white");
+  const [startTime, setStartTime] = useState<number>(0);
+  const [endTime, setEndTime] = useState<number>(Date.now() / 1000);
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -29,7 +31,6 @@ export default function addEventScreen() {
       ? (params as ListItem)
       : null;
 
-  // TODO: useEffect to load newData
   // loadData function
   useEffect(() => {
     if (initialData && initialData.type) {
@@ -37,6 +38,12 @@ export default function addEventScreen() {
       setDescription(initialData.description);
       setType(initialData.type);
       setIconColor(initialData.color);
+      if (initialData.startTime) {
+        setStartTime(initialData.startTime);
+      }
+      if (initialData.endTime) {
+        setEndTime(initialData.endTime);
+      }
     }
   }, []);
 
@@ -48,6 +55,8 @@ export default function addEventScreen() {
         color: iconColor,
         type: type,
         time: 0,
+        startTime: startTime,
+        endTime: endTime,
       };
     }
   }
@@ -151,8 +160,8 @@ export default function addEventScreen() {
           selected={type}></RadioSelect>
 
         <View className="my-5 flex w-80 flex-1 items-center border-t">
-          <DateField label="Started"></DateField>
-          <DateField label="Ended"></DateField>
+          <DateField label="Started" time={startTime}></DateField>
+          <DateField label="Ended" time={endTime}></DateField>
         </View>
       </View>
 

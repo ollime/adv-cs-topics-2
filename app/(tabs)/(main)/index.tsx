@@ -28,6 +28,8 @@ export default function index() {
       type: "since",
       time: 20,
       description: "A description of this event.",
+      startTime: 1725623522,
+      endTime: 1745622291,
     },
     { key: "good-bye", color: "purple-400", type: "until", time: 0 },
     { key: "zephyr", color: "primary", type: "since", time: 500 },
@@ -70,7 +72,6 @@ export default function index() {
     { key: "torpid" },
     { key: "heavy" },
   ]);
-  // TODO: make colors easier to select using variables
 
   const { rawData, override, overrideKey } = useLocalSearchParams<{
     rawData: string;
@@ -81,8 +82,6 @@ export default function index() {
   // converting data back into JSON
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
-  // TODO: useEffect to load newData
-  // TODO: delete existing event if changing name
   // loadData function
   useEffect(() => {
     if (data) {
@@ -109,8 +108,6 @@ export default function index() {
         // event doesn't already exist --> add event
         setTestData([...testData, data]);
       }
-    } else {
-      console.log("no data provided?");
     }
   }, []);
 
