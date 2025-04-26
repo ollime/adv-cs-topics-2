@@ -7,7 +7,7 @@ export default function TextField({
   initialText,
 }: {
   label: string;
-  onChangeText: (value: string) => void;
+  onChangeText: Function;
   initialText?: string;
 }) {
   function handleChangeText(value: string) {

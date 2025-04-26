@@ -8,12 +8,12 @@ export default function RadioSelect({
   selected,
 }: {
   label: string;
-  options: Array<"since" | "until" | "elapsed">;
-  onChangeOption: (value: "since" | "until" | "elapsed") => void;
+  options: Array<string>;
+  onChangeOption: Function;
   selected?: string;
 }) {
   const [option, setOption] = React.useState<string>(selected || options[0]);
-  const handleChangeOption = (value: "since" | "until" | "elapsed") => {
+  const handleChangeOption = (value: string) => {
     setOption(value); // updates local state
     onChangeOption(value); // updates parent container
   };
@@ -48,8 +48,8 @@ function RadioButton({
   onSelect,
   selected,
 }: {
-  label: "since" | "until" | "elapsed";
-  onSelect: (value: "since" | "until" | "elapsed") => void;
+  label: string;
+  onSelect: Function;
   selected: string;
 }) {
   const handleSelect = () => {
