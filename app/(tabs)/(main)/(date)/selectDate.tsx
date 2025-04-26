@@ -6,17 +6,20 @@ import { View, Text } from "react-native";
 import { router } from "expo-router";
 import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import DatePicker from "../../../../components/DatePicker";
-import { useLocalSearchParams, useGlobalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import { ListItem } from "../../../../types";
 
 export default function selectDate() {
   const [selectedDate, setSelectedDate] = React.useState<number>();
 
   const isPresented = router.canGoBack();
 
-  const { typeOfDateLabel } = useLocalSearchParams<{
+  const { typeOfDateLabel, rawData } = useLocalSearchParams<{
     typeOfDateLabel: string;
+    rawData: string;
   }>();
-  const globalParams = useGlobalSearchParams();
+  // converting data back into JSON
+  const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
   // TODO: write function to put new selected date in old data
 
@@ -26,16 +29,17 @@ export default function selectDate() {
 
   const handleGoBack = () => {
     // update the data with selectedDate
-    if (selectedDate) {
+    if (selectedDate && data) {
       if (typeOfDateLabel == "startTime") {
-        globalParams.startTime = selectedDate.toString();
-      } else if (typeOfDateLabel == "endTime") {
-        globalParams.endTime = selectedDate.toString();
+        data.startTime = selectedDate;
+      }
+      if (typeOfDateLabel == "endTime") {
+        data.endTime = selectedDate;
       }
     }
     router.navigate({
       pathname: "/addEvent",
-      params: globalParams,
+      params: JSON.parse(JSON.stringify(data)),
     });
   };
 

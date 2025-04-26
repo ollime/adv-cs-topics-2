@@ -1,28 +1,25 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useRouter } from "expo-router";
 
 export default function DateField({
   label,
   type,
   time,
+  openDatePicker,
 }: {
   // visual text to display
   label: string;
   // type describing the time value stored
   type: "startTime" | "endTime" | string;
   time: number;
+  openDatePicker: (type: string) => void;
 }) {
   const [date, setDate] = React.useState<number>(time);
 
   // TODO: open DatePicker modal
-  const router = useRouter();
   function handleOpenDatePicker() {
-    router.navigate({
-      pathname: "/selectDate",
-      params: { typeOfDateLabel: type },
-    });
+    openDatePicker(type);
   }
 
   function convertUnixToDate(unixTimestamp: number) {

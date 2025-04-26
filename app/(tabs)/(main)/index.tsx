@@ -3,7 +3,6 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
 import Counter from "../../../components/Counter";
 import { OutlinedPill } from "../../../components/PillButton";
-import DatePicker from "../../../components/DatePicker";
 import EventList from "../../../components/EventList";
 import { ListItem } from "./../../../types";
 import { useState, useEffect } from "react";

@@ -70,7 +70,6 @@ export default function addEventScreen() {
 
   function saveTitle(value: string) {
     setModalTitle(value);
-    // router.setParams(getCurrentData());
   }
 
   function saveDescription(value: string) {
@@ -114,6 +113,16 @@ export default function addEventScreen() {
     } else {
       return "Error: Data not loaded.";
     }
+  }
+
+  function openDatePicker(type: string) {
+    router.navigate({
+      pathname: "/selectDate",
+      params: {
+        typeOfDateLabel: type,
+        rawData: JSON.stringify(getCurrentData()),
+      },
+    });
   }
 
   // const isPresented = router.canGoBack();
@@ -163,8 +172,13 @@ export default function addEventScreen() {
           <DateField
             label="Started"
             type="startTime"
-            time={startTime}></DateField>
-          <DateField label="Ended" type="endTime" time={endTime}></DateField>
+            time={startTime}
+            openDatePicker={openDatePicker}></DateField>
+          <DateField
+            label="Ended"
+            type="endTime"
+            time={endTime}
+            openDatePicker={openDatePicker}></DateField>
         </View>
       </View>
 
