@@ -29,7 +29,7 @@ export function SelectablePalette({
   onChangeOption,
   selected,
 }: {
-  onChangeOption: Function;
+  onChangeOption: (value: string) => void;
   selected?: string;
 }) {
   const [option, useOption] = React.useState(selected || "white");
@@ -97,7 +97,7 @@ function ColorOption({
   selected,
 }: {
   color: string;
-  callback: Function;
+  callback: (value: string) => void;
   selected: string;
 }) {
   const handleSelectOption = () => {

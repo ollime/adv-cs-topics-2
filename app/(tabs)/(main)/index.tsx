@@ -13,7 +13,7 @@ export default function index() {
     router.navigate("/testModal");
   };
 
-  const openConfirmOverride = (data, overrideKey?: string) => {
+  const openConfirmOverride = (data: ListItem, overrideKey?: string) => {
     router.navigate({
       pathname: "/confirmOverride",
       params: { data: JSON.stringify(data), overrideKey: overrideKey },
