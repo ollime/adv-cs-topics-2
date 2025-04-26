@@ -21,8 +21,6 @@ export default function selectDate() {
   // converting data back into JSON
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
-  // TODO: write function to put new selected date in old data
-
   function updateDateValue(date: number) {
     setSelectedDate(date);
   }

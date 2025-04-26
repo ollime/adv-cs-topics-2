@@ -43,7 +43,20 @@ function EventListItem({ data }: { data: ListItem }) {
     });
   }
 
-  function renderText(type?: string, time?: number) {
+  function convertSecondsToDays(time: number) {
+    return Math.round(time / 60 / 60 / 24);
+  }
+
+  function renderText(type?: string, startTime?: number, endTime?: number) {
+    let time: number = 0;
+    if (startTime && endTime) {
+      time = convertSecondsToDays(endTime - startTime); // time elapsed
+    } else if (startTime) {
+      time = convertSecondsToDays(Date.now() / 1000 - startTime); // time since
+    } else if (endTime) {
+      time = convertSecondsToDays(endTime - Date.now() / 1000); // time until
+    }
+
     if (type && (time || time === 0)) {
       if (type == "since") {
         return time + " days ago";
@@ -66,7 +79,7 @@ function EventListItem({ data }: { data: ListItem }) {
           <View className="flex flex-1">
             <Text className="font-bold dark:text-white">{data.key}</Text>
             <Text className="dark:text-white">
-              {renderText(data.type, data.time)}
+              {renderText(data.type, data.startTime, data.endTime)}
             </Text>
             <Text className="mt-2 break-words dark:text-white">
               {data.description ? data.description : ""}

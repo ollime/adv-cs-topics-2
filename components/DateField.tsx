@@ -17,7 +17,6 @@ export default function DateField({
 }) {
   const [date, setDate] = React.useState<number>(time);
 
-  // TODO: open DatePicker modal
   function handleOpenDatePicker() {
     openDatePicker(type);
   }

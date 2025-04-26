@@ -3,8 +3,6 @@ import { Pressable, View, ScrollView, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
 
-// TODO: If using this later, add in parameter for JSX content
-// TODO: Move to components folder
 export default function Modal({ childContent }: { childContent: JSX.Element }) {
   return (
     <View className="flex w-full flex-1">

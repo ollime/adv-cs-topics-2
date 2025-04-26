@@ -3,7 +3,6 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 
-// TODO: Use later for editing event
 export function Palette() {
   return (
     <>
@@ -29,7 +28,7 @@ export function SelectablePalette({
   onChangeOption,
   selected,
 }: {
-  onChangeOption: Function;
+  onChangeOption: (color: string) => void;
   selected?: string;
 }) {
   const [option, useOption] = React.useState(selected || "white");
@@ -97,7 +96,7 @@ function ColorOption({
   selected,
 }: {
   color: string;
-  callback: Function;
+  callback: (color: string) => void;
   selected: string;
 }) {
   const handleSelectOption = () => {

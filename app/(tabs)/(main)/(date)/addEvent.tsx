@@ -56,7 +56,6 @@ export default function addEventScreen() {
         description: description,
         color: iconColor,
         type: type,
-        time: 0,
         startTime: startTime,
         endTime: endTime,
       };
@@ -104,7 +103,20 @@ export default function addEventScreen() {
     }
   }
 
-  function renderText(type?: string, time?: number) {
+  function convertSecondsToDays(time: number) {
+    return Math.round(time / 60 / 60 / 24);
+  }
+
+  function renderText(type?: string, startTime?: number, endTime?: number) {
+    let time: number = 0;
+    if (startTime && endTime) {
+      time = convertSecondsToDays(endTime - startTime); // time elapsed
+    } else if (startTime) {
+      time = convertSecondsToDays(Date.now() / 1000 - startTime); // time since
+    } else if (endTime) {
+      time = convertSecondsToDays(endTime - Date.now() / 1000); // time until
+    }
+
     if (type && (time || time === 0)) {
       if (type == "since") {
         return time + " days ago";
@@ -139,7 +151,11 @@ export default function addEventScreen() {
           <View className="mx-5 flex flex-row items-center">
             <Ionicons name="timer-outline" size={24} color="black" />
             <Text className="text-md ml-1 font-bold dark:text-white">
-              {renderText(initialData.type, initialData.time)}
+              {renderText(
+                initialData.type,
+                initialData.startTime,
+                initialData.endTime
+              )}
             </Text>
           </View>
         ) : (
