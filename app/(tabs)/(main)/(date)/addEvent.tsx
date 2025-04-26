@@ -2,7 +2,6 @@ import React from "react";
 
 import { View, Text } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
-import { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Modal from "../../../../components/Modal";
@@ -14,14 +13,14 @@ import { SelectablePalette } from "../../../../components/Palette";
 import { ListItem } from "../../../../types";
 
 export default function addEventScreen() {
-  const [modalTitle, setModalTitle] = useState<string>("");
-  const [description, setDescription] = useState<string | undefined>("");
-  const [type, setType] = useState<"since" | "until" | "elapsed" | string>(
-    "since"
-  );
-  const [iconColor, setIconColor] = useState<string | undefined>("white");
-  const [startTime, setStartTime] = useState<number>(Date.now() / 1000);
-  const [endTime, setEndTime] = useState<number>(Date.now() / 1000);
+  const [modalTitle, setModalTitle] = React.useState<string>("");
+  const [description, setDescription] = React.useState<string | undefined>("");
+  const [type, setType] = React.useState<
+    "since" | "until" | "elapsed" | string
+  >("since");
+  const [iconColor, setIconColor] = React.useState<string | undefined>("white");
+  const [startTime, setStartTime] = React.useState<number>(Date.now() / 1000);
+  const [endTime, setEndTime] = React.useState<number>(Date.now() / 1000);
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -31,7 +30,7 @@ export default function addEventScreen() {
       : null;
 
   // loadData function
-  useEffect(() => {
+  React.useEffect(() => {
     if (initialData && initialData.type) {
       setModalTitle(initialData.key);
       setDescription(initialData.description);

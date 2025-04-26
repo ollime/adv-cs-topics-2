@@ -1,11 +1,11 @@
 import React from "react";
-import { useRouter, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
+import { useRouter, useLocalSearchParams } from "expo-router";
+
 import Counter from "../../../components/Counter";
-import { OutlinedPill } from "../../../components/PillButton";
 import EventList from "../../../components/EventList";
+import { OutlinedPill } from "../../../components/PillButton";
 import { ListItem } from "./../../../types";
-import { useState, useEffect } from "react";
 
 export default function index() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function index() {
     });
   };
 
-  const [testData, setTestData] = useState<Array<ListItem>>([
+  const [testData, setTestData] = React.useState<Array<ListItem>>([
     {
       key: "quarter",
       color: "purple-400",
@@ -82,7 +82,7 @@ export default function index() {
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
   // loadData function
-  useEffect(() => {
+  React.useEffect(() => {
     if (data) {
       const keyAlreadyExists = testData.find(
         (i) => i.key == (overrideKey ? overrideKey : data.key)

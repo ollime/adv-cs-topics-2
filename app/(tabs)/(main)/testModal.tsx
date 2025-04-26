@@ -1,7 +1,8 @@
 import React from "react";
-import Modal from "../../../components/Modal";
 import { View, Text } from "react-native";
 import { router } from "expo-router";
+
+import Modal from "../../../components/Modal";
 import { FilledPill } from "../../../components/PillButton";
 
 export default function testModal() {

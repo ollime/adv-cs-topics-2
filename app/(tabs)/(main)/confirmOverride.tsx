@@ -1,9 +1,10 @@
 /** @overview Modal to confirm adding an event in the case that two events share the same name. */
 
 import React from "react";
-import Modal from "../../../components/Modal";
 import { View, Text } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
+
+import Modal from "../../../components/Modal";
 import { FilledPill, OutlinedPill } from "../../../components/PillButton";
 import { ListItem } from "./../../../types";
 

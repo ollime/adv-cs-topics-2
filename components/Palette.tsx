@@ -2,7 +2,6 @@
 
 import React from "react";
 import { View, Pressable } from "react-native";
-import { useState, useEffect } from "react";
 
 // TODO: Use later for editing event
 export function Palette() {
@@ -33,7 +32,7 @@ export function SelectablePalette({
   onChangeOption: Function;
   selected?: string;
 }) {
-  const [option, useOption] = useState(selected || "white");
+  const [option, useOption] = React.useState(selected || "white");
   const handleChangeOption = (value: string) => {
     // updates this function's copy of the selected option
     useOption(value);
@@ -42,7 +41,7 @@ export function SelectablePalette({
   };
 
   // Sync the internal state with the `selected` prop if it changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (selected !== undefined && selected !== option) {
       useOption(selected);
     }

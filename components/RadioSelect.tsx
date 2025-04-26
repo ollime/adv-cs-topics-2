@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { useState, useEffect } from "react";
 
 export default function RadioSelect({
   label,
@@ -13,14 +12,14 @@ export default function RadioSelect({
   onChangeOption: Function;
   selected?: string;
 }) {
-  const [option, setOption] = useState<string>(selected || options[0]);
+  const [option, setOption] = React.useState<string>(selected || options[0]);
   const handleChangeOption = (value: string) => {
     setOption(value); // updates local state
     onChangeOption(value); // updates parent container
   };
 
   // Sync the internal state with the `selected` prop if it changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (selected !== undefined && selected !== option) {
       setOption(selected);
     }

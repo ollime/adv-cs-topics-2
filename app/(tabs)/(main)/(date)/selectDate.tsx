@@ -1,12 +1,12 @@
 /** @overview Calendar view modal to select a date. */
 
 import React from "react";
-import Modal from "../../../../components/Modal";
 import { View, Text } from "react-native";
-import { router } from "expo-router";
-import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
+import { router, useLocalSearchParams } from "expo-router";
+
+import Modal from "../../../../components/Modal";
 import DatePicker from "../../../../components/DatePicker";
-import { useLocalSearchParams } from "expo-router";
+import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import { ListItem } from "../../../../types";
 
 export default function selectDate() {

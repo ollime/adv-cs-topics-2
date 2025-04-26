@@ -1,5 +1,4 @@
 import React from "react";
-// import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Gradient({ children }: { children: JSX.Element }) {

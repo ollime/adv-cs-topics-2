@@ -1,7 +1,8 @@
 import React from "react";
 import { View, FlatList, Text, Pressable } from "react-native";
-import { FilledPill } from "./PillButton";
 import { useRouter } from "expo-router";
+
+import { FilledPill } from "./PillButton";
 import { ListItem } from "./../types";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {

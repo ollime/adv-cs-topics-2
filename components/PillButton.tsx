@@ -6,7 +6,6 @@ import Gradient from "./Gradient";
  * Creates a pill-shaped button.
  * @param label Label on the button
  * @param callback Callback function called when the button is pressed
- * @returns
  */
 export function FilledPill({
   label,
