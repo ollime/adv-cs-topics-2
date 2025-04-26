@@ -1,18 +1,12 @@
 import React from "react";
 import { Stack } from "expo-router";
 
-export default function ModalLayout() {
+export default function CalendarModalLayout() {
   return (
     <>
       <Stack>
         <Stack.Screen
-          name="index"
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="(date)"
+          name="addEvent"
           options={{
             presentation: "transparentModal",
             animation: "fade",
@@ -20,15 +14,7 @@ export default function ModalLayout() {
           }}
         />
         <Stack.Screen
-          name="confirmOverride"
-          options={{
-            presentation: "transparentModal",
-            animation: "fade",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="testModal"
+          name="selectDate"
           options={{
             presentation: "transparentModal",
             animation: "fade",

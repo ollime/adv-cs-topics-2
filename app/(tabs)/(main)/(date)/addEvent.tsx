@@ -1,18 +1,17 @@
 import React from "react";
 
 import { View, Text } from "react-native";
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
-import { useLocalSearchParams } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import Modal from "../../../components/Modal";
-import TextField from "../../../components/TextField";
-import DateField from "../../../components/DateField";
-import RadioSelect from "../../../components/RadioSelect";
-import { FilledPill, OutlinedPill } from "../../../components/PillButton";
-import { SelectablePalette } from "../../../components/Palette";
-import { ListItem } from "./../../../types";
+import Modal from "../../../../components/Modal";
+import TextField from "../../../../components/TextField";
+import DateField from "../../../../components/DateField";
+import RadioSelect from "../../../../components/RadioSelect";
+import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
+import { SelectablePalette } from "../../../../components/Palette";
+import { ListItem } from "../../../../types";
 
 export default function addEventScreen() {
   const [modalTitle, setModalTitle] = useState<string>("");
@@ -24,12 +23,14 @@ export default function addEventScreen() {
   const [startTime, setStartTime] = useState<number>(0);
   const [endTime, setEndTime] = useState<number>(Date.now() / 1000);
 
-  const params = useLocalSearchParams() as unknown;
+  const params = useGlobalSearchParams() as unknown;
   // type checking the key
   const initialData =
     params && typeof params === "object" && "key" in params
       ? (params as ListItem)
       : null;
+
+  console.log(params);
 
   // loadData function
   useEffect(() => {
@@ -70,19 +71,20 @@ export default function addEventScreen() {
   }
 
   function saveTitle(value: string) {
-    return setModalTitle(value);
+    setModalTitle(value);
+    // router.setParams(getCurrentData());
   }
 
   function saveDescription(value: string) {
-    return setDescription(value);
+    setDescription(value);
   }
 
   function saveType(value: "since" | "until" | "elapsed") {
-    return setType(value);
+    setType(value);
   }
 
   function saveColor(value: string) {
-    return setIconColor(value);
+    setIconColor(value);
   }
 
   function handleAddEvent() {
@@ -160,8 +162,11 @@ export default function addEventScreen() {
           selected={type}></RadioSelect>
 
         <View className="my-5 flex w-80 flex-1 items-center border-t">
-          <DateField label="Started" time={startTime}></DateField>
-          <DateField label="Ended" time={endTime}></DateField>
+          <DateField
+            label="Started"
+            type="startTime"
+            time={startTime}></DateField>
+          <DateField label="Ended" type="endTime" time={endTime}></DateField>
         </View>
       </View>
 

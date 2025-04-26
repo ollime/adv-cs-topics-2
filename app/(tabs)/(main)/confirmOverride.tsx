@@ -25,30 +25,32 @@ export default function confirmOverrideModal() {
         <Text className="m-5 dark:text-white">
           Are you sure you want to override this event?
         </Text>
-        <FilledPill
-          label="Confirm"
-          callback={() => {
-            {
-              /* If the modal was added on a stack, return to
+        <View className="flex flex-1 flex-row">
+          <FilledPill
+            label="Confirm"
+            callback={() => {
+              {
+                /* If the modal was added on a stack, return to
                         previous page. Otherwise, return to index */
-            }
-            router.navigate({
-              pathname: "/",
-              params: {
-                rawData: JSON.stringify(currentData),
-                override: "true",
-                overrideKey: overrideKey,
-              },
-            });
-          }}></FilledPill>
-        <OutlinedPill
-          label="Cancel"
-          callback={() => {
-            router.navigate({
-              pathname: "/",
-              params: {},
-            });
-          }}></OutlinedPill>
+              }
+              router.navigate({
+                pathname: "/",
+                params: {
+                  rawData: JSON.stringify(currentData),
+                  override: "true",
+                  overrideKey: overrideKey,
+                },
+              });
+            }}></FilledPill>
+          <OutlinedPill
+            label="Cancel"
+            callback={() => {
+              router.navigate({
+                pathname: "/",
+                params: {},
+              });
+            }}></OutlinedPill>
+        </View>
       </View>
     </>
   );

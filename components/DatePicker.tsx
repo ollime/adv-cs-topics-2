@@ -5,16 +5,28 @@ import DateTimePicker, {
   useDefaultClassNames,
 } from "react-native-ui-datepicker";
 
-export default function Calendar() {
+export default function Calendar({
+  onDateChange,
+}: {
+  onDateChange: (date: number) => void;
+}) {
   const defaultClassNames = useDefaultClassNames();
   const [selected, setSelected] = React.useState<DateType>();
 
+  const handleDateChange = (date: DateType) => {
+    const unixValue = date?.valueOf() as number;
+    // update parent container state
+    onDateChange(unixValue / 1000);
+    // update local state
+    setSelected(unixValue);
+  };
+
   return (
-    <View className="m-20 flex w-56 min-w-[300px] rounded-xl bg-white">
+    <View className="flex w-56 min-w-[300px] rounded-xl bg-white">
       <DateTimePicker
         mode="single"
         date={selected}
-        onChange={({ date }) => setSelected(date)}
+        onChange={({ date }) => handleDateChange(date)}
         classNames={{
           ...defaultClassNames,
           header: "bg-gray-400 rounded-t-xl",
