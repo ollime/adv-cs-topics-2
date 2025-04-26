@@ -2,18 +2,16 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
-import Counter from "../../../components/Counter";
 import EventList from "../../../components/EventList";
-import { OutlinedPill } from "../../../components/PillButton";
 import { ListItem } from "./../../../types";
 
 export default function index() {
   const router = useRouter();
-  const testCallback = () => {
-    router.navigate("/testModal");
-  };
+  // const testCallback = () => {
+  //   router.navigate("/testModal");
+  // };
 
-  const openConfirmOverride = (data, overrideKey?: string) => {
+  const openConfirmOverride = (data: ListItem, overrideKey?: string) => {
     router.navigate({
       pathname: "/confirmOverride",
       params: { data: JSON.stringify(data), overrideKey: overrideKey },
@@ -113,9 +111,6 @@ export default function index() {
   return (
     <>
       <ScrollView className="flex flex-1 bg-background dark:bg-backgroundDark">
-        {/* <DatePicker></DatePicker> */}
-        <Counter></Counter>
-        <OutlinedPill label="Message" callback={testCallback}></OutlinedPill>
         <EventList data={testData}></EventList>
       </ScrollView>
     </>
