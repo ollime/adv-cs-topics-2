@@ -9,7 +9,7 @@ export default function RadioSelect({
 }: {
   label: string;
   options: Array<string>;
-  onChangeOption: Function;
+  onChangeOption: (value: string) => void;
   selected?: string;
 }) {
   const [option, setOption] = React.useState<string>(selected || options[0]);
@@ -49,7 +49,7 @@ function RadioButton({
   selected,
 }: {
   label: string;
-  onSelect: Function;
+  onSelect: (value: string) => void;
   selected: string;
 }) {
   const handleSelect = () => {

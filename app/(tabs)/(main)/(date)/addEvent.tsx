@@ -15,9 +15,9 @@ import { ListItem } from "../../../../types";
 export default function addEventScreen() {
   const [modalTitle, setModalTitle] = React.useState<string>("");
   const [description, setDescription] = React.useState<string | undefined>("");
-  const [type, setType] = React.useState<
-    "since" | "until" | "elapsed" | string
-  >("elapsed");
+  const [type, setType] = React.useState<"since" | "until" | "elapsed">(
+    "elapsed"
+  );
   const [iconColor, setIconColor] = React.useState<string | undefined>("white");
   const [startTime, setStartTime] = React.useState<number>(0);
   const [endTime, setEndTime] = React.useState<number>(0);
@@ -34,7 +34,13 @@ export default function addEventScreen() {
     if (initialData && initialData.type) {
       setModalTitle(initialData.key);
       setDescription(initialData.description);
-      setType(initialData.type);
+      if (
+        initialData.type === "since" ||
+        initialData.type === "until" ||
+        initialData.type === "elapsed"
+      ) {
+        setType(initialData.type);
+      }
       setIconColor(initialData.color);
       if (initialData.startTime) {
         setStartTime(initialData.startTime);
@@ -193,7 +199,9 @@ export default function addEventScreen() {
         <RadioSelect
           label="Days"
           options={["since", "until", "elapsed"]}
-          onChangeOption={saveType}
+          onChangeOption={(value) =>
+            saveType(value as "since" | "until" | "elapsed")
+          }
           selected={type}></RadioSelect>
 
         <View className="my-5 flex w-80 flex-1 items-center border-t">
