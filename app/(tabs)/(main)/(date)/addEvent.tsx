@@ -1,7 +1,7 @@
 import React from "react";
 
 import { View, Text } from "react-native";
-import { router, useGlobalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -23,7 +23,7 @@ export default function addEventScreen() {
   const [startTime, setStartTime] = useState<number>(Date.now() / 1000);
   const [endTime, setEndTime] = useState<number>(Date.now() / 1000);
 
-  const params = useGlobalSearchParams() as unknown;
+  const params = useLocalSearchParams() as unknown;
   // type checking the key
   const initialData =
     params && typeof params === "object" && "key" in params
@@ -49,7 +49,11 @@ export default function addEventScreen() {
   function getCurrentData() {
     if (modalTitle) {
       return {
-        key: modalTitle,
+        /* use initial key, not current value, to prevent a bug where the
+        initial key value changes between moving to the date picker modal
+        and confirming changes. this results in event title changes being
+        reverted back */
+        key: initialData ? initialData.key : modalTitle,
         description: description,
         color: iconColor,
         type: type,
