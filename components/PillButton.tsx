@@ -16,12 +16,12 @@ export function FilledPill({
 }) {
   return (
     <>
-      <View className="m-2 h-[40px] w-[100px] rounded-full shadow-md shadow-indigo-500/50">
-        <View className="h-[40px] w-[100px] overflow-hidden rounded-full">
+      <View className="m-2 min-h-[40px] min-w-[100px] rounded-full shadow-md shadow-indigo-500/50">
+        <View className="min-h-[40px] min-w-[100px] overflow-hidden rounded-full">
           <Pressable onPress={() => callback()}>
             <Gradient>
-              <View className="h-[40px] w-[100px] items-center justify-center">
-                <Text className="select-none font-medium text-white">
+              <View className="min-h-[40px] min-w-[100px] items-center justify-center px-2">
+                <Text className="select-none px-2 font-medium text-white">
                   {label}
                 </Text>
               </View>
