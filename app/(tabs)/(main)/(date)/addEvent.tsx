@@ -17,10 +17,10 @@ export default function addEventScreen() {
   const [description, setDescription] = React.useState<string | undefined>("");
   const [type, setType] = React.useState<
     "since" | "until" | "elapsed" | string
-  >("since");
+  >("elapsed");
   const [iconColor, setIconColor] = React.useState<string | undefined>("white");
-  const [startTime, setStartTime] = React.useState<number>(Date.now() / 1000);
-  const [endTime, setEndTime] = React.useState<number>(Date.now() / 1000);
+  const [startTime, setStartTime] = React.useState<number>(0);
+  const [endTime, setEndTime] = React.useState<number>(0);
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -44,6 +44,17 @@ export default function addEventScreen() {
       }
     }
   }, []);
+
+  React.useEffect(() => {
+    if (type == "since") {
+      console.log(type);
+      setStartTime(Math.floor(Date.now() / 1000));
+    }
+    if (type == "until") {
+      console.log("!!!");
+      setEndTime(Math.floor(Date.now() / 1000));
+    }
+  }, [type]);
 
   function getCurrentData() {
     if (modalTitle) {
@@ -140,7 +151,6 @@ export default function addEventScreen() {
     });
   }
 
-  // TODO: change startTime or endTime to Date.now() depending on type
   const childContent = (
     <>
       <View className="mb-7 mt-7 flex flex-1 flex-row items-center justify-between">

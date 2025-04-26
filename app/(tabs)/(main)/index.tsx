@@ -25,7 +25,7 @@ export default function index() {
       type: "since",
       description: "A description of this event.",
       startTime: 1725623522,
-      endTime: 1745622291,
+      endTime: 1749222291,
     },
     { key: "good-bye", color: "purple-400", type: "until" },
     { key: "zephyr", color: "primary", type: "since" },
