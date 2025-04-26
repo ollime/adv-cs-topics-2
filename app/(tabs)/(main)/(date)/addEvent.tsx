@@ -45,13 +45,12 @@ export default function addEventScreen() {
     }
   }, []);
 
+  // sets startTime or endTime to today's date based on what type of event is selected
   React.useEffect(() => {
     if (type == "since") {
-      console.log(type);
       setStartTime(Math.floor(Date.now() / 1000));
     }
     if (type == "until") {
-      console.log("!!!");
       setEndTime(Math.floor(Date.now() / 1000));
     }
   }, [type]);
