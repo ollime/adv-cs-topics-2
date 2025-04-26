@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function DateField({
   label,
   type,
   time,
+  disabled,
   openDatePicker,
 }: {
   // visual text to display
@@ -13,6 +14,7 @@ export default function DateField({
   // type describing the time value stored
   type: "startTime" | "endTime" | string;
   time: number;
+  disabled: boolean;
   openDatePicker: (type: string) => void;
 }) {
   const [date, setDate] = React.useState<number>(time);
@@ -36,10 +38,31 @@ export default function DateField({
     <>
       <View className="mt-4 flex flex-row items-center">
         <Text className="mr-2 dark:text-white">{label}</Text>
-        <Pressable className="rounded-lg" onPress={handleOpenDatePicker}>
-          <View className="border-1 flex w-40 flex-1 flex-row justify-between rounded-lg border bg-white p-2 dark:border-white">
-            <Text className="dark:text-white">{convertUnixToDate(date)}</Text>
-            <MaterialIcons name="edit-calendar" size={20} color="black" />
+        <Pressable
+          className="rounded-lg"
+          onPress={handleOpenDatePicker}
+          disabled={disabled}>
+          <View
+            className={
+              "border-1 flex w-40 flex-1 flex-row justify-between rounded-lg border p-2 dark:border-white " +
+              (disabled ? "border-gray-500 bg-gray-300" : "bg-white")
+            }>
+            <Text className={disabled ? "text-gray-500" : " dark:text-white"}>
+              {convertUnixToDate(date)}
+            </Text>
+            {disabled ? (
+              <MaterialCommunityIcons
+                name="calendar-lock"
+                size={20}
+                color="gray"
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="calendar-edit"
+                size={20}
+                color="black"
+              />
+            )}
           </View>
         </Pressable>
       </View>

@@ -140,7 +140,7 @@ export default function addEventScreen() {
     });
   }
 
-  // const isPresented = router.canGoBack();
+  // TODO: change startTime or endTime to Date.now() depending on type
   const childContent = (
     <>
       <View className="mb-7 mt-7 flex flex-1 flex-row items-center justify-between">
@@ -192,11 +192,13 @@ export default function addEventScreen() {
             label="Started"
             type="startTime"
             time={startTime}
+            disabled={type == "since" ? true : false}
             openDatePicker={openDatePicker}></DateField>
           <DateField
             label="Ended"
             type="endTime"
             time={endTime}
+            disabled={type == "until" ? true : false}
             openDatePicker={openDatePicker}></DateField>
         </View>
       </View>
