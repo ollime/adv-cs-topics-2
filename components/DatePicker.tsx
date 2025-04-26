@@ -7,11 +7,13 @@ import DateTimePicker, {
 
 export default function Calendar({
   onDateChange,
+  initialDate,
 }: {
   onDateChange: (date: number) => void;
+  initialDate?: number;
 }) {
   const defaultClassNames = useDefaultClassNames();
-  const [selected, setSelected] = React.useState<DateType>();
+  const [selected, setSelected] = React.useState<DateType>(initialDate);
 
   const handleDateChange = (date: DateType) => {
     const unixValue = date?.valueOf() as number;
@@ -20,6 +22,13 @@ export default function Calendar({
     // update local state
     setSelected(unixValue);
   };
+
+  // Sync the internal state with the `initialDate` prop if it changes
+  React.useEffect(() => {
+    if (initialDate !== undefined && initialDate !== selected) {
+      setSelected(initialDate * 1000);
+    }
+  }, [initialDate]);
 
   return (
     <View className="flex w-56 min-w-[300px] rounded-xl bg-white">

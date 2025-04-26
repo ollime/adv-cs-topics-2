@@ -13,16 +13,16 @@ export default function RadioSelect({
   onChangeOption: Function;
   selected?: string;
 }) {
-  const [option, useOption] = useState<string>(selected || options[0]);
+  const [option, setOption] = useState<string>(selected || options[0]);
   const handleChangeOption = (value: string) => {
-    useOption(value); // updates local state
+    setOption(value); // updates local state
     onChangeOption(value); // updates parent container
   };
 
   // Sync the internal state with the `selected` prop if it changes
   useEffect(() => {
     if (selected !== undefined && selected !== option) {
-      useOption(selected);
+      setOption(selected);
     }
   }, [selected]);
 

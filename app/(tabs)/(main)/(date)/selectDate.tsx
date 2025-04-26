@@ -27,6 +27,18 @@ export default function selectDate() {
     setSelectedDate(date);
   }
 
+  // load initial date
+  React.useEffect(() => {
+    if (data) {
+      if (typeOfDateLabel == "startTime") {
+        setSelectedDate(data.startTime);
+      }
+      if (typeOfDateLabel == "endTime") {
+        setSelectedDate(data.endTime);
+      }
+    }
+  }, []);
+
   const handleGoBack = () => {
     // update the data with selectedDate
     if (selectedDate && data) {
@@ -50,7 +62,9 @@ export default function selectDate() {
           Select {typeOfDateLabel.slice(0, -4)} time
         </Text>
 
-        <DatePicker onDateChange={updateDateValue}></DatePicker>
+        <DatePicker
+          onDateChange={updateDateValue}
+          initialDate={selectedDate}></DatePicker>
         <View className="m-5 flex flex-1 flex-row">
           <FilledPill label="Confirm" callback={handleGoBack}></FilledPill>
           <OutlinedPill
