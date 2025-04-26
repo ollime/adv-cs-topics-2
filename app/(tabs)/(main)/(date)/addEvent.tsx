@@ -19,8 +19,8 @@ export default function addEventScreen() {
     "elapsed"
   );
   const [iconColor, setIconColor] = React.useState<string | undefined>("white");
-  const [startTime, setStartTime] = React.useState<number>(0);
-  const [endTime, setEndTime] = React.useState<number>(0);
+  const [startTime, setStartTime] = React.useState<number>();
+  const [endTime, setEndTime] = React.useState<number>();
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
