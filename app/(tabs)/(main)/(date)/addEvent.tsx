@@ -20,7 +20,7 @@ export default function addEventScreen() {
     "since"
   );
   const [iconColor, setIconColor] = useState<string | undefined>("white");
-  const [startTime, setStartTime] = useState<number>(0);
+  const [startTime, setStartTime] = useState<number>(Date.now() / 1000);
   const [endTime, setEndTime] = useState<number>(Date.now() / 1000);
 
   const params = useGlobalSearchParams() as unknown;
