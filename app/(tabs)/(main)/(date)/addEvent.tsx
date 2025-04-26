@@ -30,8 +30,6 @@ export default function addEventScreen() {
       ? (params as ListItem)
       : null;
 
-  console.log(params);
-
   // loadData function
   useEffect(() => {
     if (initialData && initialData.type) {

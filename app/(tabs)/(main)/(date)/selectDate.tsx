@@ -25,8 +25,14 @@ export default function selectDate() {
   }
 
   const handleGoBack = () => {
-    // TODO: update the global params with selectedDate
-    console.log(globalParams);
+    // update the data with selectedDate
+    if (selectedDate) {
+      if (typeOfDateLabel == "startTime") {
+        globalParams.startTime = selectedDate.toString();
+      } else if (typeOfDateLabel == "endTime") {
+        globalParams.endTime = selectedDate.toString();
+      }
+    }
     router.navigate({
       pathname: "/addEvent",
       params: globalParams,
