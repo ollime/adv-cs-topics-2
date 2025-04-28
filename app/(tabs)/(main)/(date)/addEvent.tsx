@@ -19,6 +19,7 @@ export default function addEventScreen() {
     "elapsed"
   );
   const [iconColor, setIconColor] = React.useState<string | undefined>("white");
+  // set default values to 0 to prevent error when creating new event
   const [startTime, setStartTime] = React.useState<number>(0);
   const [endTime, setEndTime] = React.useState<number>(0);
 
@@ -54,10 +55,10 @@ export default function addEventScreen() {
   // sets startTime or endTime to today's date based on what type of event is selected
   React.useEffect(() => {
     if (type == "since") {
-      setStartTime(Math.floor(Date.now() / 1000));
+      setEndTime(Math.floor(Date.now() / 1000));
     }
     if (type == "until") {
-      setEndTime(Math.floor(Date.now() / 1000));
+      setStartTime(Math.floor(Date.now() / 1000));
     }
   }, [type]);
 
@@ -209,13 +210,13 @@ export default function addEventScreen() {
             label="Started"
             type="startTime"
             time={startTime}
-            disabled={type == "since" ? true : false}
+            disabled={type == "until" ? true : false}
             openDatePicker={openDatePicker}></DateField>
           <DateField
             label="Ended"
             type="endTime"
             time={endTime}
-            disabled={type == "until" ? true : false}
+            disabled={type == "since" ? true : false}
             openDatePicker={openDatePicker}></DateField>
         </View>
       </View>
