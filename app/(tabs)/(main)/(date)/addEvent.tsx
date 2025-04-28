@@ -27,6 +27,7 @@ export default function addEventScreen() {
   const [endTime, setEndTime] = React.useState<number>(0);
 
   const [displayAlert, setDisplayAlert] = React.useState<boolean>(false);
+  const [alertLabel, setAlertLabel] = React.useState<string>("");
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -71,15 +72,20 @@ export default function addEventScreen() {
 
   // alerts for data validation
   React.useEffect(() => {
-    validateTime();
+    validateData();
   }, [startTime, endTime]);
 
   /**
    * Time data validation
    * @returns true if times are correct, false otherwise
    */
-  function validateTime() {
+  function validateData() {
     if (startTime > endTime) {
+      setAlertLabel("End date cannot be before the start date.");
+      setDisplayAlert(true);
+      return false;
+    } else if (!eventTitle) {
+      setAlertLabel("Add an event title.");
       setDisplayAlert(true);
       return false;
     } else {
@@ -191,8 +197,8 @@ export default function addEventScreen() {
 
   /** Closes the modal and sends current data */
   function openAddEvent() {
-    if (!validateTime()) {
-      validateTime();
+    if (!validateData()) {
+      validateData();
     } else if (eventTitle) {
       router.navigate({
         pathname: "/",
@@ -201,9 +207,6 @@ export default function addEventScreen() {
           overrideKey: getInitialKey(),
         },
       });
-    } else {
-      // TODO: Create better alert popup
-      alert("Add a title!");
     }
   }
 
@@ -269,7 +272,7 @@ export default function addEventScreen() {
 
       {displayAlert ? (
         <Alert
-          label="End date cannot be before the start date."
+          label={alertLabel}
           hidden={!displayAlert}
           setHidden={setDisplayAlert}></Alert>
       ) : (
