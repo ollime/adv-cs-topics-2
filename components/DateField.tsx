@@ -55,7 +55,7 @@ export default function DateField({
               "border-1 flex w-40 flex-1 flex-row justify-between rounded-lg border p-2 dark:border-white " +
               (disabled ? "border-gray-500 bg-gray-300" : "bg-white")
             }>
-            <Text className={disabled ? "text-gray-500" : " dark:text-white"}>
+            <Text className={disabled ? "text-gray-500 " : ""}>
               {convertUnixToDate(date)}
             </Text>
             {disabled ? (
