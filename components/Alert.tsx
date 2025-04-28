@@ -17,7 +17,7 @@ export default function Alert({ label }: { label: string }) {
           <View className="m-5 mx-10 flex flex-row items-center justify-between rounded-lg border border-red-400 bg-red-100 p-4">
             <View className="flex flex-row">
               <Text className="font-bold text-red-500">WARNING: </Text>
-              <Text className="text-red-500">Changes not saved.</Text>
+              <Text className="text-red-500">{label}</Text>
             </View>
             <Pressable onPress={hideAlert}>
               <MaterialIcons name="close" size={24} color="red" />

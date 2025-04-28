@@ -5,7 +5,6 @@ import { ScrollView } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import EventList from "../../../components/EventList";
-import Alert from "../../../components/Alert";
 import { ListItem } from "./../../../types";
 
 export default function index() {
@@ -116,7 +115,6 @@ export default function index() {
   return (
     <>
       <ScrollView className="flex flex-1 bg-background dark:bg-backgroundDark">
-        <Alert></Alert>
         <EventList data={testData}></EventList>
       </ScrollView>
     </>

@@ -10,6 +10,7 @@ import Modal from "../../../../components/Modal";
 import TextField from "../../../../components/TextField";
 import DateField from "../../../../components/DateField";
 import RadioSelect from "../../../../components/RadioSelect";
+import Alert from "../../../../components/Alert";
 import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import { SelectablePalette } from "../../../../components/Palette";
 import { ListItem } from "../../../../types";
@@ -24,6 +25,8 @@ export default function addEventScreen() {
   // set default values to 0 to prevent error when creating new event
   const [startTime, setStartTime] = React.useState<number>(0);
   const [endTime, setEndTime] = React.useState<number>(0);
+
+  const [displayAlert, setDisplayAlert] = React.useState<boolean>(false);
 
   const params = useLocalSearchParams() as unknown;
   // type checking the key
@@ -63,6 +66,13 @@ export default function addEventScreen() {
       setStartTime(Math.floor(Date.now() / 1000));
     }
   }, [type]);
+
+  // alerts for data validation
+  React.useEffect(() => {
+    if (startTime > endTime) {
+      setDisplayAlert(true);
+    }
+  }, [startTime, endTime]);
 
   /** Retrieves data currently displayed on the screen
    * @returns {ListItem}
@@ -244,6 +254,12 @@ export default function addEventScreen() {
             openDatePicker={openDatePicker}></DateField>
         </View>
       </View>
+
+      {displayAlert ? (
+        <Alert label="End date cannot be before the start date."></Alert>
+      ) : (
+        ""
+      )}
 
       <View className="mb-5 mr-5 mt-2 flex flex-row content-end justify-end">
         {/* Save / close modal */}
