@@ -59,11 +59,13 @@ export default function addEventScreen() {
 
   // sets startTime or endTime to today's date based on what type of event is selected
   React.useEffect(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     if (type == "since") {
-      setEndTime(Math.floor(Date.now() / 1000));
+      setEndTime(Math.floor(today.valueOf() / 1000)); // set to today at 0:00
     }
     if (type == "until") {
-      setStartTime(Math.floor(Date.now() / 1000));
+      setStartTime(Math.floor(today.valueOf() / 1000)); // set to today at 0:00
     }
   }, [type]);
 
@@ -201,11 +203,7 @@ export default function addEventScreen() {
           <View className="mx-5 flex flex-row items-center">
             <Ionicons name="timer-outline" size={24} color="black" />
             <Text className="text-md ml-1 font-bold dark:text-white">
-              {renderText(
-                initialData.type,
-                initialData.startTime,
-                initialData.endTime
-              )}
+              {renderText(type, startTime, endTime)}
             </Text>
           </View>
         ) : (
