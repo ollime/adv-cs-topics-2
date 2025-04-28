@@ -3,6 +3,7 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 
+/** Displays color palette */
 export function Palette() {
   return (
     <>
@@ -24,6 +25,11 @@ export function Palette() {
   );
 }
 
+/**
+ * Color palette with selectable options (radio buttons)
+ * @param onChangeOption Sends the selected color to parent component
+ * @param selected Default selected value
+ */
 export function SelectablePalette({
   onChangeOption,
   selected,
@@ -31,15 +37,19 @@ export function SelectablePalette({
   onChangeOption: (color: string) => void;
   selected?: string;
 }) {
+  /** Currently selected color. */
   const [option, useOption] = React.useState(selected || "white");
+
+  /**
+   * Callback for when the color changes
+   * @param value New selected option
+   */
   const handleChangeOption = (value: string) => {
-    // updates this function's copy of the selected option
-    useOption(value);
-    // updates parent container
-    onChangeOption(value);
+    useOption(value); // updates local state
+    onChangeOption(value); // updates parent state
   };
 
-  // Sync the internal state with the `selected` prop if it changes
+  // Sync the internal state with the parent `selected` prop if it changes
   React.useEffect(() => {
     if (selected !== undefined && selected !== option) {
       useOption(selected);
@@ -90,6 +100,12 @@ export function SelectablePalette({
   );
 }
 
+/**
+ * Individual color option for selectable palette component.
+ * @param color Color specified by the option
+ * @param callback Sends the selected color to parent component
+ * @param selected Determines if the current option is selected or not
+ */
 function ColorOption({
   color,
   callback,

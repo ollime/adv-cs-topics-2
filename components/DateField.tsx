@@ -1,3 +1,5 @@
+/** Displays the currently selected date. */
+
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -19,10 +21,16 @@ export default function DateField({
 }) {
   const [date, setDate] = React.useState<number>(time);
 
+  /** Opens the selectDate modal. */
   function handleOpenDatePicker() {
     openDatePicker(type);
   }
 
+  /**
+   * Converts unix time to date string
+   * @param unixTimestamp
+   * @returns date string
+   */
   function convertUnixToDate(unixTimestamp: number) {
     return new Date(unixTimestamp * 1000).toLocaleDateString();
   }

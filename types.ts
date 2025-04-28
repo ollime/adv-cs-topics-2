@@ -1,3 +1,4 @@
+/** Contains information about each event. */
 export interface ListItem {
   key: string;
   color?: string;

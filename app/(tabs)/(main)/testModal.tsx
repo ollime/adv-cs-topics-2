@@ -1,3 +1,5 @@
+/** Example of modal screen. */
+
 import React from "react";
 import { View, Text } from "react-native";
 import { router } from "expo-router";

@@ -1,3 +1,5 @@
+/** Contains a basic modal template. */
+
 import React from "react";
 import { Pressable, View, ScrollView, StyleSheet } from "react-native";
 import { Link } from "expo-router";

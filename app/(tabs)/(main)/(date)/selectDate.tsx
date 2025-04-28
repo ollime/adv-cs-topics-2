@@ -11,7 +11,6 @@ import { ListItem } from "../../../../types";
 
 export default function selectDate() {
   const [selectedDate, setSelectedDate] = React.useState<number>();
-
   const isPresented = router.canGoBack();
 
   const { typeOfDateLabel, rawData } = useLocalSearchParams<{
@@ -21,15 +20,17 @@ export default function selectDate() {
   // converting data back into JSON
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
+  /** Sets the selected date to a specified value */
   function updateDateValue(date: number) {
     setSelectedDate(date);
   }
 
+  /** Sets the selected date to the current date. */
   function setDateToNow() {
     setSelectedDate(Math.floor(Date.now() / 1000));
   }
 
-  // load initial date
+  // load initial date data
   React.useEffect(() => {
     if (data) {
       if (typeOfDateLabel == "startTime") {
@@ -41,8 +42,8 @@ export default function selectDate() {
     }
   }, []);
 
+  /** Closes the selectDate modal and updates the data for the previous page */
   const handleGoBack = () => {
-    // update the data with selectedDate
     if (selectedDate && data) {
       if (typeOfDateLabel == "startTime") {
         data.startTime = selectedDate;

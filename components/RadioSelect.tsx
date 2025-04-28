@@ -1,6 +1,15 @@
+/** @overview Radio buttons with text options */
+
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 
+/**
+ * Radio button group.
+ * @param label Label describing the entire radio button group
+ * @param options Contains text for each radio option to display
+ * @param onChangeOption Callback to send selected option to parent component
+ * @param selected Current selected option
+ */
 export default function RadioSelect({
   label,
   options,
@@ -43,6 +52,12 @@ export default function RadioSelect({
   );
 }
 
+/**
+ * Individual radio button.
+ * @param label Text for this radio option
+ * @param onSelect Callback to handle changing selection
+ * @param selected Determines if this option is selected
+ */
 function RadioButton({
   label,
   onSelect,

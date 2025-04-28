@@ -1,3 +1,5 @@
+/** Contains list of events. */
+
 import React from "react";
 import { View, FlatList, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
@@ -7,6 +9,7 @@ import { ListItem } from "./../types";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {
   const router = useRouter();
+  /** Opens the modal to add an event */
   function openAddEventModal() {
     router.navigate("/addEvent");
   }
@@ -36,6 +39,7 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
 
 function EventListItem({ data }: { data: ListItem }) {
   const router = useRouter();
+  /** Opens the modal to add an event */
   function handleOpenModal() {
     router.navigate({
       pathname: "/addEvent",
@@ -43,12 +47,25 @@ function EventListItem({ data }: { data: ListItem }) {
     });
   }
 
+  /**
+   * Converts seconds to days.
+   * @param time seconds
+   * @returns time in days
+   */
   function convertSecondsToDays(time: number) {
     return Math.round(time / 60 / 60 / 24);
   }
 
+  /**
+   * Conditional text rendering based off event type
+   * @param type
+   * @param startTime
+   * @param endTime
+   * @returns Text to be displayed
+   */
   function renderText(type?: string, startTime?: number, endTime?: number) {
     let time: number = 0;
+    // calculates time since, until, or elasped
     if (startTime && endTime) {
       time = convertSecondsToDays(endTime - startTime); // time elapsed
     } else if (startTime) {

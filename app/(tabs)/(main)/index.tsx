@@ -1,3 +1,5 @@
+/** Main page containing the list of events. */
+
 import React from "react";
 import { ScrollView } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
@@ -7,10 +9,8 @@ import { ListItem } from "./../../../types";
 
 export default function index() {
   const router = useRouter();
-  // const testCallback = () => {
-  //   router.navigate("/testModal");
-  // };
 
+  /** If duplicate event names or renaming event, open confirmOverride modal */
   const openConfirmOverride = (data: ListItem, overrideKey?: string) => {
     router.navigate({
       pathname: "/confirmOverride",
@@ -69,12 +69,18 @@ export default function index() {
   ]);
 
   const { rawData, override, overrideKey } = useLocalSearchParams<{
+    /** Event data */
     rawData: string;
-    override?: "true" | string | undefined; // boolean used only to check if override modal should show up or not
+    /**
+     * Boolean used only to check if override modal should show up or not.
+     * If true, override the event. Otherwise, show the confirmOverride modal.
+     */
+    override?: "true" | string | undefined;
+    /** Key of the event being overridden. */
     overrideKey?: string;
   }>();
 
-  // converting data back into JSON
+  /** Event data in JSON format */
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;
 
   // loadData function

@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import Gradient from "./Gradient";
 
 /**
- * Creates a pill-shaped button.
+ * Creates a pill-shaped button with a gradient background.
  * @param label Label on the button
  * @param callback Callback function called when the button is pressed
  */
@@ -33,6 +33,11 @@ export function FilledPill({
   );
 }
 
+/**
+ * Creates an outlined pill-shaped button with a white background.
+ * @param label Label on the button
+ * @param callback Callback function called when the button is pressed
+ */
 export function OutlinedPill({
   label,
   callback,

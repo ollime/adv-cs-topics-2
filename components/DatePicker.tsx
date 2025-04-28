@@ -1,3 +1,5 @@
+/** Select the current date. */
+
 import React from "react";
 import { View } from "react-native";
 import DateTimePicker, {
@@ -15,6 +17,10 @@ export default function Calendar({
   const defaultClassNames = useDefaultClassNames();
   const [selected, setSelected] = React.useState<DateType>(initialDate);
 
+  /**
+   * Sets local and parent date variables
+   * @param date
+   */
   const handleDateChange = (date: DateType) => {
     const unixValue = date?.valueOf() as number;
     // update parent container state

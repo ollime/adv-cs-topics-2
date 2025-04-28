@@ -1,6 +1,14 @@
+/** @overview Text field component. */
+
 import React from "react";
 import { TextInput, View, Text } from "react-native";
 
+/**
+ * Contains an editable text field.
+ * @param label Label for the text field
+ * @param onChangeText Callback to handle changes to parent component
+ * @param initialText Initial text to load in the text field
+ */
 export default function TextField({
   label,
   onChangeText,

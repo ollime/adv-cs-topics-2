@@ -1,3 +1,5 @@
+/** @overview Screen to add a new event or modify an existing event */
+
 import React from "react";
 
 import { View, Text } from "react-native";
@@ -13,7 +15,7 @@ import { SelectablePalette } from "../../../../components/Palette";
 import { ListItem } from "../../../../types";
 
 export default function addEventScreen() {
-  const [modalTitle, setModalTitle] = React.useState<string>("");
+  const [eventTitle, setEventTitle] = React.useState<string>("");
   const [description, setDescription] = React.useState<string | undefined>("");
   const [type, setType] = React.useState<"since" | "until" | "elapsed">(
     "elapsed"
@@ -30,10 +32,10 @@ export default function addEventScreen() {
       ? (params as ListItem)
       : null;
 
-  // loadData function
+  // load initial data (for modifying existing event)
   React.useEffect(() => {
     if (initialData && initialData.type) {
-      setModalTitle(initialData.key);
+      setEventTitle(initialData.key);
       setDescription(initialData.description);
       if (
         initialData.type === "since" ||
@@ -62,14 +64,17 @@ export default function addEventScreen() {
     }
   }, [type]);
 
+  /** Retrieves data currently displayed on the screen
+   * @returns {ListItem}
+   */
   function getCurrentData() {
-    if (modalTitle) {
+    if (eventTitle) {
       return {
         /* use initial key, not current value, to prevent a bug where the
         initial key value changes between moving to the date picker modal
         and confirming changes. this results in event title changes being
         reverted back */
-        key: initialData ? initialData.key : modalTitle,
+        key: initialData ? initialData.key : eventTitle,
         description: description,
         color: iconColor,
         type: type,
@@ -79,6 +84,9 @@ export default function addEventScreen() {
     }
   }
 
+  /** Gets the key of the original data
+   * @returns {string}
+   */
   function getInitialKey() {
     if (initialData) {
       return initialData.key;
@@ -87,43 +95,42 @@ export default function addEventScreen() {
     }
   }
 
+  /** Saves modal version of the event title data */
   function saveTitle(value: string) {
-    setModalTitle(value);
+    setEventTitle(value);
   }
 
+  /** Saves modal version of the description data */
   function saveDescription(value: string) {
     setDescription(value);
   }
 
+  /** Saves modal version of the type data */
   function saveType(value: "since" | "until" | "elapsed") {
     setType(value);
   }
 
+  /** Saves modal version of the color data */
   function saveColor(value: string) {
     setIconColor(value);
   }
 
-  function handleAddEvent() {
-    /* If the modal was added on a stack, return to
-          previous page. Otherwise, return to index */
-    if (modalTitle) {
-      router.navigate({
-        pathname: "/",
-        params: {
-          rawData: JSON.stringify(getCurrentData()),
-          overrideKey: getInitialKey(),
-        },
-      });
-    } else {
-      // TODO: Create better alert popup
-      alert("Add a title!");
-    }
-  }
-
+  /**
+   * Converts seconds to days.
+   * @param time seconds
+   * @returns time in days
+   */
   function convertSecondsToDays(time: number) {
-    return Math.round(time / 60 / 60 / 24);
+    return Math.floor(time / 60 / 60 / 24);
   }
 
+  /**
+   * Conditional text rendering based off event type
+   * @param type
+   * @param startTime
+   * @param endTime
+   * @returns Text to be displayed
+   */
   function renderText(type?: string, startTime?: number, endTime?: number) {
     let time: number = 0;
     if (startTime && endTime) {
@@ -147,6 +154,7 @@ export default function addEventScreen() {
     }
   }
 
+  /** Opens the selectDate modal */
   function openDatePicker(type: string) {
     router.navigate({
       pathname: "/selectDate",
@@ -155,6 +163,22 @@ export default function addEventScreen() {
         rawData: JSON.stringify(getCurrentData()),
       },
     });
+  }
+
+  /** Closes the modal and sends current data */
+  function openAddEvent() {
+    if (eventTitle) {
+      router.navigate({
+        pathname: "/",
+        params: {
+          rawData: JSON.stringify(getCurrentData()),
+          overrideKey: getInitialKey(),
+        },
+      });
+    } else {
+      // TODO: Create better alert popup
+      alert("Add a title!");
+    }
   }
 
   const childContent = (
@@ -184,7 +208,7 @@ export default function addEventScreen() {
         <TextField
           label="Modal title"
           onChangeText={saveTitle}
-          initialText={modalTitle}></TextField>
+          initialText={eventTitle}></TextField>
         <TextField
           label="Description"
           onChangeText={saveDescription}
@@ -223,7 +247,7 @@ export default function addEventScreen() {
 
       <View className="mb-5 mr-5 mt-2 flex flex-row content-end justify-end">
         {/* Save / close modal */}
-        <FilledPill label="Confirm" callback={handleAddEvent}></FilledPill>
+        <FilledPill label="Confirm" callback={openAddEvent}></FilledPill>
         {/* Close modal without saving */}
         <OutlinedPill
           label="Cancel"

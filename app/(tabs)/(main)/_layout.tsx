@@ -1,3 +1,5 @@
+/** @overview Layout for addEvent modal. */
+
 import React from "react";
 import { Stack } from "expo-router";
 

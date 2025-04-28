@@ -1,4 +1,8 @@
-/** @overview Modal to confirm adding an event in the case that two events share the same name. */
+/**
+ * @overview Modal to confirm adding an event in the case
+ * that two events share the same name OR an existing event
+ * is being renamed.
+ * */
 
 import React from "react";
 import { View, Text } from "react-native";
@@ -10,9 +14,12 @@ import { ListItem } from "./../../../types";
 
 export default function confirmOverrideModal() {
   const { data, overrideKey } = useLocalSearchParams<{
+    /** Event data */
     data: string;
+    /** Key of event being overridden */
     overrideKey?: string;
   }>();
+  /** Event data in JSON format */
   const currentData = data ? (JSON.parse(data) as ListItem) : undefined;
 
   const childContent = (

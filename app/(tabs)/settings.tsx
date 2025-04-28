@@ -5,9 +5,10 @@ import RadioSelect from "../../components/RadioSelect";
 
 export default function secondPage() {
   const { setColorScheme } = useColorScheme();
-  function changeTheme(value: "dark" | "light" | "system") {
-    console.log(value);
-    setColorScheme(value);
+  function changeTheme(value: "dark" | "light" | "system" | string) {
+    if (value == "dark" || value == "light" || value == "system") {
+      setColorScheme(value);
+    }
   }
 
   return (

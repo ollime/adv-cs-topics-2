@@ -1,3 +1,7 @@
+/** Container with a gradient.
+ *
+ * To size the gradient, change the size of the children elements. */
+
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
