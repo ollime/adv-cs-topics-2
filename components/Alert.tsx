@@ -4,11 +4,26 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function Alert({ label }: { label: string }) {
-  const [hide, setHide] = React.useState<boolean>(false);
+export default function Alert({
+  label,
+  hidden,
+  setHidden,
+}: {
+  label: string;
+  hidden: boolean;
+  setHidden: (hide: boolean) => void;
+}) {
+  const [hide, setHide] = React.useState<boolean>(hidden);
   const hideAlert = () => {
+    setHidden(false);
     setHide(true);
   };
+
+  React.useEffect(() => {
+    if (hidden !== undefined && hidden !== hide) {
+      setHide(hidden);
+    }
+  }, [hidden]);
 
   return (
     <>

@@ -71,10 +71,22 @@ export default function addEventScreen() {
 
   // alerts for data validation
   React.useEffect(() => {
+    validateTime();
+  }, [startTime, endTime]);
+
+  /**
+   * Time data validation
+   * @returns true if times are correct, false otherwise
+   */
+  function validateTime() {
     if (startTime > endTime) {
       setDisplayAlert(true);
+      return false;
+    } else {
+      setDisplayAlert(false);
+      return true;
     }
-  }, [startTime, endTime]);
+  }
 
   /** Retrieves data currently displayed on the screen
    * @returns {ListItem}
@@ -179,7 +191,9 @@ export default function addEventScreen() {
 
   /** Closes the modal and sends current data */
   function openAddEvent() {
-    if (eventTitle) {
+    if (!validateTime()) {
+      validateTime();
+    } else if (eventTitle) {
       router.navigate({
         pathname: "/",
         params: {
@@ -254,7 +268,10 @@ export default function addEventScreen() {
       </View>
 
       {displayAlert ? (
-        <Alert label="End date cannot be before the start date."></Alert>
+        <Alert
+          label="End date cannot be before the start date."
+          hidden={!displayAlert}
+          setHidden={setDisplayAlert}></Alert>
       ) : (
         ""
       )}
