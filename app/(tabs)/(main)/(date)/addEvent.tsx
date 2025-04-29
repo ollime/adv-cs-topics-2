@@ -233,11 +233,13 @@ export default function addEventScreen() {
         <TextField
           label="Modal title"
           onChangeText={saveTitle}
-          initialText={eventTitle}></TextField>
+          initialText={eventTitle}
+          multiline={false}></TextField>
         <TextField
           label="Description"
           onChangeText={saveDescription}
-          initialText={description}></TextField>
+          initialText={description}
+          multiline={true}></TextField>
 
         <View className="m-2 flex flex-row items-center">
           <Text className="m-2 dark:text-white">Icon color</Text>
