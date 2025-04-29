@@ -73,7 +73,7 @@ export default function addEventScreen() {
   // alerts for data validation
   React.useEffect(() => {
     validateData();
-  }, [startTime, endTime]);
+  }, [startTime, endTime, eventTitle]);
 
   /**
    * Time data validation
@@ -198,7 +198,7 @@ export default function addEventScreen() {
   /** Closes the modal and sends current data */
   function openAddEvent() {
     if (!validateData()) {
-      validateData();
+      return;
     } else if (eventTitle) {
       router.navigate({
         pathname: "/",
