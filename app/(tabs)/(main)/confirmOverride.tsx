@@ -26,7 +26,7 @@ export default function confirmOverrideModal() {
     <>
       <View className="flex flex-1 items-center justify-center">
         <Text className="m-5 dark:text-white">
-          {currentData && overrideKey == currentData.key
+          {!overrideKey || (currentData && overrideKey == currentData.key)
             ? "The event already exists."
             : "This action will rename the event."}
         </Text>
