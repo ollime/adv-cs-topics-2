@@ -3,6 +3,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { convertUnixToDate } from "utils/DateTimeCalculation";
 
 export default function DateField({
   label,
@@ -24,15 +25,6 @@ export default function DateField({
   /** Opens the selectDate modal. */
   function handleOpenDatePicker() {
     openDatePicker(type);
-  }
-
-  /**
-   * Converts unix time to date string
-   * @param unixTimestamp
-   * @returns date string
-   */
-  function convertUnixToDate(unixTimestamp: number) {
-    return new Date(unixTimestamp * 1000).toLocaleDateString();
   }
 
   // sync displayed date with passed in time argument

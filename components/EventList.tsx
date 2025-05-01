@@ -5,7 +5,8 @@ import { View, FlatList, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
 import { FilledPill } from "./PillButton";
-import { ListItem } from "./../types";
+import { ListItem } from "../types";
+import { calculateTime } from "utils/DateTimeCalculation";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {
   const router = useRouter();
@@ -48,15 +49,6 @@ function EventListItem({ data }: { data: ListItem }) {
   }
 
   /**
-   * Converts seconds to days.
-   * @param time seconds
-   * @returns time in days
-   */
-  function convertSecondsToDays(time: number) {
-    return Math.round(time / 60 / 60 / 24);
-  }
-
-  /**
    * Conditional text rendering based off event type
    * @param type
    * @param startTime
@@ -64,15 +56,7 @@ function EventListItem({ data }: { data: ListItem }) {
    * @returns Text to be displayed
    */
   function renderText(type?: string, startTime?: number, endTime?: number) {
-    let time: number = 0;
-    // calculates time since, until, or elasped
-    if (startTime && endTime) {
-      time = convertSecondsToDays(endTime - startTime); // time elapsed
-    } else if (startTime) {
-      time = convertSecondsToDays(Date.now() / 1000 - startTime); // time since
-    } else if (endTime) {
-      time = convertSecondsToDays(endTime - Date.now() / 1000); // time until
-    }
+    const time: number = calculateTime(startTime, endTime);
 
     if (type && (time || time === 0)) {
       if (type == "since") {

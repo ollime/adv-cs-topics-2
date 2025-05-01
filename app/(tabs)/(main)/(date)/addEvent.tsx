@@ -14,6 +14,7 @@ import Alert from "../../../../components/Alert";
 import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import { SelectablePalette } from "../../../../components/Palette";
 import { ListItem } from "../../../../types";
+import { calculateTime } from "utils/DateTimeCalculation";
 
 export default function addEventScreen() {
   const [eventTitle, setEventTitle] = React.useState<string>("");
@@ -146,15 +147,6 @@ export default function addEventScreen() {
   }
 
   /**
-   * Converts seconds to days.
-   * @param time seconds
-   * @returns time in days
-   */
-  function convertSecondsToDays(time: number) {
-    return Math.floor(time / 60 / 60 / 24);
-  }
-
-  /**
    * Conditional text rendering based off event type
    * @param type
    * @param startTime
@@ -162,15 +154,9 @@ export default function addEventScreen() {
    * @returns Text to be displayed
    */
   function renderText(type?: string, startTime?: number, endTime?: number) {
-    let time: number = 0;
-    if (startTime && endTime) {
-      time = convertSecondsToDays(endTime - startTime); // time elapsed
-    } else if (startTime) {
-      time = convertSecondsToDays(Date.now() / 1000 - startTime); // time since
-    } else if (endTime) {
-      time = convertSecondsToDays(endTime - Date.now() / 1000); // time until
-    }
+    const time: number = calculateTime(startTime, endTime);
 
+    // TODO: consider moving to DateManager?
     if (type && (time || time === 0)) {
       if (type == "since") {
         return time + " days ago";
