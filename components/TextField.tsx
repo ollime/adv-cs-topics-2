@@ -33,6 +33,8 @@ export default function TextField({
           className="border-1 w-60 rounded-lg border bg-white p-2 dark:border-white"
           onChangeText={handleChangeText}
           value={initialText ? initialText : ""}
+          accessibilityRole="adjustable"
+          accessibilityLabel={label}
           multiline={multiline}
           numberOfLines={2}></TextInput>
       </View>

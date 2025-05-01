@@ -15,10 +15,17 @@ describe("<AddEvent/>", () => {
     });
   });
 
-  test("Renders radio buttons correctly", async () => {
+  test("Selects radio button option", async () => {
     const { getByRole } = render(<AddEvent />);
     const radio = getByRole("radio", { name: "since" });
     await user.press(radio);
     expect(radio).toBeChecked();
+  });
+
+  test("Edits text field", async () => {
+    const { getByRole } = render(<AddEvent />);
+    const textField = getByRole("adjustable", { name: "Event title" });
+    await user.type(textField, "This is a test");
+    expect(textField).toHaveDisplayValue("This is a test");
   });
 });

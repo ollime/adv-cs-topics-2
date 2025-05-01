@@ -231,7 +231,7 @@ export default function addEventScreen() {
       {/* Main content */}
       <View className="flex items-center justify-center">
         <TextField
-          label="Modal title"
+          label="Event title"
           onChangeText={saveTitle}
           initialText={eventTitle}
           multiline={false}></TextField>
