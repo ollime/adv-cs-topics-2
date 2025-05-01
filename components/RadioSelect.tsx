@@ -73,7 +73,11 @@ function RadioButton({
 
   return (
     <>
-      <Pressable onPress={handleSelect}>
+      <Pressable
+        accessibilityRole="radio"
+        accessibilityLabel={label}
+        accessibilityState={{ checked: label == selected }}
+        onPress={handleSelect}>
         <View className="flex flex-row items-center justify-center">
           <View
             className={
