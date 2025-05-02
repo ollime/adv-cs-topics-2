@@ -9,7 +9,10 @@ import ToggleSwitch from "../../components/ToggleSwitch";
 
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
-  const [dateFormat, setDateFormat] = React.useState<string>("MM/DD/YYYY");
+  const [dateFormat, setDateFormat] = React.useState<string>();
+  const [yearFormat, setYearFormat] = React.useState<string>("");
+  const [monthFormat, setMonthFormat] = React.useState<string>("");
+  const [dayFormat, setDayFormat] = React.useState<string>("");
 
   const { setColorScheme } = useColorScheme();
 
@@ -71,11 +74,28 @@ export default function secondPage() {
         initialText={dateFormat}
         multiline={false}
         disabled={true}></TextField>
-      <ToggleSwitch
-        label="Leading Zero (month)"
-        callback={(isEnabled: boolean) =>
-          changeValue(isEnabled)
-        }></ToggleSwitch>
+      <RadioSelect
+        label="Month format"
+        options={["M", "MM", "Month", "Mon"]}
+        onChangeOption={changeDateFormat}
+        selected={darkMode}></RadioSelect>
+      <View className="m-4">
+        <ToggleSwitch
+          label="Leading Zero (month)"
+          callback={(isEnabled: boolean) =>
+            changeValue(isEnabled)
+          }></ToggleSwitch>
+        <ToggleSwitch
+          label="Leading Zero (day)"
+          callback={(isEnabled: boolean) =>
+            changeValue(isEnabled)
+          }></ToggleSwitch>
+        <ToggleSwitch
+          label="Long form (year)"
+          callback={(isEnabled: boolean) =>
+            changeValue(isEnabled)
+          }></ToggleSwitch>
+      </View>
     </View>
   );
 }
