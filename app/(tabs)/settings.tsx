@@ -5,16 +5,14 @@ import RadioSelect from "../../components/RadioSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function secondPage() {
-  const [themeColor, setThemeColor] = React.useState<
-    "dark" | "light" | "system"
-  >();
+  const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
   const { setColorScheme } = useColorScheme();
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const theme = await getData("theme");
-      if (theme == "dark" || theme == "light" || theme == "system") {
-        changeTheme(theme);
+      const darkMode = await getData("darkMode");
+      if (darkMode == "dark" || darkMode == "light" || darkMode == "system") {
+        changeTheme(darkMode);
       }
     };
     fetchData();
@@ -42,8 +40,8 @@ export default function secondPage() {
   async function changeTheme(value: "dark" | "light" | "system" | string) {
     if (value == "dark" || value == "light" || value == "system") {
       setColorScheme(value);
-      setThemeColor(value);
-      saveInStorage("theme", value);
+      setDarkMode(value);
+      saveInStorage("darkMode", value);
     }
   }
 
@@ -53,7 +51,7 @@ export default function secondPage() {
         label="Dark mode"
         options={["system", "light", "dark"]}
         onChangeOption={changeTheme}
-        selected={themeColor}></RadioSelect>
+        selected={darkMode}></RadioSelect>
     </View>
   );
 }
