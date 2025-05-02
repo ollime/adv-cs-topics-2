@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import RadioSelect from "../../components/RadioSelect";
 import TextField from "../../components/TextField";
+import ToggleSwitch from "../../components/ToggleSwitch";
 
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
@@ -53,19 +54,28 @@ export default function secondPage() {
     setDateFormat(value);
   }
 
+  function changeValue(value: boolean) {
+    return value;
+  }
+
   return (
-    <View className="flex flex-1 bg-background dark:bg-backgroundDark">
+    <View className="flex flex-1 bg-background p-2 dark:bg-backgroundDark">
       <RadioSelect
         label="Dark mode"
         options={["system", "light", "dark"]}
         onChangeOption={changeTheme}
         selected={darkMode}></RadioSelect>
       <TextField
-        label="Date format"
+        label="Date format preview"
         onChangeText={changeDateFormat}
         initialText={dateFormat}
         multiline={false}
         disabled={true}></TextField>
+      <ToggleSwitch
+        label="Leading Zero (month)"
+        callback={(isEnabled: boolean) =>
+          changeValue(isEnabled)
+        }></ToggleSwitch>
     </View>
   );
 }
