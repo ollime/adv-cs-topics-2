@@ -1,21 +1,25 @@
 import React from "react";
 import { View } from "react-native";
 import { useColorScheme } from "nativewind";
-import RadioSelect from "../../components/RadioSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import RadioSelect from "../../components/RadioSelect";
+import TextField from "../../components/TextField";
 
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
+  const [dateFormat, setDateFormat] = React.useState<string>("MM/DD/YYYY");
+
   const { setColorScheme } = useColorScheme();
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       const darkMode = await getData("darkMode");
       if (darkMode == "dark" || darkMode == "light" || darkMode == "system") {
         changeTheme(darkMode);
       }
     };
-    fetchData();
+    loadData();
   }, []);
 
   const saveInStorage = async (key: string, value: string) => {
@@ -45,6 +49,10 @@ export default function secondPage() {
     }
   }
 
+  function changeDateFormat(value: string) {
+    setDateFormat(value);
+  }
+
   return (
     <View className="flex flex-1 bg-background dark:bg-backgroundDark">
       <RadioSelect
@@ -52,6 +60,12 @@ export default function secondPage() {
         options={["system", "light", "dark"]}
         onChangeOption={changeTheme}
         selected={darkMode}></RadioSelect>
+      <TextField
+        label="Date format"
+        onChangeText={changeDateFormat}
+        initialText={dateFormat}
+        multiline={false}
+        disabled={true}></TextField>
     </View>
   );
 }
