@@ -27,6 +27,8 @@ export default function toggleSwitch({
           onValueChange={changeValue}
           value={isEnabled}
           className="ml-5 scale-150 transform"
+          accessibilityRole="switch"
+          accessibilityLabel={label}
         />
       </View>
     </>

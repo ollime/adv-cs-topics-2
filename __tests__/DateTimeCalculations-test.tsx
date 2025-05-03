@@ -12,7 +12,16 @@ describe("utils/DateTimeCalculation", () => {
   });
 
   test("Formats date based off given options", () => {
-    expect(DateTime.formatDate(new Date(1746235453 * 1000))).toMatch(
+    const options: Intl.DateTimeFormatOptions = {
+      hour12: false,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    expect(DateTime.formatDate(new Date(1746235453 * 1000), options)).toMatch(
       "05/02/2025, 18:24:13"
     );
   });

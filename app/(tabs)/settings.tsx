@@ -7,12 +7,16 @@ import RadioSelect from "../../components/RadioSelect";
 import TextField from "../../components/TextField";
 import ToggleSwitch from "../../components/ToggleSwitch";
 
+import { formatDate } from "../../utils/DateTimeCalculation";
+
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
   const [dateFormat, setDateFormat] = React.useState<string>();
-  const [yearFormat, setYearFormat] = React.useState<string>("");
-  const [monthFormat, setMonthFormat] = React.useState<string>("");
-  const [dayFormat, setDayFormat] = React.useState<string>("");
+  const [dateOptions, setDateOptions] =
+    React.useState<Intl.DateTimeFormatOptions>();
+  const [longYearFormat, setLongYearFormat] = React.useState<boolean>();
+  const [monthFormat, setMonthFormat] = React.useState<string>();
+  const [longDayFormat, setLongDayFormat] = React.useState<boolean>();
 
   const { setColorScheme } = useColorScheme();
 
@@ -25,6 +29,11 @@ export default function secondPage() {
     };
     loadData();
   }, []);
+
+  React.useEffect(() => {
+    // TODO: updates display for dateFormat
+    changeDateFormat();
+  }, [longYearFormat, monthFormat, longDayFormat]);
 
   const saveInStorage = async (key: string, value: string) => {
     try {
@@ -53,12 +62,32 @@ export default function secondPage() {
     }
   }
 
-  function changeDateFormat(value: string) {
-    setDateFormat(value);
+  function changeDateFormat() {
+    const options: Intl.DateTimeFormatOptions = {
+      hour12: false,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    setDateOptions(options);
+    setDateFormat(formatDate(new Date(Date.now() / 1000), options));
   }
 
-  function changeValue(value: boolean) {
-    return value;
+  function handleSetMonthFormat(value: string) {
+    let newFormat: string = value;
+    if (value == "M") {
+      newFormat = "numeric";
+    } else if (value == "MM") {
+      newFormat = "2-digit";
+    } else if (value == "Month") {
+      newFormat = "long";
+    } else if (value == "Mon") {
+      newFormat = "short";
+    }
+    setMonthFormat(newFormat);
   }
 
   return (
@@ -74,26 +103,23 @@ export default function secondPage() {
         initialText={dateFormat}
         multiline={false}
         disabled={true}></TextField>
-      <RadioSelect
-        label="Month format"
-        options={["M", "MM", "Month", "Mon"]}
-        onChangeOption={changeDateFormat}
-        selected={darkMode}></RadioSelect>
       <View className="m-4">
-        <ToggleSwitch
-          label="Leading Zero (month)"
-          callback={(isEnabled: boolean) =>
-            changeValue(isEnabled)
-          }></ToggleSwitch>
+        <RadioSelect
+          label="Month format"
+          options={["M", "MM", "Month", "Mon"]}
+          onChangeOption={(value: string) => {
+            handleSetMonthFormat(value);
+          }}
+          selected={darkMode}></RadioSelect>
         <ToggleSwitch
           label="Leading Zero (day)"
           callback={(isEnabled: boolean) =>
-            changeValue(isEnabled)
+            setLongDayFormat(isEnabled)
           }></ToggleSwitch>
         <ToggleSwitch
           label="Long form (year)"
           callback={(isEnabled: boolean) =>
-            changeValue(isEnabled)
+            setLongYearFormat(isEnabled)
           }></ToggleSwitch>
       </View>
     </View>

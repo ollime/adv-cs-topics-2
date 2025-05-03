@@ -1,7 +1,14 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react-native";
+import {
+  render,
+  screen,
+  // userEvent,
+  waitFor,
+} from "@testing-library/react-native";
 import Settings from "../app/(tabs)/settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+jest.mock("expo-font");
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
   setItem: jest.fn(),
@@ -17,6 +24,8 @@ jest.mock("nativewind", () => ({
 }));
 
 describe("<Settings/>", () => {
+  // const user = userEvent.setup();
+
   beforeEach(() => {
     jest.clearAllMocks(); // Clear all mock calls and instances
     return AsyncStorage.clear();
@@ -43,4 +52,17 @@ describe("<Settings/>", () => {
       expect(darkModeRadioSelect).toBeChecked();
     });
   });
+
+  // test("Date format text displays correctly", async () => {
+  //   render(<Settings />);
+
+  //   await waitFor(() => {
+  //     // const monthFormatRadio = screen.getByRole("radio", { name: "Month" });
+  //     // const yearFormatSwitch = screen.getByRole("switch", {
+  //     //   name: "Long form (year)",
+  //     // });
+  //     // user.press(monthFormatRadio);
+  //     // user.press(yearFormatSwitch);
+  //   });
+  // });
 });
