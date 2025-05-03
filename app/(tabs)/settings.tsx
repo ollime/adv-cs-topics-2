@@ -14,9 +14,11 @@ export default function secondPage() {
   const [dateFormat, setDateFormat] = React.useState<string>();
   const [dateOptions, setDateOptions] =
     React.useState<Intl.DateTimeFormatOptions>();
-  const [longYearFormat, setLongYearFormat] = React.useState<boolean>();
-  const [monthFormat, setMonthFormat] = React.useState<string>();
-  const [longDayFormat, setLongDayFormat] = React.useState<boolean>();
+  const [shortYearFormat, setShortYearFormat] = React.useState<boolean>(true);
+  const [monthFormat, setMonthFormat] = React.useState<
+    "2-digit" | "numeric" | "long" | "short" | "narrow"
+  >("numeric");
+  const [longDayFormat, setLongDayFormat] = React.useState<boolean>(false);
 
   const { setColorScheme } = useColorScheme();
 
@@ -31,9 +33,10 @@ export default function secondPage() {
   }, []);
 
   React.useEffect(() => {
-    // TODO: updates display for dateFormat
+    console.log("longDayFormat updated:", longDayFormat);
+    console.log("Triggering changeDateFormat");
     changeDateFormat();
-  }, [longYearFormat, monthFormat, longDayFormat]);
+  }, [shortYearFormat, monthFormat, longDayFormat]);
 
   const saveInStorage = async (key: string, value: string) => {
     try {
@@ -65,28 +68,27 @@ export default function secondPage() {
   function changeDateFormat() {
     const options: Intl.DateTimeFormatOptions = {
       hour12: false,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
+      year: shortYearFormat ? "numeric" : "2-digit",
+      month: monthFormat,
+      day: longDayFormat ? "2-digit" : "numeric",
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
     };
     setDateOptions(options);
-    setDateFormat(formatDate(new Date(Date.now() / 1000), options));
+    setDateFormat(formatDate(new Date(36184 * 1000), options));
   }
 
   function handleSetMonthFormat(value: string) {
-    let newFormat: string = value;
-    if (value == "M") {
-      newFormat = "numeric";
-    } else if (value == "MM") {
+    let newFormat: "numeric" | "2-digit" | "long" | "short" = "numeric";
+    if (value == "MM") {
       newFormat = "2-digit";
     } else if (value == "Month") {
       newFormat = "long";
     } else if (value == "Mon") {
       newFormat = "short";
     }
+
     setMonthFormat(newFormat);
   }
 
@@ -112,14 +114,14 @@ export default function secondPage() {
           }}
           selected={darkMode}></RadioSelect>
         <ToggleSwitch
-          label="Leading Zero (day)"
+          label="Leading zero (day)"
           callback={(isEnabled: boolean) =>
             setLongDayFormat(isEnabled)
           }></ToggleSwitch>
         <ToggleSwitch
           label="Long form (year)"
           callback={(isEnabled: boolean) =>
-            setLongYearFormat(isEnabled)
+            setShortYearFormat(isEnabled)
           }></ToggleSwitch>
       </View>
     </View>

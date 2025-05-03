@@ -56,21 +56,46 @@ describe("<Settings/>", () => {
     });
   });
 
-  test("Date format text displays correctly", async () => {
+  test("Month format displays correctly", async () => {
     render(<Settings />);
 
     await waitFor(async () => {
-      const monthFormatRadio = screen.getByRole("radio", { name: "Month" });
-      const yearFormatSwitch = screen.getByRole("switch", {
-        name: "Long form (year)",
-      });
-      await user.press(monthFormatRadio);
-      await user.press(yearFormatSwitch);
-
+      const monthFormatRadio = screen.getByRole("radio", { name: "MM" });
       const textFormat = screen.getByRole("adjustable", {
         name: "Date format preview",
       });
-      expect(textFormat).toHaveDisplayValue("1111");
+      await user.press(monthFormatRadio);
+      expect(textFormat).toHaveDisplayValue("01/1/1970, 02:03:04");
+    });
+  });
+
+  test("Year format displays correctly", async () => {
+    render(<Settings />);
+
+    await waitFor(async () => {
+      const yearFormatSwitch = screen.getByRole("switch", {
+        name: "Long form (year)",
+      });
+      const textFormat = screen.getByRole("adjustable", {
+        name: "Date format preview",
+      });
+      await user.press(yearFormatSwitch);
+      expect(textFormat).toHaveDisplayValue("1/1/1970, 02:03:04");
+    });
+  });
+
+  test("Day format displays correctly", async () => {
+    render(<Settings />);
+
+    await waitFor(async () => {
+      const dayFormatSwitch = screen.getByRole("switch", {
+        name: "Leading zero (day)",
+      });
+      const textFormat = screen.getByRole("adjustable", {
+        name: "Date format preview",
+      });
+      await user.press(dayFormatSwitch);
+      expect(textFormat).toHaveDisplayValue("1/01/70, 02:03:04");
     });
   });
 });
