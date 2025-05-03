@@ -4,6 +4,7 @@ import {
   screen,
   userEvent,
   waitFor,
+  fireEvent,
 } from "@testing-library/react-native";
 import Settings from "../app/(tabs)/settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -65,7 +66,7 @@ describe("<Settings/>", () => {
         name: "Date format preview",
       });
       await user.press(monthFormatRadio);
-      expect(textFormat).toHaveDisplayValue("01/1/1970, 02:03:04");
+      expect(textFormat).toHaveDisplayValue("01/1/70, 02:03:04");
     });
   });
 
@@ -79,7 +80,7 @@ describe("<Settings/>", () => {
       const textFormat = screen.getByRole("adjustable", {
         name: "Date format preview",
       });
-      await user.press(yearFormatSwitch);
+      fireEvent(yearFormatSwitch, "onValueChange", true);
       expect(textFormat).toHaveDisplayValue("1/1/1970, 02:03:04");
     });
   });
@@ -94,7 +95,7 @@ describe("<Settings/>", () => {
       const textFormat = screen.getByRole("adjustable", {
         name: "Date format preview",
       });
-      await user.press(dayFormatSwitch);
+      fireEvent(dayFormatSwitch, "onValueChange", true);
       expect(textFormat).toHaveDisplayValue("1/01/70, 02:03:04");
     });
   });

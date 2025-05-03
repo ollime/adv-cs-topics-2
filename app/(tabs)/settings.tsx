@@ -14,7 +14,7 @@ export default function secondPage() {
   const [dateFormat, setDateFormat] = React.useState<string>();
   const [dateOptions, setDateOptions] =
     React.useState<Intl.DateTimeFormatOptions>();
-  const [shortYearFormat, setShortYearFormat] = React.useState<boolean>(true);
+  const [longYearFormat, setLongYearFormat] = React.useState<boolean>(false);
   const [monthFormat, setMonthFormat] = React.useState<
     "2-digit" | "numeric" | "long" | "short" | "narrow"
   >("numeric");
@@ -33,10 +33,8 @@ export default function secondPage() {
   }, []);
 
   React.useEffect(() => {
-    console.log("longDayFormat updated:", longDayFormat);
-    console.log("Triggering changeDateFormat");
     changeDateFormat();
-  }, [shortYearFormat, monthFormat, longDayFormat]);
+  }, [longYearFormat, monthFormat, longDayFormat]);
 
   const saveInStorage = async (key: string, value: string) => {
     try {
@@ -68,7 +66,7 @@ export default function secondPage() {
   function changeDateFormat() {
     const options: Intl.DateTimeFormatOptions = {
       hour12: false,
-      year: shortYearFormat ? "numeric" : "2-digit",
+      year: longYearFormat ? "numeric" : "2-digit",
       month: monthFormat,
       day: longDayFormat ? "2-digit" : "numeric",
       hour: "2-digit",
@@ -121,7 +119,7 @@ export default function secondPage() {
         <ToggleSwitch
           label="Long form (year)"
           callback={(isEnabled: boolean) =>
-            setShortYearFormat(isEnabled)
+            setLongYearFormat(isEnabled)
           }></ToggleSwitch>
       </View>
     </View>
