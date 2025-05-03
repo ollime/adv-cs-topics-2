@@ -2,11 +2,12 @@ import React from "react";
 import {
   render,
   screen,
-  // userEvent,
+  userEvent,
   waitFor,
 } from "@testing-library/react-native";
 import Settings from "../app/(tabs)/settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import "expo-router/testing-library";
 
 jest.mock("expo-font");
 
@@ -24,7 +25,7 @@ jest.mock("nativewind", () => ({
 }));
 
 describe("<Settings/>", () => {
-  // const user = userEvent.setup();
+  const user = userEvent.setup();
 
   beforeEach(() => {
     jest.clearAllMocks(); // Clear all mock calls and instances
@@ -38,9 +39,11 @@ describe("<Settings/>", () => {
   });
 
   test("Dark mode is loaded on page load", async () => {
-    AsyncStorage.setItem("darkMode", "dark");
+    await AsyncStorage.setItem("darkMode", "dark");
     render(<Settings />);
-    expect(AsyncStorage.getItem).toHaveBeenCalledWith("darkMode");
+    await waitFor(() => {
+      expect(AsyncStorage.getItem).toHaveBeenCalledWith("darkMode");
+    });
   });
 
   test("Radio button changes based on dark mode", async () => {
@@ -53,16 +56,21 @@ describe("<Settings/>", () => {
     });
   });
 
-  // test("Date format text displays correctly", async () => {
-  //   render(<Settings />);
+  test("Date format text displays correctly", async () => {
+    render(<Settings />);
 
-  //   await waitFor(() => {
-  //     // const monthFormatRadio = screen.getByRole("radio", { name: "Month" });
-  //     // const yearFormatSwitch = screen.getByRole("switch", {
-  //     //   name: "Long form (year)",
-  //     // });
-  //     // user.press(monthFormatRadio);
-  //     // user.press(yearFormatSwitch);
-  //   });
-  // });
+    await waitFor(async () => {
+      const monthFormatRadio = screen.getByRole("radio", { name: "Month" });
+      const yearFormatSwitch = screen.getByRole("switch", {
+        name: "Long form (year)",
+      });
+      await user.press(monthFormatRadio);
+      await user.press(yearFormatSwitch);
+
+      const textFormat = screen.getByRole("adjustable", {
+        name: "Date format preview",
+      });
+      expect(textFormat).toHaveDisplayValue("1111");
+    });
+  });
 });

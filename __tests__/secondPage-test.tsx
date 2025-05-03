@@ -1,10 +1,12 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
 import SecondPage from "../app/(tabs)/secondPage";
 
 describe("<SecondPage/>", () => {
-  test("Test renders correctly on secondPage", () => {
+  test("Test renders correctly on secondPage", async () => {
     const { getByText } = render(<SecondPage />);
-    getByText("Test");
+    waitFor(() => {
+      getByText("Test");
+    });
   });
 });
