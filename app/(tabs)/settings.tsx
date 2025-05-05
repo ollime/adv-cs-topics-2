@@ -31,8 +31,9 @@ export default function secondPage() {
         changeTheme(darkMode);
       }
       const longYearFormat = await getData("longYearFormat");
-      console.log(longYearFormat);
-      setLongYearFormat(longYearFormat == "true");
+      const longDayFormat = await getData("longDayFormat");
+      setLongYearFormat(longYearFormat === "true");
+      setLongDayFormat(longDayFormat === "true");
     };
     loadData();
   }, []);
@@ -100,6 +101,11 @@ export default function secondPage() {
     saveInStorage("longYearFormat", String(isEnabled));
   }
 
+  function handleSetDayFormat(isEnabled: boolean) {
+    setLongDayFormat(isEnabled);
+    saveInStorage("longDayFormat", String(isEnabled));
+  }
+
   return (
     <View className="flex flex-1 bg-background p-2 dark:bg-backgroundDark">
       <RadioSelect
@@ -123,7 +129,7 @@ export default function secondPage() {
           selected={darkMode}></RadioSelect>
         <ToggleSwitch
           label="Leading zero (day)"
-          callback={(isEnabled: boolean) => setLongDayFormat(isEnabled)}
+          callback={(isEnabled: boolean) => handleSetDayFormat(isEnabled)}
           selected={longDayFormat}></ToggleSwitch>
         <ToggleSwitch
           label="Long form (year)"

@@ -136,4 +136,15 @@ describe("<Settings/>", () => {
       expect(yearFormatSwitch).toBeChecked();
     });
   });
+
+  test("Day format is displayed from storage", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValue("true");
+    render(<Settings />);
+    await waitFor(() => {
+      const dayFormatSwitch = screen.getByRole("switch", {
+        name: "Leading zero (day)",
+      });
+      expect(dayFormatSwitch).toBeChecked();
+    });
+  });
 });
