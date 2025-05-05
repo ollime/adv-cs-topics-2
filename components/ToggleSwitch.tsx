@@ -4,15 +4,24 @@ import { View, Text, Switch } from "react-native";
 export default function toggleSwitch({
   label,
   callback,
+  selected,
 }: {
   label: string;
   callback: (isEnabled: boolean) => void;
+  selected: boolean;
 }) {
-  const [isEnabled, setIsEnabled] = React.useState<boolean>();
+  const [isEnabled, setIsEnabled] = React.useState<boolean>(selected);
   const changeValue = (isEnabled: boolean) => {
     setIsEnabled(isEnabled);
     callback(isEnabled);
   };
+
+  // Sync the internal state with the `selected` prop if it changes
+  React.useEffect(() => {
+    if (selected !== undefined && selected !== isEnabled) {
+      setIsEnabled(selected);
+    }
+  }, [selected]);
 
   return (
     <>

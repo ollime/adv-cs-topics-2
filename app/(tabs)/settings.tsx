@@ -22,12 +22,17 @@ export default function secondPage() {
 
   const { setColorScheme } = useColorScheme();
 
+  // TODO: save longYearFormat
+
   React.useEffect(() => {
     const loadData = async () => {
       const darkMode = await getData("darkMode");
       if (darkMode == "dark" || darkMode == "light" || darkMode == "system") {
         changeTheme(darkMode);
       }
+      const longYearFormat = await getData("longYearFormat");
+      console.log(longYearFormat);
+      setLongYearFormat(longYearFormat == "true");
     };
     loadData();
   }, []);
@@ -63,7 +68,7 @@ export default function secondPage() {
     }
   }
 
-  function changeDateFormat() {
+  async function changeDateFormat() {
     const options: Intl.DateTimeFormatOptions = {
       hour12: false,
       year: longYearFormat ? "numeric" : "2-digit",
@@ -90,6 +95,11 @@ export default function secondPage() {
     setMonthFormat(newFormat);
   }
 
+  function handleSetYearFormat(isEnabled: boolean) {
+    setLongYearFormat(isEnabled);
+    saveInStorage("longYearFormat", String(isEnabled));
+  }
+
   return (
     <View className="flex flex-1 bg-background p-2 dark:bg-backgroundDark">
       <RadioSelect
@@ -113,14 +123,12 @@ export default function secondPage() {
           selected={darkMode}></RadioSelect>
         <ToggleSwitch
           label="Leading zero (day)"
-          callback={(isEnabled: boolean) =>
-            setLongDayFormat(isEnabled)
-          }></ToggleSwitch>
+          callback={(isEnabled: boolean) => setLongDayFormat(isEnabled)}
+          selected={longDayFormat}></ToggleSwitch>
         <ToggleSwitch
           label="Long form (year)"
-          callback={(isEnabled: boolean) =>
-            setLongYearFormat(isEnabled)
-          }></ToggleSwitch>
+          callback={(isEnabled: boolean) => handleSetYearFormat(isEnabled)}
+          selected={longYearFormat}></ToggleSwitch>
       </View>
     </View>
   );

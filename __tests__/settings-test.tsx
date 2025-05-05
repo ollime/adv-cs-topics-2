@@ -99,4 +99,41 @@ describe("<Settings/>", () => {
       expect(textFormat).toHaveDisplayValue("1/01/70, 02:03:04");
     });
   });
+
+  test("Year format is saved to storage", async () => {
+    render(<Settings />);
+
+    await waitFor(async () => {
+      const yearFormatSwitch = screen.getByRole("switch", {
+        name: "Long form (year)",
+      });
+      fireEvent(yearFormatSwitch, "onValueChange", true);
+    });
+
+    await waitFor(() => {
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        "longYearFormat",
+        "true"
+      );
+    });
+  });
+
+  test("Year format is retrieved from storage", async () => {
+    await AsyncStorage.setItem("longYearFormat", "true");
+    render(<Settings />);
+    await waitFor(() => {
+      expect(AsyncStorage.getItem).toHaveBeenCalledWith("longYearFormat");
+    });
+  });
+
+  test("Year format is displayed from storage", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValue("true");
+    render(<Settings />);
+    await waitFor(() => {
+      const yearFormatSwitch = screen.getByRole("switch", {
+        name: "Long form (year)",
+      });
+      expect(yearFormatSwitch).toBeChecked();
+    });
+  });
 });
