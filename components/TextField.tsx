@@ -35,7 +35,7 @@ export default function TextField({
         <Text className="m-2 dark:text-white">{label}</Text>
         <View
           className={
-            "border-1 w-60 rounded-lg border p-2 " +
+            "border-1 w-60 rounded-lg border " +
             (disabled
               ? "border-gray-500 bg-gray-300 text-gray-500"
               : "bg-white")
@@ -51,7 +51,8 @@ export default function TextField({
               multiline={multiline}
               numberOfLines={2}
               editable={!disabled}
-              selectTextOnFocus={!disabled}></TextInput>
+              selectTextOnFocus={!disabled}
+              className="w-60 rounded-lg p-2"></TextInput>
             {disabled ? (
               <MaterialIcons name="edit-off" size={20} color="gray" />
             ) : (

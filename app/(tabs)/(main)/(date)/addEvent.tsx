@@ -127,26 +127,6 @@ export default function addEventScreen() {
     }
   }
 
-  /** Saves modal version of the event title data */
-  function saveTitle(value: string) {
-    setEventTitle(value);
-  }
-
-  /** Saves modal version of the description data */
-  function saveDescription(value: string) {
-    setDescription(value);
-  }
-
-  /** Saves modal version of the type data */
-  function saveType(value: "since" | "until" | "elapsed") {
-    setType(value);
-  }
-
-  /** Saves modal version of the color data */
-  function saveColor(value: string) {
-    setIconColor(value);
-  }
-
   /**
    * Conditional text rendering based off event type
    * @param type
@@ -219,19 +199,19 @@ export default function addEventScreen() {
       <View className="flex items-center justify-center">
         <TextField
           label="Event title"
-          onChangeText={saveTitle}
+          onChangeText={setEventTitle}
           initialText={eventTitle}
           multiline={false}></TextField>
         <TextField
           label="Description"
-          onChangeText={saveDescription}
+          onChangeText={setDescription}
           initialText={description}
           multiline={true}></TextField>
 
         <View className="m-2 flex flex-row items-center">
           <Text className="m-2 dark:text-white">Icon color</Text>
           <SelectablePalette
-            onChangeOption={saveColor}
+            onChangeOption={setIconColor}
             selected={iconColor}></SelectablePalette>
         </View>
 
@@ -239,7 +219,7 @@ export default function addEventScreen() {
           label="Days"
           options={["since", "until", "elapsed"]}
           onChangeOption={(value) =>
-            saveType(value as "since" | "until" | "elapsed")
+            setType(value as "since" | "until" | "elapsed")
           }
           selected={type}></RadioSelect>
 
