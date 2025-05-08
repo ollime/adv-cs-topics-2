@@ -21,11 +21,19 @@ export default function DateField({
   openDatePicker: (type: string) => void;
 }) {
   const [date, setDate] = React.useState<number>(time);
+  const [dateText, setDateText] = React.useState<string>();
 
   /** Opens the selectDate modal. */
   function handleOpenDatePicker() {
     openDatePicker(type);
   }
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      setDateText(await convertUnixToDate(date));
+    };
+    loadData();
+  }, [date]);
 
   // sync displayed date with passed in time argument
   React.useEffect(() => {
@@ -47,9 +55,7 @@ export default function DateField({
               "border-1 flex w-40 flex-1 flex-row justify-between rounded-lg border p-2 dark:border-white " +
               (disabled ? "border-gray-500 bg-gray-300" : "bg-white")
             }>
-            <Text className={disabled ? "text-gray-500 " : ""}>
-              {convertUnixToDate(date)}
-            </Text>
+            <Text className={disabled ? "text-gray-500 " : ""}>{dateText}</Text>
             {disabled ? (
               <MaterialCommunityIcons
                 name="calendar-lock"

@@ -1,10 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 /**
  * Converts unix time to date string
  * @param unixTimestamp
  * @returns date string
  */
-export function convertUnixToDate(unixTimestamp: number) {
-  return new Date(unixTimestamp * 1000).toLocaleDateString();
+export async function convertUnixToDate(unixTimestamp: number) {
+  const unformattedDate = new Date(unixTimestamp * 1000);
+  const dateFormat = await getDateFormat();
+  return formatDate(unformattedDate, dateFormat);
 }
 
 /**
@@ -30,3 +34,30 @@ export function calculateTime(startTime?: number, endTime?: number) {
 export function formatDate(date: Date, options: Intl.DateTimeFormatOptions) {
   return date.toLocaleDateString(undefined, options);
 }
+
+export async function getDateFormat() {
+  const longYearFormat = await getData("longYearFormat");
+  const monthFormat = await getData("monthFormat");
+  const longDayFormat = await getData("longDayFormat");
+  const options: Intl.DateTimeFormatOptions = {
+    hour12: false,
+    year: longYearFormat == "true" ? "numeric" : "2-digit",
+    month: monthFormat,
+    day: longDayFormat == "true" ? "2-digit" : "numeric",
+    // hour: "2-digit",
+    // minute: "2-digit",
+    // second: "2-digit",
+  };
+  return options;
+}
+
+const getData = async (key: string) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      return value;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
