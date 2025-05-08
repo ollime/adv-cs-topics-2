@@ -22,7 +22,7 @@ export default function App() {
 
   const getThemeData = async () => {
     try {
-      const value = await AsyncStorage.getItem("theme");
+      const value = await AsyncStorage.getItem("darkMode");
       if (value !== null) {
         return value;
       }
