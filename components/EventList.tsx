@@ -3,21 +3,33 @@
 import React from "react";
 import { View, FlatList, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import { FilledPill } from "./PillButton";
 import { ListItem } from "../types";
 import { calculateTime } from "../utils/DateTimeCalculation";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {
+  const [sortOrder, setSortOrder] = React.useState<number>(0);
+
   const router = useRouter();
   /** Opens the modal to add an event */
   function openAddEventModal() {
     router.navigate("/addEvent");
   }
 
+  const sortOptions = ["A-Z", "Z-A", "type", "time"];
+  function handleSortOrder() {
+    if (sortOrder == sortOptions.length - 1) {
+      setSortOrder(0);
+    } else {
+      setSortOrder(sortOrder + 1);
+    }
+  }
+
   return (
     <>
-      <View className="m-2 h-[400px] w-[300px] rounded-lg p-2">
+      <View className="m-2 h-[500px] w-[300px] rounded-lg p-2">
         <View className="flex flex-row items-center justify-between">
           <Text className="p-2 text-lg font-bold dark:text-white">
             Event List
@@ -33,6 +45,13 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
           )}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={true}></FlatList>
+
+        <Pressable onPress={handleSortOrder}>
+          <Text className="m-1 flex flex-1 select-none items-center justify-end">
+            Sort by {sortOptions[sortOrder]}
+            <MaterialIcons name="arrow-drop-down" size={24} color="black" />
+          </Text>
+        </Pressable>
       </View>
     </>
   );
