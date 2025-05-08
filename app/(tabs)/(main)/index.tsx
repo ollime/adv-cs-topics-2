@@ -27,8 +27,13 @@ export default function index() {
       startTime: 1725623522,
       endTime: 1749222291,
     },
-    { key: "good-bye", color: "purple-400", type: "until" },
-    { key: "zephyr", color: "primary", type: "since" },
+    {
+      key: "good-bye",
+      color: "purple-400",
+      type: "until",
+      endTime: 1762660048,
+    },
+    { key: "zephyr", color: "primary", type: "since", startTime: 1715309248 },
     { key: "stream", type: "elapsed" },
     { key: "unit", type: "until" },
     {

@@ -18,11 +18,60 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
     router.navigate("/addEvent");
   }
 
+  React.useEffect(() => {
+    sortDateItems(sortOrder);
+  }, [sortOrder]);
+
+  function sortDateItems(sortOrder: number) {
+    switch (sortOrder) {
+      case 0:
+        data.sort((a, b) => {
+          if (a.key < b.key) {
+            return -1;
+          } else if (a.key > b.key) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 1:
+        data.sort((a, b) => {
+          if (a.key > b.key) {
+            return -1;
+          } else if (a.key < b.key) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case 2:
+        data.sort((a, b) => {
+          if (!a.type) {
+            return 1;
+          }
+          if (!b.type) {
+            return -1;
+          }
+          return String(a.type).localeCompare(String(b.type));
+        });
+        break;
+      case 3:
+        data.sort(
+          (a, b) =>
+            -calculateTime(a.startTime, a.endTime) +
+            calculateTime(b.startTime, b.endTime)
+        );
+        break;
+    }
+  }
+
   const sortOptions = ["A-Z", "Z-A", "type", "time"];
   function handleSortOrder() {
     if (sortOrder == sortOptions.length - 1) {
+      sortDateItems(0);
       setSortOrder(0);
     } else {
+      sortDateItems(sortOrder + 1);
       setSortOrder(sortOrder + 1);
     }
   }
