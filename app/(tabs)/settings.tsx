@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React from "react";
 import { View, Platform } from "react-native";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,11 +8,12 @@ import TextField from "../../components/TextField";
 import ToggleSwitch from "../../components/ToggleSwitch";
 
 import { formatDate } from "../../utils/DateTimeCalculation";
-import { createDatabase } from "../../models/database";
+import { createDatabase, getRow } from "../../models/database";
 
 if (Platform.OS !== "web") {
   try {
     createDatabase();
+    // alert(getRow());
   } catch (err) {
     alert(err);
   }
@@ -21,8 +22,8 @@ if (Platform.OS !== "web") {
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
   const [dateFormat, setDateFormat] = React.useState<string>();
-  const [dateOptions, setDateOptions] =
-    React.useState<Intl.DateTimeFormatOptions>();
+  // const [dateOptions, setDateOptions] =
+  //   React.useState<Intl.DateTimeFormatOptions>();
   const [longYearFormat, setLongYearFormat] = React.useState<boolean>(false);
   const [monthFormat, setMonthFormat] = React.useState<
     "2-digit" | "numeric" | "long" | "short" | "narrow"
@@ -87,7 +88,7 @@ export default function secondPage() {
       minute: "2-digit",
       second: "2-digit",
     };
-    setDateOptions(options);
+    // setDateOptions(options);
     setDateFormat(formatDate(new Date(36184 * 1000), options));
   }
 
