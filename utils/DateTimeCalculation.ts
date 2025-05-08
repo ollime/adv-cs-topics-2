@@ -42,7 +42,7 @@ export async function getDateFormat() {
   const options: Intl.DateTimeFormatOptions = {
     hour12: false,
     year: longYearFormat == "true" ? "numeric" : "2-digit",
-    month: monthFormat,
+    month: monthFormat as "2-digit" | "numeric" | "long" | "short" | "narrow",
     day: longDayFormat == "true" ? "2-digit" : "numeric",
     // hour: "2-digit",
     // minute: "2-digit",

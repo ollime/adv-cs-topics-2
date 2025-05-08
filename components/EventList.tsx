@@ -7,6 +7,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import { FilledPill } from "./PillButton";
 import { ListItem } from "../types";
+
 import { calculateTime } from "../utils/DateTimeCalculation";
 
 export default function EventList({ data }: { data: Array<ListItem> }) {

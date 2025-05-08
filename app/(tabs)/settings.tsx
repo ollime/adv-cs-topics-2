@@ -12,8 +12,6 @@ import { formatDate } from "../../utils/DateTimeCalculation";
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
   const [dateFormat, setDateFormat] = React.useState<string>();
-  const [dateOptions, setDateOptions] =
-    React.useState<Intl.DateTimeFormatOptions>();
   const [longYearFormat, setLongYearFormat] = React.useState<boolean>(false);
   const [monthFormat, setMonthFormat] = React.useState<
     "2-digit" | "numeric" | "long" | "short" | "narrow"
@@ -89,7 +87,6 @@ export default function secondPage() {
       minute: "2-digit",
       second: "2-digit",
     };
-    setDateOptions(options);
     setDateFormat(formatDate(new Date(36184 * 1000), options));
   }
 
