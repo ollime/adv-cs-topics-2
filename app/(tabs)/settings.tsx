@@ -22,8 +22,6 @@ export default function secondPage() {
 
   const { setColorScheme } = useColorScheme();
 
-  // TODO: save longYearFormat
-
   React.useEffect(() => {
     const loadData = async () => {
       const darkMode = await getData("darkMode");
@@ -32,8 +30,20 @@ export default function secondPage() {
       }
       const longYearFormat = await getData("longYearFormat");
       const longDayFormat = await getData("longDayFormat");
+      const monthFormat = await getData("monthFormat");
       setLongYearFormat(longYearFormat === "true");
       setLongDayFormat(longDayFormat === "true");
+      if (
+        monthFormat == "2-digit" ||
+        monthFormat == "numeric" ||
+        monthFormat == "long" ||
+        monthFormat == "short" ||
+        monthFormat == "narrow"
+      ) {
+        setMonthFormat(
+          monthFormat as "2-digit" | "numeric" | "long" | "short" | "narrow"
+        );
+      }
     };
     loadData();
   }, []);
@@ -94,6 +104,7 @@ export default function secondPage() {
     }
 
     setMonthFormat(newFormat);
+    saveInStorage("monthFormat", newFormat);
   }
 
   function handleSetYearFormat(isEnabled: boolean) {
@@ -104,6 +115,20 @@ export default function secondPage() {
   function handleSetDayFormat(isEnabled: boolean) {
     setLongDayFormat(isEnabled);
     saveInStorage("longDayFormat", String(isEnabled));
+  }
+
+  function getInitialMonth() {
+    let value: string = "";
+    if (monthFormat == "2-digit") {
+      value = "MM";
+    } else if (monthFormat == "long") {
+      value = "Month";
+    } else if (monthFormat == "short") {
+      value = "mon";
+    } else if (monthFormat == "numeric") {
+      value = "M";
+    }
+    return value;
   }
 
   return (
@@ -126,7 +151,7 @@ export default function secondPage() {
           onChangeOption={(value: string) => {
             handleSetMonthFormat(value);
           }}
-          selected={darkMode}></RadioSelect>
+          selected={getInitialMonth()}></RadioSelect>
         <ToggleSwitch
           label="Leading zero (day)"
           callback={(isEnabled: boolean) => handleSetDayFormat(isEnabled)}

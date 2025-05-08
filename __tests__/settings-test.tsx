@@ -147,4 +147,13 @@ describe("<Settings/>", () => {
       expect(dayFormatSwitch).toBeChecked();
     });
   });
+
+  test("Month format is displayed from storage", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValue("2-digit");
+    render(<Settings />);
+    await waitFor(() => {
+      const monthFormatRadio = screen.getByRole("radio", { name: "MM" });
+      expect(monthFormatRadio).toBeChecked();
+    });
+  });
 });
