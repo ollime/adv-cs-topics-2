@@ -5,10 +5,9 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "src/*"
-      ]
-    }
+      "~/*": ["src/*"]
+    },
+    "moduleSuffixes": [".ios", ".android", ".native", ""]
   },
   "include": [
     "**/*.ts",

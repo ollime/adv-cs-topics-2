@@ -1,5 +1,5 @@
-import React from "react";
-import { View } from "react-native";
+import React, { createElement } from "react";
+import { View, Platform } from "react-native";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -8,6 +8,15 @@ import TextField from "../../components/TextField";
 import ToggleSwitch from "../../components/ToggleSwitch";
 
 import { formatDate } from "../../utils/DateTimeCalculation";
+import { createDatabase } from "../../models/database";
+
+if (Platform.OS !== "web") {
+  try {
+    createDatabase();
+  } catch (err) {
+    alert(err);
+  }
+}
 
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
@@ -21,7 +30,6 @@ export default function secondPage() {
   const [longDayFormat, setLongDayFormat] = React.useState<boolean>(false);
 
   const { setColorScheme } = useColorScheme();
-
   // TODO: save longYearFormat
 
   React.useEffect(() => {
