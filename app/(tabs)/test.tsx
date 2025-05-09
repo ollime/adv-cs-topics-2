@@ -37,28 +37,41 @@ function ProgressBar({ progress }: { progress: number }) {
 }
 
 function DateDisplay() {
+  const totalDays: number = 40;
+
   const squareWidth: number = 20; // width of each square
-  const totalDays: number = 20;
-  const weeks: number = Math.floor(totalDays / 7);
-  const days: number = totalDays % 7;
+  const months = Math.floor(totalDays / 30);
+  const weeks: number = Math.floor((totalDays - months * 30) / 6);
+  const days: number = totalDays % 6;
+
+  const monthDisplay = Array.from(Array(months)).map((i) => (
+    <View
+      className="mr-2 flex bg-primary"
+      style={{ width: squareWidth * 6, height: squareWidth * 5 }}
+      key={"month" + i}></View>
+  ));
 
   return (
     <>
-      {/* blocks for months */}
-      <View
-        className="my-2 flex bg-gray-300"
-        style={{ width: squareWidth * 7, height: squareWidth * 5 }}>
-        {/* rows for weeks */}
+      {/* display for months */}
+      <View className="my-2 flex flex-row flex-wrap">
+        {monthDisplay}
+        {/* blocks for months */}
         <View
-          className="flex size-10 bg-primary"
-          style={{
-            width: squareWidth * 7,
-            height: squareWidth * weeks,
-          }}></View>
-        {/* squares for days */}
-        <View
-          className="flex size-10 bg-primary"
-          style={{ width: squareWidth * days, height: squareWidth }}></View>
+          className="flex bg-gray-300"
+          style={{ width: squareWidth * 6, height: squareWidth * 5 }}>
+          {/* rows for weeks */}
+          <View
+            className="flex size-10 bg-primary"
+            style={{
+              width: squareWidth * 6,
+              height: squareWidth * weeks,
+            }}></View>
+          {/* squares for days */}
+          <View
+            className="flex size-10 bg-primary"
+            style={{ width: squareWidth * days, height: squareWidth }}></View>
+        </View>
       </View>
     </>
   );
