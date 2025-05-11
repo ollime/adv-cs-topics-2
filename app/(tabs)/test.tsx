@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import Counter from "../../components/Counter";
 
 export default function secondPage() {
   const days: number = 50;
@@ -8,16 +9,30 @@ export default function secondPage() {
     <>
       <View className="flex flex-1 bg-background dark:bg-backgroundDark">
         <View className="m-4 flex rounded-lg bg-white p-4">
-          <Text className="text-lg font-bold">Event Title</Text>
-          <ProgressBar progress={days}></ProgressBar>
-          <DateDisplay progress={days}></DateDisplay>
+          <Text className="text-lg font-bold">Elapsed Event</Text>
+          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
+          <GridProgressBar progress={days}></GridProgressBar>
+        </View>
+      </View>
+      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
+        <View className="m-4 flex rounded-lg bg-white p-4">
+          <Text className="text-lg font-bold">Until Event</Text>
+          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
+          <Counter progress={days}></Counter>
+        </View>
+      </View>
+      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
+        <View className="m-4 flex rounded-lg bg-white p-4">
+          <Text className="text-lg font-bold">Since Event</Text>
+          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
+          <GridProgressBar progress={days}></GridProgressBar>
         </View>
       </View>
     </>
   );
 }
 
-function ProgressBar({ progress }: { progress: number }) {
+function HorizontalProgressBar({ progress }: { progress: number }) {
   let goal: number = 0;
   let text: string = "";
   if (progress < 7) {
@@ -35,7 +50,11 @@ function ProgressBar({ progress }: { progress: number }) {
           className={
             "rounded-l-lg bg-primary " + (fraction >= 1 ? "rounded-r-lg" : "")
           }
-          style={{ flex: fraction }}></View>
+          style={{ flex: fraction }}>
+          <Text className="flex h-full items-center justify-center italic text-white">
+            {progress} / {goal}
+          </Text>
+        </View>
         <View
           className={
             "rounded-r-lg bg-gray-300 " + (fraction <= 0 ? "rounded-l-lg" : "")
@@ -46,7 +65,7 @@ function ProgressBar({ progress }: { progress: number }) {
   );
 }
 
-function DateDisplay({ progress }: { progress: number }) {
+function GridProgressBar({ progress }: { progress: number }) {
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
