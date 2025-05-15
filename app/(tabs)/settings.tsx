@@ -3,9 +3,9 @@ import { View } from "react-native";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import RadioSelect from "../../components/RadioSelect";
-import TextField from "../../components/TextField";
-import ToggleSwitch from "../../components/ToggleSwitch";
+import RadioSelect from "../../components/inputFields/RadioSelect";
+import TextField from "../../components/inputFields/TextField";
+import ToggleSwitch from "../../components/inputFields/ToggleSwitch";
 
 import { formatDate } from "../../utils/DateTimeCalculation";
 

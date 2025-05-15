@@ -4,7 +4,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { convertUnixToDate } from "../utils/DateTimeCalculation";
+import { convertUnixToDate } from "../../utils/DateTimeCalculation";
 
 export default function DateField({
   label,

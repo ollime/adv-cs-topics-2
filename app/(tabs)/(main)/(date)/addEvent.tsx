@@ -7,12 +7,12 @@ import { router, useLocalSearchParams } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Modal from "../../../../components/Modal";
-import TextField from "../../../../components/TextField";
-import DateField from "../../../../components/DateField";
-import RadioSelect from "../../../../components/RadioSelect";
+import TextField from "../../../../components/inputFields/TextField";
+import DateField from "../../../../components/inputFields/DateField";
+import RadioSelect from "../../../../components/inputFields/RadioSelect";
 import Alert from "../../../../components/Alert";
 import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
-import { SelectablePalette } from "../../../../components/Palette";
+import { SelectablePalette } from "../../../../components/inputFields/Palette";
 
 import { ListItem } from "../../../../types";
 import { calculateTime } from "../../../../utils/DateTimeCalculation";

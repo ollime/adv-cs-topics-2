@@ -5,7 +5,7 @@ import { View, Text } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 
 import Modal from "../../../../components/Modal";
-import DatePicker from "../../../../components/DatePicker";
+import DatePicker from "../../../../components/inputFields/DatePicker";
 import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import { ListItem } from "../../../../types";
 
