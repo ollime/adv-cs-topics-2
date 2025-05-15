@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import {
   ElapsedEventCard,
   UntilEventCard,
@@ -20,9 +20,11 @@ export default function secondPage() {
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ElapsedEventCard time={time} eventTitle={eventTitle} />
-        <UntilEventCard time={timeWithSeconds} eventTitle={eventTitle} />
-        <SinceEventCard time={time} eventTitle={eventTitle} />
+        <View className="flex bg-background dark:bg-backgroundDark">
+          <ElapsedEventCard time={time} eventTitle={eventTitle} />
+          <UntilEventCard time={timeWithSeconds} eventTitle={eventTitle} />
+          <SinceEventCard time={time} eventTitle={eventTitle} />
+        </View>
       </ScrollView>
     </>
   );

@@ -93,7 +93,16 @@ export default function GridProgressBar({ progress }: { progress: number }) {
                   ? colors[(months % 10) + 1]
                   : colors[0],
             }}></View>
-          <Text className="ml-1 flex font-mono text-primary">{days} days</Text>
+          <Text
+            className="ml-1 flex font-mono"
+            style={{
+              color:
+                months % 10 < colors.length
+                  ? colors[(months % 10) + 1]
+                  : colors[0],
+            }}>
+            {days} days
+          </Text>
         </View>
       </View>
     </>

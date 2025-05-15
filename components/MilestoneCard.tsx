@@ -12,12 +12,12 @@ export function ElapsedEventCard({
   eventTitle: string;
 }) {
   return (
-    <View className="flex bg-background dark:bg-backgroundDark">
-      <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
-        <Text className="text-lg font-bold">Time since {eventTitle}</Text>
-        <HorizontalProgressBar progress={time}></HorizontalProgressBar>
-        {/* <GridProgressBar progress={time}></GridProgressBar> */}
-      </View>
+    <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
+      <Text className="text-lg font-bold dark:text-white">
+        Time since {eventTitle}
+      </Text>
+      <HorizontalProgressBar progress={time}></HorizontalProgressBar>
+      {/* <GridProgressBar progress={time}></GridProgressBar> */}
     </View>
   );
 }
@@ -30,11 +30,11 @@ export function UntilEventCard({
   eventTitle: string;
 }) {
   return (
-    <View className="flex bg-background dark:bg-backgroundDark">
-      <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
-        <Text className="text-lg font-bold">Time until {eventTitle}</Text>
-        <Counter progress={time}></Counter>
-      </View>
+    <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
+      <Text className="text-lg font-bold dark:text-white">
+        Time until {eventTitle}
+      </Text>
+      <Counter progress={time}></Counter>
     </View>
   );
 }
@@ -47,12 +47,12 @@ export function SinceEventCard({
   eventTitle: string;
 }) {
   return (
-    <View className="flex bg-background dark:bg-backgroundDark">
-      <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
-        <Text className="text-lg font-bold">Since {eventTitle}</Text>
-        {/* <HorizontalProgressBar progress={time}></HorizontalProgressBar> */}
-        <GridProgressBar progress={time}></GridProgressBar>
-      </View>
+    <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
+      <Text className="text-lg font-bold dark:text-white">
+        Since {eventTitle}
+      </Text>
+      {/* <HorizontalProgressBar progress={time}></HorizontalProgressBar> */}
+      <GridProgressBar progress={time}></GridProgressBar>
     </View>
   );
 }

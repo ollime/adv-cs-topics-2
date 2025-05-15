@@ -17,7 +17,7 @@ export default function Counter({ progress }: { progress: number }) {
   return (
     <>
       <View className="mb-4 flex items-center justify-center">
-        <Text className="items-center justify-center font-mono font-light">
+        <Text className="items-center justify-center font-mono font-light dark:text-white">
           Time remaining
         </Text>
         <View className="flex flex-row flex-wrap items-center justify-center">
@@ -57,7 +57,7 @@ function CounterButton({
             </View>
           </Gradient>
         </View>
-        <Text className="mt-1 flex items-center justify-center font-mono font-light">
+        <Text className="mt-1 flex items-center justify-center font-mono font-light dark:text-white">
           {label}
         </Text>
       </View>
