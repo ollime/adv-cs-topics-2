@@ -14,12 +14,12 @@ import {
 import { ListItem } from "../../types";
 
 export default function secondPage() {
-  // const startTime = 1725623522;
-  // const endTime = 1748222240;
-  // const time: number = calculateTime(startTime, endTime);
-  // // temporary variable, fix calculateTime later
-  // const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
-  // const eventTitle = "My Event";
+  const startTime = 1725623522;
+  const endTime = 1748222240;
+  const time: number = calculateTime(startTime, endTime);
+  // temporary variable, fix calculateTime later
+  const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
+  const eventTitle = "My Event";
 
   // TODO: database retrieval
   const testData: Array<ListItem> = [
@@ -89,7 +89,6 @@ export default function secondPage() {
       />
     </View>
   ));
-  // React.useEffect(() => {}, []);
 
   function getLatestEvents() {
     const filtered = testData
@@ -106,6 +105,13 @@ export default function secondPage() {
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex bg-background dark:bg-backgroundDark">
+          <ElapsedEventCard
+            time={time}
+            eventTitle={eventTitle}
+            color="orange-400"
+          />
+          <UntilEventCard time={timeWithSeconds} eventTitle={eventTitle} />
+          <SinceEventCard time={time} eventTitle={eventTitle} />
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">
@@ -122,9 +128,6 @@ export default function secondPage() {
             </>
           </Gradient>
           {upcomingEvents}
-          {/* <ElapsedEventCard time={time} eventTitle={eventTitle} />
-          <UntilEventCard time={timeWithSeconds} eventTitle={eventTitle} />
-          <SinceEventCard time={time} eventTitle={eventTitle} /> */}
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">

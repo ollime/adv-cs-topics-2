@@ -4,9 +4,11 @@ import { Text, View } from "react-native";
 export default function HorizontalProgressBar({
   progress,
   endGoal,
+  color,
 }: {
   progress: number;
   endGoal?: number;
+  color: string;
 }) {
   let current = progress;
   let goal: number = endGoal ? endGoal : 1;
@@ -31,7 +33,7 @@ export default function HorizontalProgressBar({
       <View className="my-2 flex h-8 flex-row">
         <View
           className={
-            "rounded-l-lg bg-primary " + (fraction >= 1 ? "rounded-r-lg" : "")
+            `rounded-l-lg bg-${color}` + (fraction >= 1 ? "rounded-r-lg " : " ")
           }
           style={{ flex: fraction }}>
           <Text className="flex h-full items-center justify-center italic text-white">
