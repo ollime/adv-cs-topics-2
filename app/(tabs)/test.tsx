@@ -6,7 +6,7 @@ import { calculateTime } from "../../utils/DateTimeCalculation";
 
 export default function secondPage() {
   const startTime = 1725623522;
-  const endTime = 1749722240;
+  const endTime = 1748222240;
   const time: number = calculateTime(startTime, endTime);
   // temporary variable, fix calculateTime later
   const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
@@ -47,19 +47,24 @@ function HorizontalProgressBar({
   progress: number;
   endGoal?: number;
 }) {
+  let current = progress;
   let goal: number = endGoal ? endGoal : 1;
   let text: string = "";
-  if (progress < 7) {
+  if (current < 7) {
     goal = 7;
     text = "1 week";
-  } else if (progress < 30) {
+  } else if (current < 30) {
     goal = 30;
     text = "1 month";
-  } else if (progress < 365) {
+  } else if (current < 365) {
     goal = 365;
     text = "1 year";
+  } else {
+    goal = current - (current % 365) + 365;
+    text = Math.floor(current / 365) + " years";
   }
-  const fraction: number = progress / goal;
+
+  const fraction: number = current / goal;
   return (
     <>
       <View className="my-2 flex h-8 flex-row">
@@ -69,7 +74,7 @@ function HorizontalProgressBar({
           }
           style={{ flex: fraction }}>
           <Text className="flex h-full items-center justify-center italic text-white">
-            {progress} / {goal}
+            {current} / {goal} days
           </Text>
         </View>
         <View
@@ -77,7 +82,7 @@ function HorizontalProgressBar({
             "rounded-r-lg bg-gray-300 " + (fraction <= 0 ? "rounded-l-lg" : "")
           }
           style={{ flex: 1 - fraction }}>
-          <Text className="mr-4 flex h-full items-center justify-end italic text-gray-500">
+          <Text className="mr-4 flex h-full items-center justify-end overflow-clip italic text-gray-500">
             {text}
           </Text>
         </View>
@@ -87,7 +92,6 @@ function HorizontalProgressBar({
 }
 
 function GridProgressBar({ progress }: { progress: number }) {
-  const eventTitle: string = "Event Title";
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
@@ -105,9 +109,26 @@ function GridProgressBar({ progress }: { progress: number }) {
     "#3210C9",
   ];
 
-  const months = Math.floor(totalDays / 30);
-  const weeks: number = Math.floor((totalDays - months * 30) / 6);
+  const years = Math.floor(totalDays / 365);
+  const months = Math.floor((totalDays / 30) % 12);
+  const weeks: number = Math.floor((totalDays / 7) % 5);
   const days: number = totalDays % 6;
+
+  const yearDisplay = Array.from(Array(years)).map((i, index) => (
+    <View
+      className="mr-2 mt-2"
+      style={{
+        height: squareWidth * 2,
+        backgroundColor: colors[index % 10],
+      }}
+      key={"year" + index}>
+      {index == years - 1 ? (
+        <Text className="m-2 font-mono text-white">{years} years</Text>
+      ) : (
+        ""
+      )}
+    </View>
+  ));
 
   const monthDisplay = Array.from(Array(months)).map((i, index) => (
     <View
@@ -125,17 +146,12 @@ function GridProgressBar({ progress }: { progress: number }) {
       )}
     </View>
   ));
-  console.log(months);
 
   return (
     <>
-      <View className="flex flex-row">
-        <Text className="font-mono">{months} months, </Text>
-        <Text className="font-mono">{weeks} weeks, and </Text>
-        <Text className="font-mono">{days} days since this event</Text>
-      </View>
       {/* display for months */}
       <View className="my-1 flex flex-row flex-wrap">
+        <View className="flex w-full">{yearDisplay}</View>
         {monthDisplay}
         {/* blocks for months */}
         <View
@@ -152,7 +168,9 @@ function GridProgressBar({ progress }: { progress: number }) {
                   ? colors[(months % 10) + 1]
                   : colors[0],
             }}>
-            <Text className="ml-1 font-mono text-white">{weeks} weeks</Text>
+            <Text className="mr-1 flex flex-1 items-center justify-end font-mono text-white">
+              {weeks} weeks
+            </Text>
           </View>
           {/* squares for days */}
           <View
@@ -165,9 +183,7 @@ function GridProgressBar({ progress }: { progress: number }) {
                   ? colors[(months % 10) + 1]
                   : colors[0],
             }}></View>
-          <Text className="mr-1 flex justify-end font-mono text-primary">
-            {days} days
-          </Text>
+          <Text className="ml-1 flex font-mono text-primary">{days} days</Text>
         </View>
       </View>
     </>
