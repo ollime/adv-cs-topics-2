@@ -6,7 +6,7 @@ import { calculateTime } from "../../utils/DateTimeCalculation";
 
 export default function secondPage() {
   const startTime = 1725623522;
-  const endTime = 1749422240;
+  const endTime = 1749722240;
   const time: number = calculateTime(startTime, endTime);
   // temporary variable, fix calculateTime later
   const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
@@ -14,25 +14,24 @@ export default function secondPage() {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex bg-background dark:bg-backgroundDark">
-          <View className="m-4 flex rounded-lg bg-white p-4">
+          <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
             <Text className="text-lg font-bold">Elapsed Event</Text>
             <HorizontalProgressBar progress={time}></HorizontalProgressBar>
-            <GridProgressBar progress={time}></GridProgressBar>
+            {/* <GridProgressBar progress={time}></GridProgressBar> */}
           </View>
         </View>
         <View className="flex bg-background dark:bg-backgroundDark">
-          <View className="m-4 flex rounded-lg bg-white p-4">
+          <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
             <Text className="text-lg font-bold">Until Event</Text>
-            <HorizontalProgressBar progress={time}></HorizontalProgressBar>
             <Counter progress={timeWithSeconds}></Counter>
           </View>
         </View>
         <View className="flex bg-background dark:bg-backgroundDark">
-          <View className="m-4 flex rounded-lg bg-white p-4">
+          <View className="m-4 mb-0 flex rounded-lg bg-white p-4">
             <Text className="text-lg font-bold">Since Event</Text>
-            <HorizontalProgressBar progress={time}></HorizontalProgressBar>
+            {/* <HorizontalProgressBar progress={time}></HorizontalProgressBar> */}
             <GridProgressBar progress={time}></GridProgressBar>
           </View>
         </View>
@@ -88,6 +87,7 @@ function HorizontalProgressBar({
 }
 
 function GridProgressBar({ progress }: { progress: number }) {
+  const eventTitle: string = "Event Title";
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
@@ -117,11 +117,23 @@ function GridProgressBar({ progress }: { progress: number }) {
         height: squareWidth * 5,
         backgroundColor: colors[index % 10],
       }}
-      key={"month" + index}></View>
+      key={"month" + index}>
+      {index == months - 1 ? (
+        <Text className="m-2 font-mono text-white">{months} months</Text>
+      ) : (
+        ""
+      )}
+    </View>
   ));
+  console.log(months);
 
   return (
     <>
+      <View className="flex flex-row">
+        <Text className="font-mono">{months} months, </Text>
+        <Text className="font-mono">{weeks} weeks, and </Text>
+        <Text className="font-mono">{days} days since this event</Text>
+      </View>
       {/* display for months */}
       <View className="my-1 flex flex-row flex-wrap">
         {monthDisplay}
@@ -139,7 +151,9 @@ function GridProgressBar({ progress }: { progress: number }) {
                 months % 10 < colors.length
                   ? colors[(months % 10) + 1]
                   : colors[0],
-            }}></View>
+            }}>
+            <Text className="ml-1 font-mono text-white">{weeks} weeks</Text>
+          </View>
           {/* squares for days */}
           <View
             className="flex size-10"
@@ -151,6 +165,9 @@ function GridProgressBar({ progress }: { progress: number }) {
                   ? colors[(months % 10) + 1]
                   : colors[0],
             }}></View>
+          <Text className="mr-1 flex justify-end font-mono text-primary">
+            {days} days
+          </Text>
         </View>
       </View>
     </>

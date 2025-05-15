@@ -16,7 +16,7 @@ export default function Counter({ progress }: { progress: number }) {
 
   return (
     <>
-      <View className="flex items-center justify-center">
+      <View className="mb-4 flex items-center justify-center">
         <Text className="items-center justify-center font-mono font-light">
           Time remaining
         </Text>
