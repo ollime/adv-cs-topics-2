@@ -1,46 +1,64 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import Counter from "../../components/Counter";
 
+import { calculateTime } from "../../utils/DateTimeCalculation";
+
 export default function secondPage() {
-  const days: number = 50;
+  const startTime = 1725623522;
+  const endTime = 1749422240;
+  const time: number = calculateTime(startTime, endTime);
+  // temporary variable, fix calculateTime later
+  const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
+  console.log(timeWithSeconds);
 
   return (
     <>
-      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
-        <View className="m-4 flex rounded-lg bg-white p-4">
-          <Text className="text-lg font-bold">Elapsed Event</Text>
-          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
-          <GridProgressBar progress={days}></GridProgressBar>
+      <ScrollView>
+        <View className="flex bg-background dark:bg-backgroundDark">
+          <View className="m-4 flex rounded-lg bg-white p-4">
+            <Text className="text-lg font-bold">Elapsed Event</Text>
+            <HorizontalProgressBar progress={time}></HorizontalProgressBar>
+            <GridProgressBar progress={time}></GridProgressBar>
+          </View>
         </View>
-      </View>
-      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
-        <View className="m-4 flex rounded-lg bg-white p-4">
-          <Text className="text-lg font-bold">Until Event</Text>
-          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
-          <Counter progress={days}></Counter>
+        <View className="flex bg-background dark:bg-backgroundDark">
+          <View className="m-4 flex rounded-lg bg-white p-4">
+            <Text className="text-lg font-bold">Until Event</Text>
+            <HorizontalProgressBar progress={time}></HorizontalProgressBar>
+            <Counter progress={timeWithSeconds}></Counter>
+          </View>
         </View>
-      </View>
-      <View className="flex flex-1 bg-background dark:bg-backgroundDark">
-        <View className="m-4 flex rounded-lg bg-white p-4">
-          <Text className="text-lg font-bold">Since Event</Text>
-          <HorizontalProgressBar progress={days}></HorizontalProgressBar>
-          <GridProgressBar progress={days}></GridProgressBar>
+        <View className="flex bg-background dark:bg-backgroundDark">
+          <View className="m-4 flex rounded-lg bg-white p-4">
+            <Text className="text-lg font-bold">Since Event</Text>
+            <HorizontalProgressBar progress={time}></HorizontalProgressBar>
+            <GridProgressBar progress={time}></GridProgressBar>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
 
-function HorizontalProgressBar({ progress }: { progress: number }) {
-  let goal: number = 0;
+function HorizontalProgressBar({
+  progress,
+  endGoal,
+}: {
+  progress: number;
+  endGoal?: number;
+}) {
+  let goal: number = endGoal ? endGoal : 1;
   let text: string = "";
   if (progress < 7) {
     goal = 7;
+    text = "1 week";
   } else if (progress < 30) {
     goal = 30;
+    text = "1 month";
   } else if (progress < 365) {
     goal = 365;
+    text = "1 year";
   }
   const fraction: number = progress / goal;
   return (
@@ -59,7 +77,11 @@ function HorizontalProgressBar({ progress }: { progress: number }) {
           className={
             "rounded-r-lg bg-gray-300 " + (fraction <= 0 ? "rounded-l-lg" : "")
           }
-          style={{ flex: 1 - fraction }}></View>
+          style={{ flex: 1 - fraction }}>
+          <Text className="mr-4 flex h-full items-center justify-end italic text-gray-500">
+            {text}
+          </Text>
+        </View>
       </View>
     </>
   );
