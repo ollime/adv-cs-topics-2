@@ -13,9 +13,7 @@ export function ElapsedEventCard({
 }) {
   return (
     <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
-      <Text className="text-lg font-bold dark:text-white">
-        Time since {eventTitle}
-      </Text>
+      <Text className="text-lg font-bold dark:text-white">{eventTitle}</Text>
       <HorizontalProgressBar progress={time}></HorizontalProgressBar>
       {/* <GridProgressBar progress={time}></GridProgressBar> */}
     </View>
@@ -31,9 +29,7 @@ export function UntilEventCard({
 }) {
   return (
     <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
-      <Text className="text-lg font-bold dark:text-white">
-        Time until {eventTitle}
-      </Text>
+      <Text className="text-lg font-bold dark:text-white">{eventTitle}</Text>
       <Counter progress={time}></Counter>
     </View>
   );
@@ -48,9 +44,7 @@ export function SinceEventCard({
 }) {
   return (
     <View className="m-4 mb-0 flex rounded-lg bg-white p-4 dark:bg-lightDark">
-      <Text className="text-lg font-bold dark:text-white">
-        Since {eventTitle}
-      </Text>
+      <Text className="text-lg font-bold dark:text-white">{eventTitle}</Text>
       {/* <HorizontalProgressBar progress={time}></HorizontalProgressBar> */}
       <GridProgressBar progress={time}></GridProgressBar>
     </View>
