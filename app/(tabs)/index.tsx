@@ -13,7 +13,7 @@ import {
 } from "../../utils/DateTimeCalculation";
 import { ListItem } from "../../types";
 
-export default function secondPage() {
+export default function homePage() {
   const startTime = 1725623522;
   const endTime = 1748222240;
   const time: number = calculateTime(startTime, endTime);

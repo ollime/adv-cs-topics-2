@@ -8,3 +8,6 @@ export interface ListItem {
   startTime?: number;
   endTime?: number;
 }
+
+/** RGB values stored as an array */
+export type Color = [number, number, number];

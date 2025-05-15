@@ -1,5 +1,6 @@
-import { Text, View } from "react-native";
 import React from "react";
+import { Text, View } from "react-native";
+
 import HorizontalProgressBar from "./HorizontalProgressBar";
 import GridProgressBar from "./GridProgressBar";
 import Counter from "./Counter";

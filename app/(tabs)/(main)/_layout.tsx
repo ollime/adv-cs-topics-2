@@ -8,7 +8,7 @@ export default function ModalLayout() {
     <>
       <Stack>
         <Stack.Screen
-          name="index"
+          name="events"
           options={{
             headerShown: false,
           }}

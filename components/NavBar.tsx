@@ -18,7 +18,7 @@ export default function NavBar() {
       <Gradient>
         <View className="flex flex-row flex-wrap">
           <NavBarButton route={"/"} label={"home"}></NavBarButton>
-          <NavBarButton route={"secondPage"}></NavBarButton>
+          <NavBarButton route={"events"} label={"events"}></NavBarButton>
           <NavBarButton route={"settings"}></NavBarButton>
         </View>
       </Gradient>
