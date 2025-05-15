@@ -4,7 +4,7 @@
 
 import React from "react";
 import { View, Text } from "react-native";
-import Gradient from "./Gradient";
+import Gradient from "../Gradient";
 
 export default function Counter({ progress }: { progress: number }) {
   const [count] = React.useState<number>(progress);

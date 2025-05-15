@@ -10,7 +10,7 @@ export default function HorizontalProgressBar({
   endGoal?: number;
   color: string;
 }) {
-  let current = progress;
+  const current = progress;
   let goal: number = endGoal ? endGoal : 1;
   let text: string = "";
   if (current < 7) {

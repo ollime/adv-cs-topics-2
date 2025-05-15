@@ -4,7 +4,7 @@ import {
   ElapsedEventCard,
   UntilEventCard,
   SinceEventCard,
-} from "../../components/MilestoneCard";
+} from "../../components/milestones/MilestoneCard";
 import Gradient from "../../components/Gradient";
 
 import {
