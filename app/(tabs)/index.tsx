@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
+
 import {
   ElapsedEventCard,
   UntilEventCard,
@@ -11,6 +12,7 @@ import {
   calculateTime,
   convertSecondsToDays,
 } from "../../utils/DateTimeCalculation";
+import { getGradientColors } from "utils/ColorCalculation";
 import { ListItem } from "../../types";
 
 export default function homePage() {
@@ -86,6 +88,7 @@ export default function homePage() {
       <UntilEventCard
         time={convertSecondsToDays(item.endTime - Date.now() / 1000)}
         eventTitle={item.key}
+        color={item.color}
       />
     </View>
   ));
@@ -101,6 +104,8 @@ export default function homePage() {
     return filtered.slice(0, 3);
   }
 
+  console.log(getGradientColors("red-400"));
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -110,8 +115,16 @@ export default function homePage() {
             eventTitle={eventTitle}
             color="orange-400"
           />
-          <UntilEventCard time={timeWithSeconds} eventTitle={eventTitle} />
-          <SinceEventCard time={time} eventTitle={eventTitle} />
+          <UntilEventCard
+            time={timeWithSeconds}
+            eventTitle={eventTitle}
+            color="red-400"
+          />
+          <SinceEventCard
+            time={time}
+            eventTitle={eventTitle}
+            color="green-400"
+          />
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">

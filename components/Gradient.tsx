@@ -7,7 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function Gradient({
   children,
-  colors = ["#3210c9", "#7bd1ed"],
+  colors,
 }: {
   children: JSX.Element;
   colors?: [string, string, ...string[]];

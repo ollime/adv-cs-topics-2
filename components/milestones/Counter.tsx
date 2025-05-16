@@ -5,8 +5,15 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Gradient from "../Gradient";
+import { getAdjacentColor } from "utils/ColorCalculation";
 
-export default function Counter({ progress }: { progress: number }) {
+export default function Counter({
+  progress,
+  color,
+}: {
+  progress: number;
+  color?: string;
+}) {
   const [count] = React.useState<number>(progress);
   const months = count / 30.417;
   const days = count % 30.417;
@@ -21,10 +28,10 @@ export default function Counter({ progress }: { progress: number }) {
           Time remaining
         </Text>
         <View className="flex flex-row flex-wrap items-center justify-center">
-          <CounterButton progress={months} label="MONTHS" />
-          <CounterButton progress={days} label="DAYS" />
-          <CounterButton progress={hours} label="HOURS" />
-          <CounterButton progress={minutes} label="MINUTES" />
+          <CounterButton progress={months} label="MONTHS" color={color} />
+          <CounterButton progress={days} label="DAYS" color={color} />
+          <CounterButton progress={hours} label="HOURS" color={color} />
+          <CounterButton progress={minutes} label="MINUTES" color={color} />
         </View>
       </View>
     </>
@@ -34,9 +41,11 @@ export default function Counter({ progress }: { progress: number }) {
 function CounterButton({
   progress,
   label,
+  color,
 }: {
   progress: number;
   label: string;
+  color?: string;
 }) {
   const [count] = React.useState<number>(progress);
 
@@ -48,7 +57,7 @@ function CounterButton({
         {/* second view for rounded corner.
         overflow-hidden necessary to keep rounded corner */}
         <View className="size-20 overflow-hidden rounded-lg">
-          <Gradient>
+          <Gradient colors={getAdjacentColor(color)}>
             {/* change the size of the button here */}
             <View className="size-20 items-center justify-center">
               <Text className="text-2xl text-white first-line:select-none">

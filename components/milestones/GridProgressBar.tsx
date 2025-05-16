@@ -1,23 +1,32 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { getGradientColors } from "utils/ColorCalculation";
 
-export default function GridProgressBar({ progress }: { progress: number }) {
+export default function GridProgressBar({
+  progress,
+  color,
+}: {
+  progress: number;
+  color?: string;
+}) {
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
-  const colors = [
-    "#7BD1ED",
-    "#73BDE9",
-    "#6CAAE6",
-    "#6596E2",
-    "#5E83DF",
-    "#5770DB",
-    "#4F5CD7",
-    "#484AD4",
-    "#4137D0",
-    "#3923CC",
-    "#3210C9",
-  ];
+  let colors = color
+    ? getGradientColors(color)
+    : [
+        "#7BD1ED",
+        "#73BDE9",
+        "#6CAAE6",
+        "#6596E2",
+        "#5E83DF",
+        "#5770DB",
+        "#4F5CD7",
+        "#484AD4",
+        "#4137D0",
+        "#3923CC",
+        "#3210C9",
+      ];
 
   const years = Math.floor(totalDays / 365);
   const months = Math.floor((totalDays / 30) % 12);
