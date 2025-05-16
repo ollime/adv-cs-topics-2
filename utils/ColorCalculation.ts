@@ -34,6 +34,7 @@ export function getAdjacentColor(color: ColorKey) {
 export function getGradientColors(color: ColorKey) {
   const gradientArray = new Gradient()
     .setColorGradient(colors[color], getAdjacentColor(color)[1])
+    .setMidpoint(6)
     .getColors();
   return gradientArray;
 }

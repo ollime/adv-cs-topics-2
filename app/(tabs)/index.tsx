@@ -40,7 +40,13 @@ export default function homePage() {
       endTime: 1762660048,
     },
     { key: "zephyr", color: "primary", type: "since", startTime: 1715309248 },
-    { key: "stream", type: "elapsed" },
+    {
+      key: "stream",
+      type: "elapsed",
+      color: "blue-400",
+      startTime: 1725623522,
+      endTime: 1748222240,
+    },
     { key: "unit", type: "until" },
     {
       key: "receptive",
@@ -66,7 +72,12 @@ export default function homePage() {
       type: "until",
       endTime: 1749391692,
     },
-    { key: "writing" },
+    {
+      key: "writing",
+      color: "green-400",
+      type: "since",
+      startTime: 1697424893,
+    },
     { key: "key" },
     { key: "quill" },
     { key: "tearful" },
@@ -83,7 +94,7 @@ export default function homePage() {
     { key: "heavy" },
   ];
 
-  const upcomingEvents = getLatestEvents().map((item) => (
+  const upcomingEvents = getUpcomingEvents().map((item) => (
     <View key={item.key}>
       <UntilEventCard
         time={convertSecondsToDays(item.endTime - Date.now() / 1000)}
@@ -93,10 +104,10 @@ export default function homePage() {
     </View>
   ));
 
-  function getLatestEvents() {
+  function getUpcomingEvents() {
     const filtered = testData
       .filter((item) => item.type == "until" && item.endTime)
-      .sort(
+      .toSorted(
         (a, b) =>
           calculateTime(a.startTime, a.endTime) -
           calculateTime(b.startTime, b.endTime)
@@ -104,25 +115,74 @@ export default function homePage() {
     return filtered.slice(0, 3);
   }
 
+  // TODO: implement data retrieval for starred events
+  const starred = [
+    {
+      key: "summer",
+      color: "red-400",
+      type: "since",
+      description: `For multi-line descriptions,
+          use \` markers or \\n
+          newline characters.`,
+      startTime: 1592323203,
+    },
+    { key: "red", type: "until", endTime: 1903593432 },
+    {
+      key: "stream",
+      type: "elapsed",
+      color: "blue-400",
+      startTime: 1725623522,
+      endTime: 1748222240,
+    },
+    {
+      key: "writing",
+      color: "green-400",
+      type: "since",
+      startTime: 1697424893,
+    },
+  ];
+
+  const starredEvents = starred.map((item) => {
+    if (item) {
+      if (item.type === "until") {
+        return (
+          <UntilEventCard
+            key={item.key}
+            time={convertSecondsToDays(item.endTime - Date.now() / 1000)}
+            eventTitle={item.key}
+            color={item.color}
+          />
+        );
+      }
+      if (item.type === "since") {
+        return (
+          <SinceEventCard
+            key={item.key}
+            time={convertSecondsToDays(
+              Date.now() / 1000 - (item.startTime ?? Date.now() / 1000)
+            )}
+            eventTitle={item.key}
+            color={item.color}
+          />
+        );
+      }
+      if (item.type === "elapsed") {
+        return (
+          <ElapsedEventCard
+            key={item.key}
+            time={time}
+            eventTitle={item.key}
+            color={item.color}
+          />
+        );
+      }
+    }
+  });
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex bg-background dark:bg-backgroundDark">
-          <ElapsedEventCard
-            time={time}
-            eventTitle={eventTitle}
-            color="orange-400"
-          />
-          <UntilEventCard
-            time={timeWithSeconds}
-            eventTitle={eventTitle}
-            color="red-400"
-          />
-          <SinceEventCard
-            time={time}
-            eventTitle={eventTitle}
-            color="green-400"
-          />
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">
@@ -130,6 +190,10 @@ export default function homePage() {
               </Text>
             </>
           </Gradient>
+          {starredEvents}
+          <Text className="m-2 flex justify-end italic dark:text-white">
+            To add more events, to go the Events panel and star an event.
+          </Text>
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">
@@ -138,13 +202,6 @@ export default function homePage() {
             </>
           </Gradient>
           {upcomingEvents}
-          <Gradient>
-            <>
-              <Text className="flex justify-center p-2 text-lg font-bold text-white">
-                Recently Added
-              </Text>
-            </>
-          </Gradient>
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">

@@ -12,7 +12,10 @@ export default function GridProgressBar({
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
-  let colors = color ? getGradientColors(color) : getGradientColors("primary");
+  const colors = color
+    ? getGradientColors(color)
+    : getGradientColors("primary");
+  const colorsLength = colors.length;
 
   const years = Math.floor(totalDays / 365);
   const months = Math.floor((totalDays / 30) % 12);
@@ -21,10 +24,10 @@ export default function GridProgressBar({
 
   const yearDisplay = Array.from(Array(years)).map((i, index) => (
     <View
-      className="mr-2 mt-2"
+      className="mr-2"
       style={{
         height: squareWidth * 2,
-        backgroundColor: colors[index % 10],
+        backgroundColor: colors[index % colorsLength],
       }}
       key={"year" + index}>
       {index == years - 1 ? (
@@ -41,7 +44,7 @@ export default function GridProgressBar({
       style={{
         width: squareWidth * 6,
         height: squareWidth * 5,
-        backgroundColor: colors[index % 10],
+        backgroundColor: colors[index % colorsLength],
       }}
       key={"month" + index}>
       {index == months - 1 ? (
@@ -69,8 +72,8 @@ export default function GridProgressBar({
               width: squareWidth * 6,
               height: squareWidth * weeks,
               backgroundColor:
-                months % 10 < colors.length
-                  ? colors[(months % 10) + 1]
+                months % colorsLength < colors.length
+                  ? colors[months % colorsLength]
                   : colors[0],
             }}>
             <Text className="mr-1 flex flex-1 items-center justify-end font-mono text-white">
@@ -84,16 +87,16 @@ export default function GridProgressBar({
               width: squareWidth * days,
               height: squareWidth,
               backgroundColor:
-                months % 10 < colors.length
-                  ? colors[(months % 10) + 1]
+                months % colorsLength < colors.length
+                  ? colors[months % colorsLength]
                   : colors[0],
             }}></View>
           <Text
             className="ml-1 flex font-mono"
             style={{
               color:
-                months % 10 < colors.length
-                  ? colors[(months % 10) + 1]
+                months % colorsLength < colors.length
+                  ? colors[months % colorsLength]
                   : colors[0],
             }}>
             {days} days
