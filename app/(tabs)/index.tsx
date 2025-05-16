@@ -104,8 +104,6 @@ export default function homePage() {
     return filtered.slice(0, 3);
   }
 
-  console.log(getGradientColors("red-400"));
-
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -132,7 +130,6 @@ export default function homePage() {
               </Text>
             </>
           </Gradient>
-
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">

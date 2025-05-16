@@ -12,21 +12,7 @@ export default function GridProgressBar({
   const totalDays: number = progress;
 
   const squareWidth: number = 15; // width of each square
-  let colors = color
-    ? getGradientColors(color)
-    : [
-        "#7BD1ED",
-        "#73BDE9",
-        "#6CAAE6",
-        "#6596E2",
-        "#5E83DF",
-        "#5770DB",
-        "#4F5CD7",
-        "#484AD4",
-        "#4137D0",
-        "#3923CC",
-        "#3210C9",
-      ];
+  let colors = color ? getGradientColors(color) : getGradientColors("primary");
 
   const years = Math.floor(totalDays / 365);
   const months = Math.floor((totalDays / 30) % 12);

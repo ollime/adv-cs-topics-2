@@ -57,14 +57,16 @@ function CounterButton({
         {/* second view for rounded corner.
         overflow-hidden necessary to keep rounded corner */}
         <View className="size-20 overflow-hidden rounded-lg">
-          <Gradient colors={getAdjacentColor(color)}>
-            {/* change the size of the button here */}
-            <View className="size-20 items-center justify-center">
-              <Text className="text-2xl text-white first-line:select-none">
-                {Math.floor(count)}
-              </Text>
-            </View>
-          </Gradient>
+          {/* change the size of the button here */}
+          <View
+            className={
+              "size-20 items-center justify-center " +
+              (color ? "bg-" + color : "bg-primary")
+            }>
+            <Text className="text-2xl text-white first-line:select-none">
+              {Math.floor(count)}
+            </Text>
+          </View>
         </View>
         <Text className="mt-1 flex items-center justify-center font-mono font-light dark:text-white">
           {label}
