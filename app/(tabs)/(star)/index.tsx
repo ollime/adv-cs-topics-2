@@ -7,7 +7,7 @@ import {
   SinceEventCard,
 } from "../../../components/milestones/MilestoneCard";
 import Gradient from "../../../components/Gradient";
-import { FilledPill } from "../../../components/PillButton";
+import { OutlinedPill } from "../../../components/PillButton";
 import { useRouter } from "expo-router";
 
 import {
@@ -188,22 +188,21 @@ export default function homePage() {
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex bg-background dark:bg-backgroundDark">
-          <View className="flex w-full flex-row justify-end">
-            <FilledPill
-              label="Add new event"
-              callback={handleStarEvent}></FilledPill>
-          </View>
           <Gradient>
             <>
-              <Text className="flex justify-center p-2 text-lg font-bold text-white">
-                Starred
-              </Text>
+              <View className="flex flex-row">
+                <Text className="flex w-full justify-center p-2 text-center text-lg font-bold text-white">
+                  Starred
+                </Text>
+                <View className="flex flex-row justify-end">
+                  <OutlinedPill
+                    label="Add new event"
+                    callback={handleStarEvent}></OutlinedPill>
+                </View>
+              </View>
             </>
           </Gradient>
           {starredEvents}
-          <Text className="m-2 flex justify-end italic dark:text-white">
-            To add more events, to go the Events panel and star an event.
-          </Text>
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">

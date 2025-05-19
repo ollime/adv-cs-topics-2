@@ -50,14 +50,14 @@ export function OutlinedPill({
 }) {
   return (
     <>
-      <View className="m-2 h-[36px] w-[100px] rounded-full shadow-md shadow-indigo-500/50 outline outline-primary">
-        <View className="h-[36px] w-[100px] overflow-hidden rounded-full bg-white">
+      <View className="m-2 h-[36px] w-fit min-w-[100px] rounded-full shadow-md shadow-indigo-500/50 outline outline-primary">
+        <View className="h-[36px] min-w-[100px] overflow-hidden rounded-full bg-white">
           <Pressable
             onPress={() => callback()}
             accessibilityRole="button"
             accessibilityLabel={label}>
-            <View className="h-[36px] w-[100px] items-center justify-center">
-              <Text className="select-none font-medium text-primary">
+            <View className="h-[36px] min-w-[100px] items-center justify-center">
+              <Text className="select-none px-2 font-medium text-primary">
                 {label}
               </Text>
             </View>
