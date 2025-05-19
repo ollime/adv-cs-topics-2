@@ -39,6 +39,7 @@ export default function DropdownComponent({
         maxHeight={300}
         labelField="key"
         valueField="key"
+        activeColor="#d1d1d1"
         placeholder={!isFocus ? "Select item" : "..."}
         searchPlaceholder="Search..."
         value={value}
@@ -48,9 +49,6 @@ export default function DropdownComponent({
           setValue(item);
           setIsFocus(false);
         }}
-        // renderLeftIcon={() => (
-        //   <MaterialIcons name="check" size={24} color="black" />
-        // )}
       />
     </View>
   );
