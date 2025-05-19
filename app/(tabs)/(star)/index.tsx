@@ -196,7 +196,7 @@ export default function homePage() {
                 </Text>
                 <View className="flex flex-row justify-end">
                   <OutlinedPill
-                    label="Add new event"
+                    label="Star an event"
                     callback={handleStarEvent}></OutlinedPill>
                 </View>
               </View>
