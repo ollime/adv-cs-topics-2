@@ -7,27 +7,24 @@ import { ListItem } from "../../types";
 export default function DropdownComponent({
   data,
   preset,
+  callback,
 }: {
   data;
   preset: Array<string>;
+  callback: (value: Array<string>) => void;
 }) {
   const [value, setValue] = React.useState(preset);
   const [isFocus, setIsFocus] = React.useState(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: "blue" }]}>
-          MultiSelect label
-        </Text>
-      );
-    }
-    return null;
-  };
+  // // Sync the internal state with the `selected` prop if it changes
+  // React.useEffect(() => {
+  //   if (preset !== undefined && preset !== value) {
+  //     setValue(preset);
+  //   }
+  // }, [preset]);
 
   return (
     <View style={styles.container}>
-      {renderLabel()}
       <MultiSelect
         style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
         placeholderStyle={styles.placeholderStyle}
@@ -43,10 +40,12 @@ export default function DropdownComponent({
         placeholder={!isFocus ? "Select item" : "..."}
         searchPlaceholder="Search..."
         value={value}
+        selectedStyle={styles.selectedStyle}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
           setValue(item);
+          callback(item);
           setIsFocus(false);
         }}
       />
@@ -56,10 +55,10 @@ export default function DropdownComponent({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     padding: 16,
   },
   dropdown: {
+    backgroundColor: "white",
     height: 50,
     borderColor: "gray",
     borderWidth: 0.5,
@@ -68,15 +67,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
-  },
-  label: {
-    position: "absolute",
-    backgroundColor: "white",
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
   },
   placeholderStyle: {
     fontSize: 16,
@@ -91,5 +81,8 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+  },
+  selectedStyle: {
+    backgroundColor: "white",
   },
 });

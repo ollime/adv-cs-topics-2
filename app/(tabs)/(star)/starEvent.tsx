@@ -1,13 +1,40 @@
 import React from "react";
-import DropdownComponent from "components/inputFields/DropdownField";
+import { View, Text } from "react-native";
+import { useRouter } from "expo-router";
+
 import Modal from "../../../components/Modal";
+import DropdownComponent from "components/inputFields/DropdownField";
+import { FilledPill, OutlinedPill } from "components/PillButton";
 
 export default function StarEventModal() {
+  const [values, setValues] = React.useState();
+  const router = useRouter();
+
+  const confirmItems = () => {
+    // TODO: put in storage
+    handleGoBack();
+  };
+
+  const handleGoBack = () => {
+    router.navigate({
+      pathname: "/starEvent",
+    });
+  };
+
   const childContent = (
     <>
+      <Text className="m-5 mb-2 text-center text-lg font-bold dark:text-white">
+        Select event(s) to add
+      </Text>
       <DropdownComponent
         data={testData}
-        preset={["quarter", "red", "key"]}></DropdownComponent>
+        preset={["quarter", "red", "key"]}
+        callback={setValues}></DropdownComponent>
+
+      <View className="flex flex-1 flex-row justify-center">
+        <FilledPill label="Confirm" callback={confirmItems}></FilledPill>
+        <OutlinedPill label="Cancel" callback={handleGoBack}></OutlinedPill>
+      </View>
     </>
   );
 

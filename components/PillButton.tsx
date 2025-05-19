@@ -16,7 +16,7 @@ export function FilledPill({
 }) {
   return (
     <>
-      <View className="m-2 min-h-[40px] min-w-[100px] rounded-full shadow-md shadow-indigo-500/50">
+      <View className="m-2 min-h-[40px] w-fit min-w-[100px] rounded-full shadow-md shadow-indigo-500/50">
         <View className="min-h-[40px] min-w-[100px] overflow-hidden rounded-full">
           <Pressable
             onPress={() => callback()}
