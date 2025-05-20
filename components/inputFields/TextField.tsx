@@ -54,7 +54,9 @@ export default function TextField({
               selectTextOnFocus={!disabled}
               className="w-60 rounded-lg p-2"></TextInput>
             {disabled ? (
-              <MaterialIcons name="edit-off" size={20} color="gray" />
+              <View className="flex items-center justify-center px-2">
+                <MaterialIcons name="edit-off" size={20} color="gray" />
+              </View>
             ) : (
               ""
             )}
