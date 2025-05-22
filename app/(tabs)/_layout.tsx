@@ -22,7 +22,7 @@ export default function TabLayout() {
             title: "events",
           }}></Tabs.Screen>
         <Tabs.Screen
-          name="index"
+          name="(star)"
           options={{
             title: "home",
           }}></Tabs.Screen>

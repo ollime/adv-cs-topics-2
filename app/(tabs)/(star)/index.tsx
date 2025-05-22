@@ -5,23 +5,22 @@ import {
   ElapsedEventCard,
   UntilEventCard,
   SinceEventCard,
-} from "../../components/milestones/MilestoneCard";
-import Gradient from "../../components/Gradient";
+} from "../../../components/milestones/MilestoneCard";
+import Gradient from "../../../components/Gradient";
+import { OutlinedPill } from "../../../components/PillButton";
+import { useRouter } from "expo-router";
 
 import {
   calculateTime,
   convertSecondsToDays,
-} from "../../utils/DateTimeCalculation";
-import { getGradientColors } from "utils/ColorCalculation";
-import { ListItem } from "../../types";
+} from "../../../utils/DateTimeCalculation";
+import { ListItem } from "../../../types";
 
 export default function homePage() {
+  const router = useRouter();
   const startTime = 1725623522;
   const endTime = 1748222240;
   const time: number = calculateTime(startTime, endTime);
-  // temporary variable, fix calculateTime later
-  const timeWithSeconds: number = calculateTime(startTime, endTime) + 0.4352;
-  const eventTitle = "My Event";
 
   // TODO: database retrieval
   const testData: Array<ListItem> = [
@@ -179,21 +178,31 @@ export default function homePage() {
     }
   });
 
+  const handleStarEvent = () => {
+    router.navigate({
+      pathname: "/starEvent",
+    });
+  };
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex bg-background dark:bg-backgroundDark">
           <Gradient>
             <>
-              <Text className="flex justify-center p-2 text-lg font-bold text-white">
-                Starred
-              </Text>
+              <View className="flex flex-row">
+                <Text className="flex w-full justify-center p-2 text-center text-lg font-bold text-white">
+                  Starred
+                </Text>
+                <View className="flex flex-row justify-end">
+                  <OutlinedPill
+                    label="Star an event"
+                    callback={handleStarEvent}></OutlinedPill>
+                </View>
+              </View>
             </>
           </Gradient>
           {starredEvents}
-          <Text className="m-2 flex justify-end italic dark:text-white">
-            To add more events, to go the Events panel and star an event.
-          </Text>
           <Gradient>
             <>
               <Text className="flex justify-center p-2 text-lg font-bold text-white">
