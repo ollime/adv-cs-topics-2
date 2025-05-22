@@ -104,14 +104,16 @@ export default function homePage() {
   ));
 
   function getUpcomingEvents() {
-    const filtered = testData
-      .filter((item) => item.type == "until" && item.endTime)
-      .toSorted(
-        (a, b) =>
-          calculateTime(a.startTime, a.endTime) -
-          calculateTime(b.startTime, b.endTime)
-      );
-    return filtered.slice(0, 3);
+    return testData;
+    // const filtered = testData.filter(
+    //   (item) => item.type == "until" && item.endTime
+    // );
+    // .toSorted(
+    //   (a, b) =>
+    //     calculateTime(a.startTime, a.endTime) -
+    //     calculateTime(b.startTime, b.endTime)
+    // );
+    // return filtered.slice(0, 3);
   }
 
   // TODO: implement data retrieval for starred events

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -8,6 +8,7 @@ import TextField from "../../components/inputFields/TextField";
 import ToggleSwitch from "../../components/inputFields/ToggleSwitch";
 
 import { formatDate } from "../../utils/DateTimeCalculation";
+import { createDatabase } from "../../models/database";
 
 export default function secondPage() {
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
@@ -49,6 +50,18 @@ export default function secondPage() {
   React.useEffect(() => {
     changeDateFormat();
   }, [longYearFormat, monthFormat, longDayFormat]);
+
+  React.useEffect(() => {
+    if (Platform.OS === "android") {
+      (async () => {
+        try {
+          await createDatabase();
+        } catch (err) {
+          console.log(err);
+        }
+      })();
+    }
+  }, []);
 
   const saveInStorage = async (key: string, value: string) => {
     try {
