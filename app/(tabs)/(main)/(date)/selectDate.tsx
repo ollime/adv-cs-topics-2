@@ -10,12 +10,14 @@ import { FilledPill, OutlinedPill } from "../../../../components/PillButton";
 import { ListItem } from "../../../../types";
 
 export default function selectDate() {
+  /** @type current selected date */
   const [selectedDate, setSelectedDate] = React.useState<number>();
+  /** @type determines if expo router is a stacked screen */
   const isPresented = router.canGoBack();
 
   const { typeOfDateLabel, rawData } = useLocalSearchParams<{
-    typeOfDateLabel: string;
-    rawData: string;
+    typeOfDateLabel: string /* "startTime" or "endTime" */;
+    rawData: string /* JSON formatted as a string */;
   }>();
   // converting data back into JSON
   const data = rawData ? (JSON.parse(rawData) as ListItem) : undefined;

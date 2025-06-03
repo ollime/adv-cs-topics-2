@@ -18,6 +18,7 @@ import { ListItem } from "../../../../types";
 import { calculateTime } from "../../../../utils/DateTimeCalculation";
 
 export default function addEventScreen() {
+  // Data type fields for current shown event
   const [eventTitle, setEventTitle] = React.useState<string>("");
   const [description, setDescription] = React.useState<string | undefined>("");
   const [type, setType] = React.useState<"since" | "until" | "elapsed">(
@@ -28,6 +29,7 @@ export default function addEventScreen() {
   const [startTime, setStartTime] = React.useState<number>(0);
   const [endTime, setEndTime] = React.useState<number>(0);
 
+  // If there is an error, display an alert
   const [displayAlert, setDisplayAlert] = React.useState<boolean>(false);
   const [alertLabel, setAlertLabel] = React.useState<string>("");
 

@@ -22,7 +22,6 @@ export default function homePage() {
   const endTime = 1748222240;
   const time: number = calculateTime(startTime, endTime);
 
-  // TODO: database retrieval
   const testData: Array<ListItem> = [
     {
       key: "quarter",
@@ -96,7 +95,9 @@ export default function homePage() {
   const upcomingEvents = getUpcomingEvents().map((item) => (
     <View key={item.key}>
       <UntilEventCard
-        time={convertSecondsToDays(item.endTime - Date.now() / 1000)}
+        time={convertSecondsToDays(
+          item.endTime ? item.endTime - Date.now() / 1000 : 0
+        )}
         eventTitle={item.key}
         color={item.color}
       />
@@ -104,19 +105,16 @@ export default function homePage() {
   ));
 
   function getUpcomingEvents() {
-    return testData;
-    // const filtered = testData.filter(
-    //   (item) => item.type == "until" && item.endTime
-    // );
-    // .toSorted(
-    //   (a, b) =>
-    //     calculateTime(a.startTime, a.endTime) -
-    //     calculateTime(b.startTime, b.endTime)
-    // );
-    // return filtered.slice(0, 3);
+    const filtered = testData
+      .filter((item) => item.type == "until" && item.endTime)
+      .toSorted(
+        (a, b) =>
+          calculateTime(a.startTime, a.endTime) -
+          calculateTime(b.startTime, b.endTime)
+      );
+    return filtered.slice(0, 3);
   }
 
-  // TODO: implement data retrieval for starred events
   const starred = [
     {
       key: "summer",
@@ -149,7 +147,9 @@ export default function homePage() {
         return (
           <UntilEventCard
             key={item.key}
-            time={convertSecondsToDays(item.endTime - Date.now() / 1000)}
+            time={convertSecondsToDays(
+              item.endTime ? item.endTime - Date.now() / 1000 : 0
+            )}
             eventTitle={item.key}
             color={item.color}
           />
@@ -173,7 +173,7 @@ export default function homePage() {
             key={item.key}
             time={time}
             eventTitle={item.key}
-            color={item.color}
+            color={item.color ? item.color : ""}
           />
         );
       }

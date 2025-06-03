@@ -1,3 +1,12 @@
+/** @overview Tests for the addEvent page.
+ *
+ * Tests that buttons render correctly when the page loads.
+ *
+ * Most of the Jest functions have descriptions built into the
+ * test function / describe block itself. Anything more complicated
+ * will be documented with a comment.
+ */
+
 import React from "react";
 import {
   render,
@@ -34,11 +43,4 @@ describe("<AddEvent/>", () => {
     await user.type(textField, "This is a test");
     expect(textField).toHaveDisplayValue("This is a test");
   });
-
-  // test("Cancel button closes modal", async () => {
-  //   const { getByRole } = render(<AddEvent />);
-  //   const CancelBtn = getByRole("button", { name: "Cancel" });
-  //   await user.press(CancelBtn);
-  //   expect(screen).toHavePathname("/");
-  // });
 });

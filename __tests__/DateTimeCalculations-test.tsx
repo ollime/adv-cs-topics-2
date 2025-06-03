@@ -1,10 +1,14 @@
+/** @overview Tests for DateTimeCalculation utils file.
+ *
+ * Each utility function should have at least 1 test associated with it
+ * and test a variety of conditions and values.
+ */
+
 import * as DateTime from "../utils/DateTimeCalculation";
 
 describe("utils/DateTimeCalculation", () => {
   test("Converts seconds to days", () => {
     expect(DateTime.convertSecondsToDays(360000)).toEqual(4);
-    // TODO: rounding rules
-    // expect(DateTime.convertSecondsToDays(360000)).toBeCloseTo(4.16666667);
   });
 
   test("Correct conversion of unix timestamp", () => {

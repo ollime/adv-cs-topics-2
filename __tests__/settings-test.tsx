@@ -1,3 +1,10 @@
+/** @overview Tests the main functions of the Settings page.
+ *
+ * All inputs on the Settings page are tested for: 1.) Retrieving
+ * data on page load 2.) UI change when changing input value and
+ * 3.) Data saved to storage when changing input value.
+ */
+
 import React from "react";
 import {
   render,
@@ -30,7 +37,7 @@ describe("<Settings/>", () => {
 
   beforeEach(() => {
     jest.clearAllMocks(); // Clear all mock calls and instances
-    return AsyncStorage.clear();
+    return AsyncStorage.clear(); // Clear Async Storage before each test to ensure clean db each time
   });
 
   test("Async Storage works", async () => {

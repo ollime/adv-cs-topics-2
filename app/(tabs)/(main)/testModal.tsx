@@ -1,4 +1,9 @@
-/** Example of modal screen. */
+/** Example of modal screen.
+ *
+ * This page can be used to test the basic functionality of a modal
+ * and as a template for future modals. This page should be removed
+ * from the production build.
+ */
 
 import React from "react";
 import { View, Text } from "react-native";

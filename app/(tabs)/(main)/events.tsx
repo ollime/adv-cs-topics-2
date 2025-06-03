@@ -1,4 +1,9 @@
-/** Main page containing the list of events. */
+/** Main page containing the list of events.
+ *
+ * Uses the EventList component to display a list of events. The
+ * ability to add and modify events starts at this page and navigates
+ * to the appropriate modals.
+ */
 
 import React from "react";
 import { ScrollView } from "react-native";
@@ -18,6 +23,7 @@ export default function index() {
     });
   };
 
+  // default preloaded test data
   const [testData, setTestData] = React.useState<Array<ListItem>>([
     {
       key: "quarter",
