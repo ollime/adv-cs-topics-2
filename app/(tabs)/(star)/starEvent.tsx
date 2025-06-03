@@ -1,3 +1,8 @@
+/**
+ * @overview Modal to star a new event and view the list of
+ * currently starred events.
+ * */
+
 import React from "react";
 import { View, Text } from "react-native";
 import { useRouter } from "expo-router";

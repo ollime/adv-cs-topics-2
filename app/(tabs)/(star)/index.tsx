@@ -1,3 +1,16 @@
+/** First landing page for the user.
+ *
+ * Displays the most important events by 1.) user selection
+ * 2.) upcoming events (events whose endTime is closest)
+ *
+ * Each type of event is displayed differently.
+ *    Since: Grid Progress Bar
+ *    Until: Counter
+ *    Elapsed: Horizontal Progress Bar
+ * See the component .tsx files for more information on how
+ * each event is displayed.
+ */
+
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 
@@ -18,9 +31,6 @@ import { ListItem } from "../../../types";
 
 export default function homePage() {
   const router = useRouter();
-  const startTime = 1725623522;
-  const endTime = 1748222240;
-  const time: number = calculateTime(startTime, endTime);
 
   const testData: Array<ListItem> = [
     {
@@ -92,6 +102,9 @@ export default function homePage() {
     { key: "heavy" },
   ];
 
+  /** Given a list of upcoming events, create the JSX elements to
+   * display those events.
+   */
   const upcomingEvents = getUpcomingEvents().map((item) => (
     <View key={item.key}>
       <UntilEventCard
@@ -104,6 +117,9 @@ export default function homePage() {
     </View>
   ));
 
+  /** Gets a list of events whose endTime values are closest to the
+   * Date now. Returns the closest 3 events
+   */
   function getUpcomingEvents() {
     const filtered = testData
       .filter((item) => item.type == "until" && item.endTime)
@@ -115,6 +131,7 @@ export default function homePage() {
     return filtered.slice(0, 3);
   }
 
+  // holds the data of events manually starred by the user
   const starred = [
     {
       key: "summer",
@@ -141,6 +158,9 @@ export default function homePage() {
     },
   ];
 
+  /** Given a list of starred events, create the JSX elements to
+   * display those events.
+   */
   const starredEvents = starred.map((item) => {
     if (item) {
       if (item.type === "until") {
@@ -171,7 +191,7 @@ export default function homePage() {
         return (
           <ElapsedEventCard
             key={item.key}
-            time={time}
+            time={calculateTime(item.startTime, item.endTime)}
             eventTitle={item.key}
             color={item.color ? item.color : ""}
           />
@@ -180,6 +200,9 @@ export default function homePage() {
     }
   });
 
+  /** If the user selects the option to star a new event,
+   * navigates to the modal to select new starred events.
+   */
   const handleStarEvent = () => {
     router.navigate({
       pathname: "/starEvent",
