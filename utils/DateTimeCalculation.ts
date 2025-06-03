@@ -44,9 +44,6 @@ export async function getDateFormat() {
     year: longYearFormat == "true" ? "numeric" : "2-digit",
     month: monthFormat as "2-digit" | "numeric" | "long" | "short" | "narrow",
     day: longDayFormat == "true" ? "2-digit" : "numeric",
-    // hour: "2-digit",
-    // minute: "2-digit",
-    // second: "2-digit",
   };
   return options;
 }
