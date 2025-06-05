@@ -42,7 +42,7 @@ export default function confirmOverrideModal() {
                         previous page. Otherwise, return to index */
               }
               router.navigate({
-                pathname: "/",
+                pathname: "../",
                 params: {
                   rawData: JSON.stringify(currentData),
                   override: "true",
@@ -54,7 +54,7 @@ export default function confirmOverrideModal() {
             label="Cancel"
             callback={() => {
               router.navigate({
-                pathname: "/",
+                pathname: "/events",
                 params: {},
               });
             }}></OutlinedPill>

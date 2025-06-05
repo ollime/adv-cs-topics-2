@@ -1,4 +1,11 @@
-/** @overview Alert popup that closes when clicked on. */
+/** @overview Alert popup that closes when clicked on.
+ *
+ * This alert will show up in the page itself, and it
+ * can be dismissed by clicking on the X button. However,
+ * error handling code should be written so that the user
+ * cannot bypass important alerts by having the alert show
+ * up again until the problem is resolved.
+ */
 
 import React from "react";
 import { View, Text, Pressable } from "react-native";

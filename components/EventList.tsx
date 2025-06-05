@@ -1,4 +1,15 @@
-/** Contains list of events. */
+/** Contains a list of events.
+ *
+ * A nicely formatted scrollable list containing event data.
+ * There is an option to add a new event, as well as the ability
+ * to modify an existing event by clicking on it.
+ *
+ * There are several sort options available:
+ *  1.
+ *  2.
+ *  3.
+ *  4.
+ */
 
 import React from "react";
 import { View, FlatList, Text, Pressable } from "react-native";
@@ -23,6 +34,7 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
     sortDateItems(sortOrder);
   }, [sortOrder]);
 
+  /** Creates multiple sorting options as defined in the module level comment. */
   function sortDateItems(sortOrder: number) {
     switch (sortOrder) {
       case 0:

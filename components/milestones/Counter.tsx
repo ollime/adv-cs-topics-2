@@ -1,11 +1,16 @@
 /**
- * @overview Button component with gradient style
+ * @overview Button component that displays a number
+ *
+ * This module includes a larger display containing counter buttons
+ * to display the date, as well as the logic for each individual
+ * counter button.
+ *
+ * The button itself cannot be interacted with, but its values can
+ * be modified with code elsewhere.
  */
 
 import React from "react";
 import { View, Text } from "react-native";
-import Gradient from "../Gradient";
-import { getAdjacentColor } from "utils/ColorCalculation";
 
 export default function Counter({
   progress,
@@ -15,11 +20,9 @@ export default function Counter({
   color?: string;
 }) {
   const [count] = React.useState<number>(progress);
-  const months = count / 30.417;
+  const years = count / 360;
+  const months = (count % 360) / 30.417;
   const days = count % 30.417;
-  // TODO: not actually time
-  const hours = (count - Math.floor(count)) * 24;
-  const minutes = (hours - Math.floor(hours)) * 60;
 
   return (
     <>
@@ -28,16 +31,16 @@ export default function Counter({
           Time remaining
         </Text>
         <View className="flex flex-row flex-wrap items-center justify-center">
+          <CounterButton progress={years} label="YEARS" color={color} />
           <CounterButton progress={months} label="MONTHS" color={color} />
           <CounterButton progress={days} label="DAYS" color={color} />
-          <CounterButton progress={hours} label="HOURS" color={color} />
-          <CounterButton progress={minutes} label="MINUTES" color={color} />
         </View>
       </View>
     </>
   );
 }
 
+/** Individual button component, including styles and stored value. */
 function CounterButton({
   progress,
   label,

@@ -170,7 +170,7 @@ export default function addEventScreen() {
       return;
     } else if (eventTitle) {
       router.navigate({
-        pathname: "/",
+        pathname: "/events",
         params: {
           rawData: JSON.stringify(getCurrentData()),
           overrideKey: getInitialKey(),
@@ -258,7 +258,7 @@ export default function addEventScreen() {
           label="Cancel"
           callback={() => {
             router.navigate({
-              pathname: "/",
+              pathname: "/events",
               params: {},
             });
           }}></OutlinedPill>
