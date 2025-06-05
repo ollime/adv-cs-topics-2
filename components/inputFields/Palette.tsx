@@ -1,4 +1,9 @@
-/** @overview Color palette */
+/** @overview Color palette
+ *
+ * Components related to color, themes, and palette selection.
+ * This includes a blank palette displaying the default colors
+ * and a radio selection that returns a selected color.
+ */
 
 import React from "react";
 import { View, Pressable } from "react-native";

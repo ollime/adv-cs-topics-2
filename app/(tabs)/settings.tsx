@@ -1,3 +1,14 @@
+/** Settings page.
+ *
+ * The settings page stores persistent data across app sessions
+ * by storing key-value pairs in AsyncStorage. This file handles
+ * setting these values, the UI changes associated with changing
+ * values, and retrieval/storage of AsyncStorage data.
+ *
+ * These values are also available in other files that use
+ * AsyncStorage for using the data stored.
+ */
+
 import React from "react";
 import { View, Platform } from "react-native";
 import { useColorScheme } from "nativewind";
@@ -11,16 +22,28 @@ import { formatDate } from "../../utils/DateTimeCalculation";
 import { createDatabase } from "../../models/database";
 
 export default function secondPage() {
+  /** Background & text color of the page */
   const [darkMode, setDarkMode] = React.useState<"dark" | "light" | "system">();
+  /** A string representing how dates will be stored. This string is also displayed for the user on the UI */
   const [dateFormat, setDateFormat] = React.useState<string>();
+  /** @example Long year format is 2025, short year is 25*/
   const [longYearFormat, setLongYearFormat] = React.useState<boolean>(false);
+  /** Stores the format of the month.
+   * @example
+   *    2-digit - 03
+   *    numeric - 3
+   *    long - March
+   *    short - Mar
+   */
   const [monthFormat, setMonthFormat] = React.useState<
     "2-digit" | "numeric" | "long" | "short" | "narrow"
   >("numeric");
+  /** @example Long day format is 05, short day is 5 */
   const [longDayFormat, setLongDayFormat] = React.useState<boolean>(false);
 
   const { setColorScheme } = useColorScheme();
 
+  /** Loads initial data from AsyncStorage */
   React.useEffect(() => {
     const loadData = async () => {
       const darkMode = await getData("darkMode");
@@ -33,6 +56,7 @@ export default function secondPage() {
       setLongYearFormat(longYearFormat === "true");
       setLongDayFormat(longDayFormat === "true");
       if (
+        // type checking
         monthFormat == "2-digit" ||
         monthFormat == "numeric" ||
         monthFormat == "long" ||
@@ -47,10 +71,14 @@ export default function secondPage() {
     loadData();
   }, []);
 
+  /** If any of the 3 date format options change, change the display text
+   * for the full date format string.
+   */
   React.useEffect(() => {
     changeDateFormat();
   }, [longYearFormat, monthFormat, longDayFormat]);
 
+  /** Creates the database. If it already exists, initializes database object */
   React.useEffect(() => {
     if (Platform.OS === "android") {
       (async () => {
@@ -63,6 +91,7 @@ export default function secondPage() {
     }
   }, []);
 
+  /** Save a key-value pair to storage. */
   const saveInStorage = async (key: string, value: string) => {
     try {
       await AsyncStorage.setItem(key, value);
@@ -71,6 +100,7 @@ export default function secondPage() {
     }
   };
 
+  /** Retrieve a key-value pair from storage. */
   const getData = async (key: string) => {
     try {
       const value = await AsyncStorage.getItem(key);
@@ -82,6 +112,7 @@ export default function secondPage() {
     }
   };
 
+  /** Changes the theme and saves the value to the database */
   async function changeTheme(value: "dark" | "light" | "system" | string) {
     if (value == "dark" || value == "light" || value == "system") {
       setColorScheme(value);
@@ -90,6 +121,7 @@ export default function secondPage() {
     }
   }
 
+  /** Updates the date format */
   async function changeDateFormat() {
     const options: Intl.DateTimeFormatOptions = {
       hour12: false,
@@ -103,6 +135,7 @@ export default function secondPage() {
     setDateFormat(formatDate(new Date(36184 * 1000), options));
   }
 
+  /** Sets the month format */
   function handleSetMonthFormat(value: string) {
     let newFormat: "numeric" | "2-digit" | "long" | "short" = "numeric";
     if (value == "MM") {
@@ -117,16 +150,19 @@ export default function secondPage() {
     saveInStorage("monthFormat", newFormat);
   }
 
+  /** Sets the year format */
   function handleSetYearFormat(isEnabled: boolean) {
     setLongYearFormat(isEnabled);
     saveInStorage("longYearFormat", String(isEnabled));
   }
 
+  /** Sets the day format */
   function handleSetDayFormat(isEnabled: boolean) {
     setLongDayFormat(isEnabled);
     saveInStorage("longDayFormat", String(isEnabled));
   }
 
+  /** Converts between display and stored value of the month format */
   function getInitialMonth() {
     let value: string = "";
     if (monthFormat == "2-digit") {

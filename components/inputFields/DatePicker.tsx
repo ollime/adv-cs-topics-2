@@ -1,4 +1,8 @@
-/** Select the current date. */
+/** Select the current date.
+ *
+ * Uses the react-native-ui-datepicker library to select
+ * a date. Displays a calendar UI element.
+ */
 
 import React from "react";
 import { View } from "react-native";

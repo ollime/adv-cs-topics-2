@@ -1,4 +1,8 @@
-/** @overview Radio buttons with text options */
+/** @overview Radio buttons with text options
+ *
+ * Custom radio button group that selects a single option
+ * from a list of values.
+ */
 
 import React from "react";
 import { View, Text, Pressable } from "react-native";

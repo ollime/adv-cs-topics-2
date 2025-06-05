@@ -1,4 +1,9 @@
-/** @overview Text field component. */
+/** @overview Text field component
+ *
+ * This is an editable text field that has the option to load
+ * with an initial displayed value, multiline display, and
+ * a disabled text field that the user cannot enter values in.
+ */
 
 import React from "react";
 import { TextInput, View, Text } from "react-native";

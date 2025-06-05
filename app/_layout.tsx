@@ -10,6 +10,7 @@ import "./../global.css";
 export default function App() {
   const { setColorScheme } = useColorScheme();
 
+  /** Global color scheme */
   React.useEffect(() => {
     const setThemeColor = async () => {
       const theme = await getThemeData();
@@ -20,6 +21,7 @@ export default function App() {
     setThemeColor();
   }, []);
 
+  /** Retrieves existing theme */
   const getThemeData = async () => {
     try {
       const value = await AsyncStorage.getItem("darkMode");

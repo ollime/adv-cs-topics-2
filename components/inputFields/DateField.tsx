@@ -1,4 +1,10 @@
-/** Displays the currently selected date. */
+/** Displays the currently selected date.
+ *
+ * A field similar to the TextField, but stores a DateTime
+ * object. Additionally, the user cannot directly type in the
+ * field, but needs to navigate to a separate DatePicker
+ * component first.
+ */
 
 import React from "react";
 import { View, Text, Pressable } from "react-native";

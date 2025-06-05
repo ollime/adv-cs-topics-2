@@ -1,3 +1,8 @@
+/** @overview ToggleSwitch
+ *
+ * Uses the built-in React Native ToggleSwitch component.
+ */
+
 import React from "react";
 import { View, Text, Switch } from "react-native";
 
