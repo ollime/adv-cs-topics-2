@@ -42,7 +42,7 @@ export default function confirmOverrideModal() {
                         previous page. Otherwise, return to index */
               }
               router.navigate({
-                pathname: "../",
+                pathname: "/events",
                 params: {
                   rawData: JSON.stringify(currentData),
                   override: "true",
