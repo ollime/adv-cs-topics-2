@@ -23,7 +23,7 @@ export default function StarEventModal() {
   /** Moves back to previous page. */
   const handleGoBack = () => {
     router.navigate({
-      pathname: "../",
+      pathname: "/",
     });
   };
 

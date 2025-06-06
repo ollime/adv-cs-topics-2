@@ -109,7 +109,7 @@ export default function EventList({ data }: { data: Array<ListItem> }) {
           showsVerticalScrollIndicator={true}></FlatList>
 
         <Pressable onPress={handleSortOrder}>
-          <Text className="m-1 flex flex-1 select-none items-center justify-end">
+          <Text className="m-1 flex flex-1 select-none items-center justify-end dark:text-white">
             Sort by {sortOptions[sortOrder]}
             <MaterialIcons name="arrow-drop-down" size={24} color="black" />
           </Text>
